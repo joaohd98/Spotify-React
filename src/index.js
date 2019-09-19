@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
+import {Layout} from "./layout/layout";
 
-ReactDOM.render(<div> Hello World</div>, document.getElementById('app'));
+ReactDOM.render(<Layout/>, document.getElementById('app'));
