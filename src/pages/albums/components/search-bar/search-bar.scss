@@ -23,7 +23,7 @@ input {
 
   font-size: 24px;
   font-weight: bold;
-  color: map-get($colors, gray);
+  color: map-get($colors, white);
   border: none;
   border-bottom: 1px solid map-get($colors, gray);
   background-color: map-get($colors, background);
@@ -33,6 +33,11 @@ input {
 
   @media screen and (min-width: $desktop) {
     font-size: 48px;
+  }
+
+  ::placeholder, :-ms-input-placeholder, ::-ms-input-placeholder  {
+    color: map-get($colors, gray);
+    opacity: 1;
   }
 
   /*
