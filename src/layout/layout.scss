@@ -7,20 +7,65 @@ html, body {
 
 }
 
-#app{
+#app {
 
   color: map-get($colors, white);
 
-  margin-top: 5%;
-  margin-left: 7%;
-  margin-right: 7%;
+  margin-top: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (min-width: 750px) {
 
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-top: 5%;
+    margin-left: 7%;
+    margin-right: 7%;
+
+  }
+
+  .container {
+
+    img {
+
+      height: 24px;
+      width: 24px;
+      background-color: map-get($colors, white);
+      border-radius: 24px;
+
+    }
+
+    .page-container {
+
+      margin-top: 10px;
+
+    }
+
+    @media screen and (min-width: 750px) {
+
+      flex-direction: row;
+      display: flex;
+
+      img {
+
+        height: 64px;
+        width: 64px;
+        border-radius: 64px;
+
+      }
+
+      .page-container {
+
+        margin-left: 25px;
+        margin-top: 20px;
+
+      }
+
+    }
+
+
 
   }
 
 }
+
+

@@ -9,6 +9,7 @@ export class SearchAlbumMusic extends React.Component {
         Hello SearchAlbumMusic
       </div>
     )
+
   }
 
 }
