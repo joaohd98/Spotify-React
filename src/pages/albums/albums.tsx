@@ -1,5 +1,6 @@
 import React from 'react';
 import {SearchBar} from "./components/search-bar";
+import {SubHeaderTitle} from "./components/sub-header-title";
 
 export class Albums extends React.Component {
 
@@ -8,6 +9,7 @@ export class Albums extends React.Component {
     return (
       <div>
         <SearchBar/>
+        <SubHeaderTitle/>
       </div>
     )
 
