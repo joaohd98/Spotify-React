@@ -11,10 +11,8 @@ export class ListAlbums extends React.Component {
       elements.push(
         <div className="card" key={i}>
           <img src="https://e.snmc.io/i/300/w/4f0b811b8377bd258111cfd66c174ebb/6190855" alt="capa" />
-          <div>
-            <p>{"nome do artista"} </p>
-            <p>Nome do artista</p>
-          </div>
+          <p>Nome do Artista</p>
+          <p>Nome do Artista</p>
         </div>
       )
 
