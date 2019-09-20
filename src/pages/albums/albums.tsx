@@ -15,7 +15,7 @@ class Albums extends React.Component<AlbumsModel.Props, AlbumsModel.State> {
     return (
       <div>
         <SearchBar {...this.props}/>
-        <SubHeaderTitle/>
+        <SubHeaderTitle {...this.props}/>
         <ListAlbums />
       </div>
     )
