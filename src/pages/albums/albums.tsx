@@ -6,14 +6,15 @@ import {StatesReducers} from "../../redux/reducers";
 import {bindActionCreators} from "redux";
 import {AlbumsInitalState} from "./redux/albums-reducer";
 import {connect} from "react-redux";
+import {AlbumsModel} from "./services/albums-model";
 
-class Albums extends React.Component {
+class Albums extends React.Component<AlbumsModel.Props, AlbumsModel.State> {
 
   render() {
 
     return (
       <div>
-        <SearchBar/>
+        <SearchBar {...this.props}/>
         <SubHeaderTitle/>
         <ListAlbums />
       </div>
