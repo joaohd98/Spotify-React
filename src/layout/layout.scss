@@ -15,7 +15,7 @@ html, body {
   margin-left: 8px;
   margin-right: 8px;
 
-  @media screen and (min-width: 750px) {
+  @media screen and (min-width: $desktop) {
 
     margin-top: 5%;
     margin-left: 7%;
@@ -37,10 +37,11 @@ html, body {
     .page-container {
 
       margin-top: 10px;
+      width: 100%;
 
     }
 
-    @media screen and (min-width: 750px) {
+    @media screen and (min-width: $desktop) {
 
       flex-direction: row;
       display: flex;
@@ -61,8 +62,6 @@ html, body {
       }
 
     }
-
-
 
   }
 

@@ -1,0 +1,52 @@
+@import "../../../theme/variables";
+
+.input-container {
+
+  width: 100%;
+
+}
+
+label {
+
+  font-size: 12px;
+  display: block;
+  color: map-get($colors, white);
+  margin-bottom: 10px;
+
+  @media screen and (min-width: $desktop) {
+    font-size: 24px;
+  }
+
+}
+
+input {
+
+  font-size: 24px;
+  font-weight: bold;
+  color: map-get($colors, gray);
+  border: none;
+  border-bottom: 1px solid map-get($colors, gray);
+  background-color: map-get($colors, background);
+  width: 100%;
+  padding-bottom: 2px;
+  padding-left: 2px;
+
+  /*
+   * iOS issue
+   */
+
+  -webkit-appearance: none;
+  outline:none;
+  border-radius: 0;
+
+  @media screen and (min-width: $desktop) {
+    font-size: 48px;
+  }
+
+}
+
+input:focus {
+
+  outline: none;
+
+}
