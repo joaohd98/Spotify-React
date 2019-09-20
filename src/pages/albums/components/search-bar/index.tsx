@@ -8,7 +8,7 @@ export class SearchBar extends React.Component {
     return (
       <div className="search-bar">
         <label htmlFor="search-bar">Busque por artistas, álbuns ou músicas.</label>
-        <input type="search" id="search-bar" placeholder="Comece a ecrever..."/>
+        <input type="search" id="search-bar" placeholder="Comece a escrever..."/>
       </div>
     )
 

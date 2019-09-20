@@ -3,8 +3,8 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
 import store from "../redux/store";
 import './layout.scss'
-import {Albums} from "../pages/albums/albums";
 import logo from "../assets/logo.png"
+import {AlbumsPage} from "../pages/albums/albums";
 
 export const Layout = () => {
 
@@ -14,7 +14,7 @@ export const Layout = () => {
         <div className="container">
           <img className="logo" src={logo} alt="logo"/>
           <div className="page-container">
-            <Route path="/" exact component={Albums} />
+            <Route path="/" exact component={AlbumsPage} />
           </div>
         </div>
       </BrowserRouter>
