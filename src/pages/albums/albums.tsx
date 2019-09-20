@@ -1,12 +1,12 @@
 import React from 'react';
 import {SearchBar} from "./components/search-bar";
 
-export class SearchAlbumMusic extends React.Component {
+export class Albums extends React.Component {
 
   render() {
 
     return (
-      <div className="page">
+      <div>
         <SearchBar/>
       </div>
     )

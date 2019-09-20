@@ -1,4 +1,4 @@
-@import "../../../theme/variables";
+@import "../../../../theme/variables";
 
 .input-container {
 
@@ -31,6 +31,10 @@ input {
   padding-bottom: 2px;
   padding-left: 2px;
 
+  @media screen and (min-width: $desktop) {
+    font-size: 48px;
+  }
+
   /*
    * iOS issue
    */
@@ -39,9 +43,7 @@ input {
   outline:none;
   border-radius: 0;
 
-  @media screen and (min-width: $desktop) {
-    font-size: 48px;
-  }
+
 
 }
 
