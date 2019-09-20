@@ -1,0 +1,74 @@
+@import "../../../../theme/variables";
+
+/*
+
+ */
+
+.list-album {
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+  grid-column-gap: 15px;
+  justify-content: space-between;
+
+  /*
+   * Screen with just one item
+   */
+  @media screen and (max-width: 330px)  {
+
+    display: block;
+    grid-gap: 0;
+
+  }
+
+  .card {
+
+    width: 150px;
+    height: auto;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+
+
+    /*
+     * Screen with just one item
+     */
+    @media screen and (max-width: 330px)  {
+
+      width: 80%;
+
+
+    }
+
+    img {
+
+      border-radius: 0;
+      width: 100%;
+      margin-bottom: 10px;
+
+    }
+
+    p {
+
+      font-size: 14px;
+      margin: 0;
+      padding: 2px;
+
+    }
+
+    p:first-child {
+      color: map-get($colors, white);
+    }
+
+    p:last-child {
+      color: map-get($colors, gray);
+    }
+
+  }
+
+}
+

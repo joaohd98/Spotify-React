@@ -6,7 +6,7 @@ export class SubHeaderTitle extends React.Component {
   render() {
 
     return (
-      <p>Álbuns buscados recentemente</p>
+      <p className="sub-header-title">Álbuns buscados recentemente</p>
     )
 
   }

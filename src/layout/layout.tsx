@@ -12,7 +12,7 @@ export const Layout = () => {
     <Provider store={store()}>
       <BrowserRouter>
         <div className="container">
-          <img src={logo} alt="logo"/>
+          <img className="logo" src={logo} alt="logo"/>
           <div className="page-container">
             <Route path="/" exact component={Albums} />
           </div>
