@@ -3,6 +3,7 @@ import "./list-albums.scss"
 import {AlbumsModel} from "../../services/albums-model";
 import {ServiceCod} from "../../../../service/service";
 import {ErrorMessage, ErrorMessageInterface} from "../../../../components/error-message/error-message";
+import {AlbumsInteractor} from "../../services/albums-interactor";
 
 export class ListAlbums extends React.Component<AlbumsModel.Props> {
 
@@ -50,7 +51,7 @@ export class ListAlbums extends React.Component<AlbumsModel.Props> {
 
       data = {
 
-        title: `Não foi possível encontrar "${this.props.text}"`,
+        title: <div>Não foi possível encontrar: <br/>"{AlbumsInteractor.breakTooLongWorld(this.props.text)}</div>,
         subTitle: "Tente novamente escrevendo o termo da busca de outra forma ou usando outra palavra chave.",
 
       }

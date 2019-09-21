@@ -2,8 +2,8 @@ import React from "react";
 import "./error-message.scss"
 
 export interface ErrorMessageInterface {
-  title: string,
-  subTitle: string,
+  title: string | JSX.Element,
+  subTitle: string | JSX.Element,
   buttonText?: string,
   buttonPress?: () => void
 }

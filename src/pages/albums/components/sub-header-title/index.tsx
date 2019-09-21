@@ -1,6 +1,7 @@
 import React from 'react';
 import "./sub-header-title.scss"
 import {AlbumsModel} from "../../services/albums-model";
+import {AlbumsInteractor} from "../../services/albums-interactor";
 
 export class SubHeaderTitle extends React.Component<AlbumsModel.Props> {
 
@@ -9,7 +10,7 @@ export class SubHeaderTitle extends React.Component<AlbumsModel.Props> {
     return (
       this.props.text === '' ?
         `Álbuns buscados recentemente` :
-        `Resultados encontrados para "${this.props.text}"`
+        `Resultados encontrados para "${AlbumsInteractor.breakTooLongWorld(this.props.text)}"`
     )
 
   }
