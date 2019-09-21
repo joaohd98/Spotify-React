@@ -1,9 +1,14 @@
 import React from 'react';
 import "./list-albums.scss"
+import {AlbumsModel} from "../../services/albums-model";
+import {ServiceCod} from "../../../../service/service";
+import {ErrorMessage, ErrorMessageInterface} from "../../../../components/error-message/error-message";
 
-export class ListAlbums extends React.Component {
+export class ListAlbums extends React.Component<AlbumsModel.Props> {
 
   renderMultipleCard = () => {
+
+    // let {albums} = this.props;
 
     let elements: JSX.Element[] = [];
 
@@ -18,17 +23,65 @@ export class ListAlbums extends React.Component {
 
     }
 
-    return elements;
+    return <div className="list-album">{ elements }</div>;
 
+  };
+
+  renderErrorMessage = () => {
+
+    const hasInternetConnectionError = this.props.error === ServiceCod.noInternetConnection;
+
+    let data: ErrorMessageInterface;
+
+    if(hasInternetConnectionError)  {
+
+      data = {
+
+        title: "Sem acesso a internet",
+        subTitle: "Verifique a sua rede Wi-Fi ou dados móveis.",
+        buttonText : "Tentar Novamente",
+        buttonPress : () => this.props.functions.searchAlbums(this.props.text)
+
+      }
+
+    }
+
+    else {
+
+      data = {
+
+        title: `Não foi possível encontrar "${this.props.text}"`,
+        subTitle: "Tente novamente escrevendo o termo da busca de outra forma ou usando outra palavra chave.",
+
+      }
+
+    }
+
+    return <ErrorMessage {...data} />
+
+  };
+
+  renderSkeletonCard = () => {
+
+    return (
+      <div>
+
+      </div>
+    )
   };
 
   render() {
 
-    return (
-     <div className="list-album">
-       { this.renderMultipleCard() }
-     </div>
-    )
+    const hasError = this.props.error !== ServiceCod.success || (this.props.text !== "" && this.props.albums.length === 0);
+
+    if(hasError)
+      return this.renderErrorMessage();
+
+    else if(this.props.loading)
+      return this.renderSkeletonCard();
+
+    else
+      return this.renderMultipleCard();
 
   }
 

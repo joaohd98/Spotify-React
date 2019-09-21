@@ -1,3 +1,5 @@
+import {ServiceCod} from "../../../service/service";
+
 export namespace AlbumsModel {
 
   export interface Props {
@@ -5,7 +7,7 @@ export namespace AlbumsModel {
     text: string;
     albums: object[];
     loading: boolean;
-    error: false;
+    error: ServiceCod;
 
     functions: {
       searchAlbums: (text: string) => void

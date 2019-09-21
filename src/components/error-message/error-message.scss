@@ -1,0 +1,70 @@
+@import "../../theme/variables.scss";
+
+.error-message {
+
+  margin: 80px auto 0 auto;
+  width: 90%;
+  text-align: center;
+
+
+  @media screen and (min-width: $desktop) {
+
+    margin-top: 120px;
+
+  }
+
+  p {
+
+    margin: 0;
+
+  }
+
+  p:first-child {
+
+    color: map-get($colors, white);
+    font-size: 25px;
+    margin-bottom: 15px;
+
+    @media screen and (min-width: $desktop) {
+
+      font-size: 35px;
+
+    }
+
+  }
+
+  p:nth-child(2) {
+
+    color: map-get($colors, gray);
+    font-size: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    @media screen and (min-width: $desktop) {
+
+      font-size: 25px;
+
+    }
+
+  }
+
+  button {
+
+    margin-top: 15px;
+    background: map-get($colors, white);
+    border-radius: 15px;
+    padding: 10px;
+    color: map-get($colors, background);
+
+  }
+
+  button:focus {
+
+    outline: none;
+    -webkit-appearance: none;
+
+  }
+
+
+
+}
