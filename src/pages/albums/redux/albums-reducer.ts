@@ -6,7 +6,7 @@ export const AlbumsInitalState: AlbumsModel.Props = {
 
   text: "",
   albums: [],
-  loading: true,
+  loading: false,
   error: ServiceCod.success,
   functions: {
     searchAlbums: text => AlbumsAction.searchAlbums(text)

@@ -1,9 +1,25 @@
-$colors: (
-  background: #161616,
-  gray: #999,
-  white: #FAFAFA,
-  danger: #BB2124
-);
+:root {
 
-$desktop: 700px;
-$mobile: 699px;
+  --color-background: #161616;
+  --color-gray: #999;
+  --color-white: #FAFAFA;
+  --color-danger: #BB2124;
+
+}
+
+
+@mixin screenType($media) {
+
+  @if $media == desktop {
+    @media only screen and (min-width: 700px) { @content; }
+  }
+
+  @else if $media == mobile {
+    @media only screen and (max-width: 699px) { @content; }
+  }
+
+  @else if $media == mobile-small-screen {
+    @media only screen and (max-width: 365px) { @content; }
+  }
+
+}

@@ -6,8 +6,7 @@
   width: 100%;
   text-align: center;
 
-
-  @media screen and (min-width: $desktop) {
+  @include screenType(desktop){
 
     margin-top: 120px;
 
@@ -21,11 +20,11 @@
 
   p:first-child {
 
-    color: map-get($colors, white);
+    color: var(--color-white);
     font-size: 22px;
     margin-bottom: 15px;
 
-    @media screen and (min-width: $desktop) {
+    @include screenType(desktop){
 
       font-size: 35px;
 
@@ -35,12 +34,12 @@
 
   p:nth-child(2) {
 
-    color: map-get($colors, gray);
+    color: var(--color-gray);
     font-size: 16px;
     margin-top: 15px;
     margin-bottom: 15px;
 
-    @media screen and (min-width: $desktop) {
+    @include screenType(desktop){
 
       font-size: 25px;
 
@@ -51,10 +50,10 @@
   button {
 
     margin-top: 15px;
-    background: map-get($colors, white);
+    background: var(--color-white);
     border-radius: 15px;
     padding: 10px;
-    color: map-get($colors, background);
+    color: var(--color-background);
 
   }
 
