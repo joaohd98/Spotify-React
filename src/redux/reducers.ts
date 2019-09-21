@@ -1,11 +1,12 @@
 import {combineReducers} from "redux";
 import {AlbumsReducer} from "../pages/albums/redux/albums-reducer";
+import {AlbumsModel} from "../pages/albums/services/albums-model";
 
 export interface StatesReducers {
-  AlbumsReducer,
+  AlbumsReducer: AlbumsModel.Props,
 }
 
-let States: StatesReducers = {
+let States = {
   AlbumsReducer
 };
 
