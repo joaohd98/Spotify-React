@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import "./search-bar.scss"
+import "./styles.scss"
 import {AlbumsModel} from "../../services/albums-model";
 
 interface States {

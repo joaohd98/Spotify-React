@@ -1,5 +1,5 @@
 import React from "react";
-import "./error-message.scss"
+import "./styles.scss"
 
 export interface ErrorMessageInterface {
   title: string | JSX.Element,
@@ -16,8 +16,8 @@ export class ErrorMessage extends React.Component<ErrorMessageInterface>{
 
     return (
       <div className="error-message">
-        <p>{ title }</p>
-        <p>{ subTitle }</p>
+        <div className="title">{ title }</div>
+        <div className="sub-title">{ subTitle }</div>
         { buttonPress && buttonText ? <button onClick={buttonPress}>{ buttonText }</button> : '' }
       </div>
     )

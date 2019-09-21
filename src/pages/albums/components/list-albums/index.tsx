@@ -1,8 +1,8 @@
 import React from 'react';
-import "./list-albums.scss"
+import "./styles.scss"
 import {AlbumsModel} from "../../services/albums-model";
 import {ServiceCod} from "../../../../service/service";
-import {ErrorMessage, ErrorMessageInterface} from "../../../../components/error-message/error-message";
+import {ErrorMessage, ErrorMessageInterface} from "../../../../components/error-message";
 import {AlbumsInteractor} from "../../services/albums-interactor";
 
 export class ListAlbums extends React.Component<AlbumsModel.Props> {
