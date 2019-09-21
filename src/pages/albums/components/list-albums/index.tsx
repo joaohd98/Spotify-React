@@ -66,19 +66,8 @@ export class ListAlbums extends React.Component<AlbumsModel.Props> {
 
     let elements: JSX.Element[] = [];
 
-    for(let i = 0; i < 10; i++) {
-      if (i % 2 === 0)
-        elements.push(<div className="card skeleton" key={i}/>);
-      else
-        elements.push(
-          <div className="card" key={i}>
-            <img src="https://e.snmc.io/i/300/w/4f0b811b8377bd258111cfd66c174ebb/6190855" alt="capa" />
-            <p>Nome do Artista</p>
-            <p>Nome do Artista</p>
-          </div>
-        )
-
-    }
+    for(let i = 0; i < 10; i++)
+      elements.push(<div className="card skeleton" key={i}/>);
 
     return <div className="list-album skeleton-container">{ elements }</div>
 
