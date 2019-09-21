@@ -85,34 +85,50 @@
     background-repeat: no-repeat;
 
     background-image:
-      linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 80%),
+      linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 80%), // animation ing
       linear-gradient(lightgray 60%, transparent 0), // img
+
+      linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 80%), // animation title
       linear-gradient(lightgray 20%, transparent 0), // title
+
+      linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 80%), // animation artist
       linear-gradient(lightgray 20%, transparent 0); // artist
 
     background-size:
-      50px 200px, /* highlight */
+      50px 60%, //animation img
       100% 100%, // img
+
+      30px 12px, //animation title
       70% 20%, // title
+
+      30px 12px, //animation artist
       70% 20%; // artist
 
 
     background-position:
-      0 0,
+      0 0, //animation img
       0 0, // img
+
+      18% 71%, //animation title
       50% 85%, // title
+
+      18% 79%, //animation title
       50% 95%; // artist
 
-    animation: loading-album 1s infinite;
+    animation: loading-album 0.8s infinite linear;
 
   }
 
   @keyframes loading-album {
     to {
       background-position:
-        100% 0, // animation
+        100% 0, // animation img
         0 0, // img
+
+        83% 71%, //animation title
         50% 85%, // title
+
+        83% 79%, //animation artist
         50% 95%; // artist
 
     }
