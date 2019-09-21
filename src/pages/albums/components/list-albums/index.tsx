@@ -80,7 +80,7 @@ export class ListAlbums extends React.Component<AlbumsModel.Props> {
 
     }
 
-    return <div className="list-album">{ elements }</div>
+    return <div className="list-album skeleton-container">{ elements }</div>
 
   };
 
