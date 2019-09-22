@@ -16,7 +16,7 @@ export class SearchBar extends React.Component<AlbumsModel.Props, States> {
 
     this.setState({ textInput: target.value });
 
-    this.props.functions.searchAlbums(target.value);
+    this.props.functions.searchAlbums(target.value, this.props.offset, this.props.limit);
 
   };
 

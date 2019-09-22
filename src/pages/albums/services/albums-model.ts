@@ -1,4 +1,4 @@
-import {ServiceStatus} from "../../../service/service";
+import {ServiceStatus} from "../../../service";
 
 export namespace AlbumsModel {
 
@@ -6,11 +6,12 @@ export namespace AlbumsModel {
 
     text: string;
     albums: object[];
-    loading: boolean;
-    error: ServiceStatus;
+    status: ServiceStatus;
+    offset: number,
+    limit: number
 
     functions: {
-      searchAlbums: (text: string) => void
+      searchAlbums: (text: string, offset: number, limit: number) => void
     }
 
   }

@@ -3,7 +3,7 @@ import "./styles.scss"
 import {AlbumsModel} from "../../services/albums-model";
 import {ErrorMessage, ErrorMessageInterface} from "../../../../components/error-message";
 import {AlbumsInteractor} from "../../services/albums-interactor";
-import {ServiceStatus} from "../../../../service/service";
+import {ServiceStatus} from "../../../../service";
 
 export class ListAlbums extends React.Component<AlbumsModel.Props> {
 
@@ -30,20 +30,32 @@ export class ListAlbums extends React.Component<AlbumsModel.Props> {
 
   renderErrorMessage = () => {
 
-    const hasInternetConnectionError = this.props.error === ServiceStatus.noInternetConnection;
-
     let data: ErrorMessageInterface;
 
-    if(hasInternetConnectionError)  {
+    if(this.props.status === ServiceStatus.failed)  {
+
+      data = {
+
+        title: 'Não foi possível encontrar os àlbuns',
+        subTitle: "Tente novamente mais tarde.",
+        buttonText : "Tentar Novamente",
+        buttonPress : () => this.props.functions.searchAlbums(this.props.text, this.props.offset, this.props.limit)
+
+      }
+
+
+    }
+
+    else if(this.props.status === ServiceStatus.noInternetConnection) {
 
       data = {
 
         title: "Sem acesso a internet",
         subTitle: "Verifique a sua rede Wi-Fi ou dados móveis.",
         buttonText : "Tentar Novamente",
-        buttonPress : () => this.props.functions.searchAlbums(this.props.text)
+        buttonPress : () => this.props.functions.searchAlbums(this.props.text, this.props.offset, this.props.limit)
 
-      }
+      };
 
     }
 
@@ -75,12 +87,16 @@ export class ListAlbums extends React.Component<AlbumsModel.Props> {
 
   render() {
 
-    const hasError = this.props.error !== ServiceStatus.success || (this.props.text !== "" && this.props.albums.length === 0);
+    const hasErrors = (
+      this.props.status === ServiceStatus.failed ||
+      this.props.status === ServiceStatus.noInternetConnection ||
+      (this.props.albums.length !== 0 && this.props.text !== "")
+    );
 
-    if(hasError)
+    if(hasErrors)
       return this.renderErrorMessage();
 
-    else if(this.props.loading)
+    else if(this.props.status === ServiceStatus.loading)
       return this.renderSkeletonCard();
 
     else

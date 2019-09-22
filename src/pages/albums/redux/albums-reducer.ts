@@ -1,15 +1,16 @@
 import {AlbumActionConst, AlbumsAction} from "./albums-action";
 import {AlbumsModel} from "../services/albums-model";
-import {ServiceStatus} from "../../../service/service";
+import {ServiceStatus} from "../../../service";
 
 export const AlbumsInitalState: AlbumsModel.Props = {
 
   text: "",
   albums: [],
-  loading: false,
-  error: ServiceStatus.success,
+  status: ServiceStatus.noAction,
+  offset: 0,
+  limit: 20,
   functions: {
-    searchAlbums: text => AlbumsAction.searchAlbums(text)
+    searchAlbums: (text, offset, limit) => AlbumsAction.searchAlbums(text, offset, limit)
   }
 
 };
@@ -23,6 +24,18 @@ export const AlbumsReducer = (state = AlbumsInitalState, action: { type: AlbumAc
       return {
         ...state,
         text: action.payload.text,
+        albums: [],
+        status: action.payload.status
+      };
+
+    }
+
+
+    case AlbumActionConst.FAILED_SEARCH_ALBUM: {
+
+      return {
+        ...state,
+        status: action.payload.status
       };
 
     }
