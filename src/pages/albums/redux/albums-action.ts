@@ -1,4 +1,3 @@
-import {ServiceStatus} from "../../../service";
 import {SearchService} from "../../../service/search";
 import {AlbumsPageInteractor} from "../services/albums-page-interactor";
 
@@ -10,7 +9,7 @@ export enum AlbumActionConst {
 
   LOADING_ADD_ALBUM,
   SUCCESS_ADD_ALBUM,
-  FAILED_ALBUM
+  FAILED_ADD_ALBUM
 
 }
 
@@ -26,8 +25,6 @@ export class AlbumsAction {
           cards: [],
           seeMore: false,
           offset: 0,
-          limit: 3,
-          status: ServiceStatus.loading,
         }
       });
 
@@ -67,17 +64,18 @@ export class AlbumsAction {
         dispatch({
           type: AlbumActionConst.SUCCESS_ADD_ALBUM, payload: {
             cards: AlbumsPageInteractor.formatRequest(response.data!),
+            status: response.cod,
             offset
           }
         });
 
       }, response => {
 
-        // dispatch({
-        //   type: AlbumActionConst.FAILED_SEARCH_ALBUM, payload: {
-        //     status: response.cod,
-        //   }
-        // });
+        dispatch({
+          type: AlbumActionConst.FAILED_ADD_ALBUM, payload: {
+            status: response.cod,
+          }
+        });
 
       });
 

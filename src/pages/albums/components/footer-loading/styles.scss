@@ -16,7 +16,6 @@
 
     width: 80px;
     height: 80px;
-    color: var(--color-white);
     -webkit-animation: fa-spin 700ms infinite linear;
     animation: fa-spin 700ms infinite linear;
   }
@@ -24,9 +23,21 @@
   p {
 
     margin: 0;
-    color: var(--color-white);
-    font-size: 20px;
 
+  }
+
+  p:first-child {
+
+    font-size: 25px;
+    color: var(--color-white);
+
+  }
+
+  p:nth-child(2) {
+
+    font-size: 15px;
+    color: var(--color-gray);
+    margin-bottom: 15px;
 
   }
 

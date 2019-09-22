@@ -11,6 +11,7 @@ export const AlbumsInitalState: AlbumsPageModel.Props = {
   footerLoading: {
     seeMore: false,
     reachedBottom: false,
+    status: ServiceStatus.noAction
   },
   limit: 3, //9
   functions: {
@@ -28,9 +29,10 @@ export const AlbumsReducer = (state = AlbumsInitalState, action: { type: AlbumAc
 
       return {
         ...state,
-        text: action.payload.text,
         cards: [],
-        status: action.payload.status
+        text: action.payload.text,
+        offset: action.payload.offset,
+        status: ServiceStatus.loading
       };
 
     }
@@ -60,6 +62,7 @@ export const AlbumsReducer = (state = AlbumsInitalState, action: { type: AlbumAc
         ...state,
         footerLoading: {
           seeMore: true,
+          status: ServiceStatus.loading,
           reachedBottom: true
         }
       };
@@ -74,7 +77,20 @@ export const AlbumsReducer = (state = AlbumsInitalState, action: { type: AlbumAc
         offset: action.payload.offset,
         footerLoading: {
           seeMore: true,
+          status: action.payload.status,
           reachedBottom: false
+        }
+      };
+
+    }
+
+    case AlbumActionConst.FAILED_ADD_ALBUM: {
+
+      return {
+        ...state,
+        footerLoading: {
+          ...state.footerLoading,
+          status: action.payload.status,
         }
       };
 
