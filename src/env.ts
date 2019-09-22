@@ -4,6 +4,6 @@ export const ENV = {
   production:true,
   client_id: "76f87d316726466e999bfb3164fc2114",
   client_secret: "d204dd5d9cb8492083f4dd712d25caa3",
-  auth_token: "BQCIRL_YyBCg2E4lPewwV8353P33DizOCWVgvRMPRtp3dScwKO8KeV66-02G__Pe4AKdA_JdqleOG4ZdTClMhr7cxTtnVmXCfNSFY7Ev0wqq8Tt3100XN7ARwywjiTSsMUMWGkdAoiTuh3uY1SQ"
+  auth_token: "BQC5spP_vn90H1sjGJt3tWDN-hAzX6Tm6Ed04sidpPeGx10-P6ureXENOuJSCyWn6oj2_IVwOkuaJ7tZInGYzHbkT8RatfqsWy9ZBg0aA5jIBFcYPRg03IYkdohiV16YnAC_E7FofqAaAHfifVU"
 
 };

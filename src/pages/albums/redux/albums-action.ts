@@ -8,6 +8,10 @@ export enum AlbumActionConst {
   SUCCESS_SEARCH_ALBUM,
   FAILED_SEARCH_ALBUM,
 
+  LOADING_ADD_ALBUM,
+  SUCCESS_ADD_ALBUM,
+  FAILED_ALBUM
+
 }
 
 export class AlbumsAction {
@@ -20,6 +24,9 @@ export class AlbumsAction {
         type: AlbumActionConst.LOADING_SEARCH_ALBUM, payload: {
           text: text,
           cards: [],
+          seeMore: false,
+          offset: 0,
+          limit: 3,
           status: ServiceStatus.loading,
         }
       });
@@ -44,6 +51,37 @@ export class AlbumsAction {
       });
 
     };
+
+  };
+
+  static addAlbums = (text: string, offset: number, limit: number) => {
+
+    return dispatch => {
+
+      offset += 3;
+
+      dispatch({type: AlbumActionConst.LOADING_ADD_ALBUM});
+
+      SearchService.makeRequest(text, limit, offset, response => {
+
+        dispatch({
+          type: AlbumActionConst.SUCCESS_ADD_ALBUM, payload: {
+            cards: AlbumsPageInteractor.formatRequest(response.data!),
+            offset
+          }
+        });
+
+      }, response => {
+
+        // dispatch({
+        //   type: AlbumActionConst.FAILED_SEARCH_ALBUM, payload: {
+        //     status: response.cod,
+        //   }
+        // });
+
+      });
+
+    }
 
   }
 

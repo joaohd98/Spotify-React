@@ -4,6 +4,7 @@ import {ErrorMessage, ErrorMessageInterface} from "../../../../components/error-
 import {AlbumsPageInteractor} from "../../services/albums-page-interactor";
 import {ServiceStatus} from "../../../../service";
 import {AlbumsPageModel} from "../../services/albums-page-model";
+import {FooterLoading} from "../footer-loading";
 
 export class ListAlbums extends React.Component<AlbumsPageModel.Props> {
 
@@ -23,7 +24,12 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props> {
 
     });
 
-    return <div className="list-album">{ elements }</div>;
+    return (
+      <div>
+        <div className="list-album">{ elements }</div>
+        <FooterLoading {...this.props} />
+      </div>
+    )
 
   };
 

@@ -68,3 +68,11 @@ html, body {
 }
 
 
+// Remove ios button border
+
+button:focus {
+
+  outline: none;
+  -webkit-appearance: none;
+
+}

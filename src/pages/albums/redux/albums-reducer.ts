@@ -8,9 +8,14 @@ export const AlbumsInitalState: AlbumsPageModel.Props = {
   cards: [],
   status: ServiceStatus.noAction,
   offset: 0,
+  footerLoading: {
+    seeMore: false,
+    reachedBottom: false,
+  },
   limit: 3, //9
   functions: {
-    searchAlbums: (text, offset, limit) => AlbumsAction.searchAlbums(text, offset, limit)
+    searchAlbums: (text, offset, limit) => AlbumsAction.searchAlbums(text, offset, limit),
+    addAlbums: (text, offset, limit) => AlbumsAction.addAlbums(text, offset, limit),
   }
 
 };
@@ -45,6 +50,32 @@ export const AlbumsReducer = (state = AlbumsInitalState, action: { type: AlbumAc
       return {
         ...state,
         status: action.payload.status
+      };
+
+    }
+
+    case AlbumActionConst.LOADING_ADD_ALBUM: {
+
+      return {
+        ...state,
+        footerLoading: {
+          seeMore: true,
+          reachedBottom: true
+        }
+      };
+
+    }
+
+    case AlbumActionConst.SUCCESS_ADD_ALBUM: {
+
+      return {
+        ...state,
+        cards: state.cards.concat(action.payload.cards),
+        offset: action.payload.offset,
+        footerLoading: {
+          seeMore: true,
+          reachedBottom: false
+        }
       };
 
     }

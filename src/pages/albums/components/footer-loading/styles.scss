@@ -1,0 +1,34 @@
+.footer-loading {
+
+  text-align: center;
+
+  button {
+
+    background: var(--color-white);
+    border-radius: 15px;
+    padding: 10px;
+    width: 150px;
+    color: var(--color-background);
+    margin-bottom: 20px;
+  }
+
+  img {
+
+    width: 80px;
+    height: 80px;
+    color: var(--color-white);
+    -webkit-animation: fa-spin 700ms infinite linear;
+    animation: fa-spin 700ms infinite linear;
+  }
+
+  p {
+
+    margin: 0;
+    color: var(--color-white);
+    font-size: 20px;
+
+
+  }
+
+}
+
