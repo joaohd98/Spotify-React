@@ -37,7 +37,7 @@ export class AlbumsPageInteractor {
         id: track.id,
         type: "track",
         title: upperCaseFirstLetter(track.name),
-        subTitle: "",
+        subTitle: upperCaseFirstLetter(track.artists[0].name),
         img: getImage(track.album.images)
       })
 
