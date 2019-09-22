@@ -1,11 +1,11 @@
 import {ServiceStatus} from "../../../service";
 
-export namespace AlbumsModel {
+export namespace AlbumsPageModel {
 
   export interface Props {
 
     text: string;
-    albums: object[];
+    albums: AlbumView[];
     status: ServiceStatus;
     offset: number,
     limit: number
@@ -17,6 +17,15 @@ export namespace AlbumsModel {
   }
 
   export interface State {
+
+  }
+
+  export interface AlbumView {
+
+    id: string,
+    nameAlbum: string,
+    nameArtist: string,
+    img: string,
 
   }
 

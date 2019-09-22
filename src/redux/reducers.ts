@@ -1,9 +1,9 @@
 import {combineReducers} from "redux";
 import {AlbumsReducer} from "../pages/albums/redux/albums-reducer";
-import {AlbumsModel} from "../pages/albums/services/albums-model";
+import {AlbumsPageModel} from "../pages/albums/services/albums-page-model";
 
 export interface StatesReducers {
-  AlbumsReducer: AlbumsModel.Props,
+  AlbumsReducer: AlbumsPageModel.Props,
 }
 
 let States = {

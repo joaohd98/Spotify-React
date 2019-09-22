@@ -10,7 +10,7 @@ export class SearchService {
 
     let request: SearchModel.Request = {
       q: text,
-      type: 'track,artist, album',
+      type: 'track,artist,album',
       limit: limit,
       offset: offset
     };

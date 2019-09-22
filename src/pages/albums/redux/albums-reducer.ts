@@ -1,8 +1,8 @@
 import {AlbumActionConst, AlbumsAction} from "./albums-action";
-import {AlbumsModel} from "../services/albums-model";
 import {ServiceStatus} from "../../../service";
+import {AlbumsPageModel} from "../services/albums-page-model";
 
-export const AlbumsInitalState: AlbumsModel.Props = {
+export const AlbumsInitalState: AlbumsPageModel.Props = {
 
   text: "",
   albums: [],

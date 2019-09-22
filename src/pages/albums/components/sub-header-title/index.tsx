@@ -1,16 +1,16 @@
 import React from 'react';
 import "./styles.scss"
-import {AlbumsModel} from "../../services/albums-model";
-import {AlbumsInteractor} from "../../services/albums-interactor";
+import {AlbumsPageInteractor} from "../../services/albums-page-interactor";
+import {AlbumsPageModel} from "../../services/albums-page-model";
 
-export class SubHeaderTitle extends React.Component<AlbumsModel.Props> {
+export class SubHeaderTitle extends React.Component<AlbumsPageModel.Props> {
 
   getMessage() {
 
     return (
       this.props.text === '' ?
         `Álbuns buscados recentemente` :
-        `Resultados encontrados para "${AlbumsInteractor.breakTooLongWorld(this.props.text)}"`
+        `Resultados encontrados para "${AlbumsPageInteractor.breakTooLongWorld(this.props.text)}"`
     )
 
   }

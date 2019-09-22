@@ -1,11 +1,11 @@
 import React from 'react';
 import "./styles.scss"
-import {AlbumsModel} from "../../services/albums-model";
 import {ErrorMessage, ErrorMessageInterface} from "../../../../components/error-message";
-import {AlbumsInteractor} from "../../services/albums-interactor";
+import {AlbumsPageInteractor} from "../../services/albums-page-interactor";
 import {ServiceStatus} from "../../../../service";
+import {AlbumsPageModel} from "../../services/albums-page-model";
 
-export class ListAlbums extends React.Component<AlbumsModel.Props> {
+export class ListAlbums extends React.Component<AlbumsPageModel.Props> {
 
   renderMultipleCard = () => {
 
@@ -39,7 +39,7 @@ export class ListAlbums extends React.Component<AlbumsModel.Props> {
         title: 'Não foi possível encontrar os àlbuns',
         subTitle: "Tente novamente mais tarde.",
         buttonText : "Tentar Novamente",
-        buttonPress : () => this.props.functions.searchAlbums(this.props.text, this.props.offset, this.props.limit)
+        buttonPress : () => this.props.functions.searchAlbums(this.props.text, this.props.limit, this.props.offset)
 
       }
 
@@ -53,7 +53,7 @@ export class ListAlbums extends React.Component<AlbumsModel.Props> {
         title: "Sem acesso a internet",
         subTitle: "Verifique a sua rede Wi-Fi ou dados móveis.",
         buttonText : "Tentar Novamente",
-        buttonPress : () => this.props.functions.searchAlbums(this.props.text, this.props.offset, this.props.limit)
+        buttonPress : () => this.props.functions.searchAlbums(this.props.text, this.props.limit, this.props.offset)
 
       };
 
@@ -63,7 +63,7 @@ export class ListAlbums extends React.Component<AlbumsModel.Props> {
 
       data = {
 
-        title: <div>Não foi possível encontrar: <br/>"{AlbumsInteractor.breakTooLongWorld(this.props.text)}</div>,
+        title: <div>Não foi possível encontrar: <br/>"{AlbumsPageInteractor.breakTooLongWorld(this.props.text)}</div>,
         subTitle: "Tente novamente escrevendo o termo da busca de outra forma ou usando outra palavra chave.",
 
       }

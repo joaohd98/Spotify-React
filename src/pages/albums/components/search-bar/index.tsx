@@ -1,12 +1,12 @@
 import React, {ChangeEvent} from 'react';
 import "./styles.scss"
-import {AlbumsModel} from "../../services/albums-model";
+import {AlbumsPageModel} from "../../services/albums-page-model";
 
 interface States {
   textInput: string;
 }
 
-export class SearchBar extends React.Component<AlbumsModel.Props, States> {
+export class SearchBar extends React.Component<AlbumsPageModel.Props, States> {
 
   state = {
     textInput: this.props.text,
@@ -16,7 +16,7 @@ export class SearchBar extends React.Component<AlbumsModel.Props, States> {
 
     this.setState({ textInput: target.value });
 
-    this.props.functions.searchAlbums(target.value, this.props.offset, this.props.limit);
+    this.props.functions.searchAlbums(target.value, this.props.limit, this.props.offset);
 
   };
 

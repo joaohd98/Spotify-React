@@ -1,5 +1,6 @@
 import {ServiceStatus} from "../../../service";
 import {SearchService} from "../../../service/search";
+import {AlbumsPageInteractor} from "../services/albums-page-interactor";
 
 export enum AlbumActionConst {
 
@@ -29,7 +30,7 @@ export class AlbumsAction {
 
         dispatch({
           type: AlbumActionConst.SUCESS_SEARCH_ALBUM, payload: {
-            albums: response.data,
+            albums: AlbumsPageInteractor.formatAlbumRequest(response.data!),
             status: response.cod,
           }
         });
