@@ -32,6 +32,7 @@ export const AlbumsReducer = (state = AlbumsInitalState, action: { type: AlbumAc
         cards: [],
         text: action.payload.text,
         offset: action.payload.offset,
+        seeMore: action.payload.seeMore,
         status: ServiceStatus.loading
       };
 
