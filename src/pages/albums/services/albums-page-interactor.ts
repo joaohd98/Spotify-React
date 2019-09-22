@@ -1,7 +1,7 @@
 import {AlbumsPageModel} from "./albums-page-model";
 import {SearchModel} from "../../../service/search/search-model";
-// import {ArtistAlbumservice} from "../../../service/artist-albums";
 import noPhoto from "../../../assets/no-photo.png";
+import {Helpers} from "../../../helpers";
 
 export class AlbumsPageInteractor {
 
@@ -17,13 +17,15 @@ export class AlbumsPageInteractor {
 
     const getImage = (data: {url: string}[]) => ( data.length > 0 ? data[0].url  : noPhoto);
 
+    const upperCaseFirstLetter = Helpers.upperCaseFirstLetter;
+
     request.albums.items.forEach(album => {
 
       cards.push({
         id: album.id,
         type: "album",
-        title: album.name,
-        subTitle: album.artists[0].name,
+        title: upperCaseFirstLetter(album.name),
+        subTitle: upperCaseFirstLetter(album.artists[0].name),
         img: getImage(album.images)
       })
 
@@ -34,7 +36,7 @@ export class AlbumsPageInteractor {
       cards.push({
         id: track.id,
         type: "track",
-        title: track.name,
+        title: upperCaseFirstLetter(track.name),
         subTitle: "",
         img: getImage(track.album.images)
       })
@@ -46,7 +48,7 @@ export class AlbumsPageInteractor {
       cards.push({
         id: artist.id,
         type: "artist",
-        title: artist.name,
+        title: upperCaseFirstLetter(artist.name),
         subTitle: "",
         img: getImage(artist.images)
       })

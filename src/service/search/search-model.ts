@@ -10,6 +10,7 @@ export namespace SearchModel {
     type: string
     limit: number,
     offset: number,
+    market: string
 
   }
 

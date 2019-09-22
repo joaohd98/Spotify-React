@@ -12,7 +12,8 @@ export class SearchService {
       q: text,
       type: 'track,artist,album',
       limit: limit,
-      offset: offset
+      offset: offset,
+      market: "BR"
     };
 
     return Helpers.generateUrlGet<SearchModel.Request>(SearchService.url, request);
