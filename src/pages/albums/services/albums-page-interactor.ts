@@ -1,61 +1,59 @@
 import {AlbumsPageModel} from "./albums-page-model";
 import {SearchModel} from "../../../service/search/search-model";
+// import {ArtistAlbumservice} from "../../../service/artist-albums";
+import noPhoto from "../../../assets/no-photo.png";
 
 export class AlbumsPageInteractor {
 
   static breakTooLongWorld = (text: string): string => {
 
-
     return text.length <= 20 ? text : text.substring(0, 20) + "...";
 
   };
 
-  static formatAlbumRequest = (request: SearchModel.Response): AlbumsPageModel.AlbumView[] => {
+  static formatRequest = (request: SearchModel.Response): AlbumsPageModel.cardView[] => {
 
-    let albums: AlbumsPageModel.AlbumView[] = [];
+    let cards: AlbumsPageModel.cardView[] = [];
 
-    request.albums.forEach(album => {
+    const getImage = (data: {url: string}[]) => ( data.length > 0 ? data[0].url  : noPhoto);
 
-      albums.push({
+    request.albums.items.forEach(album => {
+
+      cards.push({
         id: album.id,
-        nameAlbum: album.name,
-        nameArtist: album.artists[0].name,
-        img: album.images[0].url
+        type: "album",
+        title: album.name,
+        subTitle: album.artists[0].name,
+        img: getImage(album.images)
       })
 
     });
 
+    request.tracks.items.forEach(track => {
 
-    request.tracks.forEach(track => {
-
-      let album = track.album;
-
-      albums.push({
+      cards.push({
         id: track.id,
-        nameAlbum: album.name,
-        nameArtist: album.artists[0].name,
-        img: album.images[0].url
+        type: "track",
+        title: track.name,
+        subTitle: "",
+        img: getImage(track.album.images)
       })
 
     });
 
+    request.artists.items.forEach(artist => {
 
-    request.artists.forEach(artist => {
-
-      // let album = artist;
-      //
-      // albums.push({
-      //   id: album.id,
-      //   nameAlbum: album.name,
-      //   nameArtist: artist.name,
-      //   img: album.images[0].url
-      // })
+      cards.push({
+        id: artist.id,
+        type: "artist",
+        title: artist.name,
+        subTitle: "",
+        img: getImage(artist.images)
+      })
 
     });
 
-    console.log(albums);
-
-    return albums;
+    return cards.sort((card1, card2) => ( card1.title > card2.title ? 1 : card1.title < card2.title ? -1 : 0));
 
   }
 

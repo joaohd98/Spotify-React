@@ -9,20 +9,19 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props> {
 
   renderMultipleCard = () => {
 
-    // let {albums} = this.props;
-
     let elements: JSX.Element[] = [];
 
-    for(let i = 0; i < 5; i++) {
+    this.props.cards.forEach((card, index) => {
+
       elements.push(
-        <div className="card" key={i}>
-          <img src="https://e.snmc.io/i/300/w/4f0b811b8377bd258111cfd66c174ebb/6190855" alt="capa" />
-          <p>Nome do Artista</p>
-          <p>Nome do Artista</p>
+        <div className="card" key={index}>
+          <img src={card.img} alt="capa" />
+          <p>{card.title}</p>
+          <p>{card.subTitle}</p>
         </div>
       )
 
-    }
+    });
 
     return <div className="list-album">{ elements }</div>;
 
@@ -90,7 +89,7 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props> {
     const hasErrors = (
       this.props.status === ServiceStatus.failed ||
       this.props.status === ServiceStatus.noInternetConnection ||
-      (this.props.albums.length !== 0 && this.props.text !== "")
+      (this.props.status === ServiceStatus.success && this.props.cards.length === 0 && this.props.text !== "")
     );
 
     if(hasErrors)

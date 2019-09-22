@@ -5,7 +5,7 @@ export namespace AlbumsPageModel {
   export interface Props {
 
     text: string;
-    albums: AlbumView[];
+    cards: cardView[];
     status: ServiceStatus;
     offset: number,
     limit: number
@@ -20,11 +20,12 @@ export namespace AlbumsPageModel {
 
   }
 
-  export interface AlbumView {
+  export interface cardView {
 
     id: string,
-    nameAlbum: string,
-    nameArtist: string,
+    type: "artist" | "track" | "album",
+    title: string,
+    subTitle: string,
     img: string,
 
   }

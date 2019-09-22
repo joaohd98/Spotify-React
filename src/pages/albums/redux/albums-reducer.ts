@@ -5,10 +5,10 @@ import {AlbumsPageModel} from "../services/albums-page-model";
 export const AlbumsInitalState: AlbumsPageModel.Props = {
 
   text: "",
-  albums: [],
+  cards: [],
   status: ServiceStatus.noAction,
   offset: 0,
-  limit: 20,
+  limit: 3, //9
   functions: {
     searchAlbums: (text, offset, limit) => AlbumsAction.searchAlbums(text, offset, limit)
   }
@@ -24,12 +24,21 @@ export const AlbumsReducer = (state = AlbumsInitalState, action: { type: AlbumAc
       return {
         ...state,
         text: action.payload.text,
-        albums: [],
+        cards: [],
         status: action.payload.status
       };
 
     }
 
+    case AlbumActionConst.SUCCESS_SEARCH_ALBUM: {
+
+      return {
+        ...state,
+        cards: action.payload.cards,
+        status: action.payload.status
+      };
+
+    }
 
     case AlbumActionConst.FAILED_SEARCH_ALBUM: {
 

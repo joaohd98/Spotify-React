@@ -15,9 +15,9 @@ export namespace SearchModel {
 
   export interface Response {
 
-    albums: AlbumModel.Response[];
-    artists: ArtistModel.Response[];
-    tracks: TrackModel.Response[];
+    albums:  { items: AlbumModel.Response[] };
+    artists: { items: ArtistModel.Response[] };
+    tracks:  { items: TrackModel.Response[] };
 
   }
 

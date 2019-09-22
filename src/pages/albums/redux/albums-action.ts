@@ -5,7 +5,7 @@ import {AlbumsPageInteractor} from "../services/albums-page-interactor";
 export enum AlbumActionConst {
 
   LOADING_SEARCH_ALBUM,
-  SUCESS_SEARCH_ALBUM,
+  SUCCESS_SEARCH_ALBUM,
   FAILED_SEARCH_ALBUM,
 
 }
@@ -19,29 +19,24 @@ export class AlbumsAction {
       dispatch({
         type: AlbumActionConst.LOADING_SEARCH_ALBUM, payload: {
           text: text,
-          albums: [],
+          cards: [],
           status: ServiceStatus.loading,
         }
       });
 
       SearchService.makeRequest(text, limit, offset, response => {
 
-        console.log(response);
-
         dispatch({
-          type: AlbumActionConst.SUCESS_SEARCH_ALBUM, payload: {
-            albums: AlbumsPageInteractor.formatAlbumRequest(response.data!),
+          type: AlbumActionConst.SUCCESS_SEARCH_ALBUM, payload: {
+            cards: AlbumsPageInteractor.formatRequest(response.data!),
             status: response.cod,
           }
         });
 
       }, response => {
 
-        console.log(response);
-
         dispatch({
           type: AlbumActionConst.FAILED_SEARCH_ALBUM, payload: {
-            text: text,
             status: response.cod,
           }
         });

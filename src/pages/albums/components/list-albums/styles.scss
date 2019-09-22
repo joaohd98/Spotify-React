@@ -21,6 +21,7 @@
 
     width: 150px;
     height: auto;
+    margin-bottom: 20px;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -28,7 +29,6 @@
     @include screenType(mobile-small-screen) {
 
       width: 80%;
-      margin-bottom: 20px;
 
     }
 
@@ -36,7 +36,14 @@
 
       border-radius: 0;
       width: 100%;
+      height: 150px;
       margin-bottom: 10px;
+
+      @include screenType(mobile-small-screen) {
+
+        height: 200px;
+
+      }
 
     }
 
