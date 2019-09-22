@@ -1,8 +1,6 @@
 const fs = require('fs');
 
-let selectedEnv = process.argv;
-
-console.log(selectedEnv)
+let selectedEnv = process.argv[3] || "prd";
 
 if(!selectedEnv || !['hml', 'dsv', 'prd'].find(str => str === selectedEnv))
   return;

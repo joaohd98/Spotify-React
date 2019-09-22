@@ -1,13 +1,17 @@
 {
-  "name": "Spotify Clone",
+  "name": "spotify-clone",
   "version": "1.0.0",
   "description": "App para visualizar musicas, albums a artistas.",
   "main": "index.js",
   "scripts": {
-    "prestart": "node scripts/change-env.js",
-    "preinstall": "node scripts/change-env.js",
-    "start": "react-scripts start -- --env=hml",
-    "install": "react-scripts build --env=hml"
+    "start": "react-scripts start",
+    "change-env": "node scripts/change-env.js",
+    "start --dsv": "npm run change-env dsv && react-scripts start",
+    "start --hml": "npm run change-env hml && react-scripts start",
+    "start --prd": "npm run change-env prd && react-scripts start",
+    "build --dsv": "npm run change-env dsv && react-scripts build",
+    "build --hml": "npm run change-env hml && react-scripts build",
+    "build --prd": "npm run change-env prd && react-scripts build"
   },
   "repository": {
     "type": "git",
