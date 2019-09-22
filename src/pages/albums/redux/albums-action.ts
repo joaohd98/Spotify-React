@@ -22,9 +22,6 @@ export class AlbumsAction {
       dispatch({
         type: AlbumActionConst.LOADING_SEARCH_ALBUM, payload: {
           text: text,
-          cards: [],
-          seeMore: false,
-          offset: 0,
         }
       });
 

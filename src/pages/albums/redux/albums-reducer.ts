@@ -21,7 +21,7 @@ export const AlbumsInitalState: AlbumsPageModel.Props = {
 
 };
 
-export const AlbumsReducer = (state = AlbumsInitalState, action: { type: AlbumActionConst, payload: any}) => {
+export const AlbumsReducer = (state = AlbumsInitalState, action: { type: AlbumActionConst, payload: AlbumsPageModel.Props}) => {
 
   switch (action.type) {
 
@@ -31,8 +31,12 @@ export const AlbumsReducer = (state = AlbumsInitalState, action: { type: AlbumAc
         ...state,
         cards: [],
         text: action.payload.text,
-        offset: action.payload.offset,
-        seeMore: action.payload.seeMore,
+        offset: 0,
+        footerLoading: {
+          seeMore: false,
+          reachedBottom: false,
+          status: ServiceStatus.noAction
+        },
         status: ServiceStatus.loading
       };
 
