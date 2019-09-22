@@ -1,10 +1,13 @@
 {
-  "name": "XP-investimento",
+  "name": "Spotify Clone",
   "version": "1.0.0",
   "description": "App para visualizar musicas, albums a artistas.",
   "main": "index.js",
   "scripts": {
-    "start": "react-scripts start"
+    "prestart": "node scripts/change-env.js",
+    "preinstall": "node scripts/change-env.js",
+    "start": "react-scripts start -- --env=hml",
+    "install": "react-scripts build --env=hml"
   },
   "repository": {
     "type": "git",
