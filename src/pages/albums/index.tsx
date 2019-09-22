@@ -12,6 +12,7 @@ class Albums extends React.Component<AlbumsModel.Props, AlbumsModel.State> {
 
   render() {
 
+
     return (
       <div>
         <SearchBar {...this.props}/>

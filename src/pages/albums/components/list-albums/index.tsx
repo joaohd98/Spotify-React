@@ -1,9 +1,9 @@
 import React from 'react';
 import "./styles.scss"
 import {AlbumsModel} from "../../services/albums-model";
-import {ServiceCod} from "../../../../service/service";
 import {ErrorMessage, ErrorMessageInterface} from "../../../../components/error-message";
 import {AlbumsInteractor} from "../../services/albums-interactor";
+import {ServiceStatus} from "../../../../service/service";
 
 export class ListAlbums extends React.Component<AlbumsModel.Props> {
 
@@ -30,7 +30,7 @@ export class ListAlbums extends React.Component<AlbumsModel.Props> {
 
   renderErrorMessage = () => {
 
-    const hasInternetConnectionError = this.props.error === ServiceCod.noInternetConnection;
+    const hasInternetConnectionError = this.props.error === ServiceStatus.noInternetConnection;
 
     let data: ErrorMessageInterface;
 
@@ -75,7 +75,7 @@ export class ListAlbums extends React.Component<AlbumsModel.Props> {
 
   render() {
 
-    const hasError = this.props.error !== ServiceCod.success || (this.props.text !== "" && this.props.albums.length === 0);
+    const hasError = this.props.error !== ServiceStatus.success || (this.props.text !== "" && this.props.albums.length === 0);
 
     if(hasError)
       return this.renderErrorMessage();

@@ -1,13 +1,13 @@
 import {AlbumActionConst, AlbumsAction} from "./albums-action";
 import {AlbumsModel} from "../services/albums-model";
-import {ServiceCod} from "../../../service/service";
+import {ServiceStatus} from "../../../service/service";
 
 export const AlbumsInitalState: AlbumsModel.Props = {
 
   text: "",
   albums: [],
   loading: false,
-  error: ServiceCod.success,
+  error: ServiceStatus.success,
   functions: {
     searchAlbums: text => AlbumsAction.searchAlbums(text)
   }
