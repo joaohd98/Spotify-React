@@ -4,7 +4,7 @@ import {SubHeaderTitle} from "./components/sub-header-title";
 import {ListAlbums} from "./components/list-albums";
 import {StatesReducers} from "../../redux/reducers";
 import {bindActionCreators} from "redux";
-import {AlbumsInitalState} from "./redux/albums-reducer";
+import {AlbumsInitialState} from "./redux/albums-reducer";
 import {connect} from "react-redux";
 import {AlbumsPageModel} from "./services/albums-page-model";
 import {Helpers} from "../../helpers";
@@ -60,7 +60,7 @@ const mapStateToProps = (state: StatesReducers) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  functions: bindActionCreators(AlbumsInitalState.functions, dispatch)
+  functions: bindActionCreators(AlbumsInitialState.functions, dispatch)
 });
 
 export const AlbumsPage = connect(mapStateToProps, mapDispatchToProps)(Albums);

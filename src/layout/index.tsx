@@ -8,6 +8,8 @@ import {AlbumsPage} from "../pages/albums";
 
 export const Layout = () => {
 
+
+
   return (
     <Provider store={store()}>
       <BrowserRouter>

@@ -2,7 +2,7 @@ import {AlbumActionConst, AlbumsAction} from "./albums-action";
 import {ServiceStatus} from "../../../service";
 import {AlbumsPageModel} from "../services/albums-page-model";
 
-export const AlbumsInitalState: AlbumsPageModel.Props = {
+export const AlbumsInitialState: AlbumsPageModel.Props = {
 
   text: "",
   cards: [],
@@ -21,7 +21,7 @@ export const AlbumsInitalState: AlbumsPageModel.Props = {
 
 };
 
-export const AlbumsReducer = (state = AlbumsInitalState, action: { type: AlbumActionConst, payload: AlbumsPageModel.Props}) => {
+export const AlbumsReducer = (state = AlbumsInitialState, action: { type: AlbumActionConst, payload: AlbumsPageModel.Props}) => {
 
   switch (action.type) {
 

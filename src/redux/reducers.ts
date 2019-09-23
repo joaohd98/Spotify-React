@@ -1,13 +1,15 @@
 import {combineReducers} from "redux";
-import {AlbumsReducer} from "../pages/albums/redux/albums-reducer";
 import {AlbumsPageModel} from "../pages/albums/services/albums-page-model";
+import {UserReducer} from "../user/user-reducer";
+import {AlbumsReducer} from "../pages/albums/redux/albums-reducer";
 
 export interface StatesReducers {
   AlbumsReducer: AlbumsPageModel.Props,
 }
 
 let States = {
-  AlbumsReducer
+  AlbumsReducer,
+  UserReducer
 };
 
 export const combinedReducers = () => combineReducers(States);
