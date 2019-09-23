@@ -11,7 +11,6 @@ export class ArtistAlbumservice {
 
   };
 
-
   static makeRequest = (id: string, success: (response: ServiceReturn<AlbumModel.Response>) => void, failed: (response: ServiceReturn<AlbumModel.Response>) => void = () => {}) => {
 
    let service = Service.get<any, AlbumModel.Response>(ArtistAlbumservice.getUrl(id));

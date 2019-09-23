@@ -1,12 +1,29 @@
 import {AnyAction, Dispatch} from "redux";
+import {store} from "../config/configure-store";
 
 export interface UserModel {
 
-  token: string,
+  authCode: string,
+  accessToken: string,
+  refreshToken: string,
   albumsRecent: object[],
 
   functions: {
-    saveToken: (token: string, dispatch: Dispatch<AnyAction>) => void
+    saveAuthCode: (authCode: string, dispatch: Dispatch<AnyAction>) => void
   }
 
 }
+
+export const getUserCode = (type: "authCode" | "refreshToken" | "accessToken") => {
+
+  return store.getState().UserPersistedReducer[type];
+
+};
+
+
+export const getRedirectUri = () => {
+
+  return window.location.origin + "/auth";
+
+};
+

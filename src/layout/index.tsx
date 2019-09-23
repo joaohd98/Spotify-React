@@ -5,17 +5,20 @@ import './styles.scss'
 import logo from "../assets/logo.png"
 import {AlbumsPage} from "../pages/albums";
 import {PersistGate} from "redux-persist/integration/react";
-import {UserService} from "../user/user-service";
 import {UserInitialState} from "../user/user-reducer";
-import {store, persistor} from "../redux/configure-store"
+import {store, persistor} from "../config/configure-store"
+import {ConfigureInterceptor} from "../config/configure-interceptor";
+import {UserAuthorizationService} from "../user/service/authorization";
+import {getUserCode} from "../user/user-model";
+import {UserTokenService} from "../user/service/token";
 
 export class Layout extends React.Component {
 
-  getToken = () => {
+  componentDidMount() {
 
-    return store.getState().UserPersistedReducer.token;
+    ConfigureInterceptor();
 
-  };
+  }
 
   checkIfHasToken = () => {
 
@@ -24,20 +27,31 @@ export class Layout extends React.Component {
       let code = new URL(window.location.href).searchParams.get("code")!;
 
       if (!code)
-        window.location.href = UserService.getUrl();
+        window.location.href = UserAuthorizationService.getUrl();
 
-      UserInitialState.functions.saveToken(code, store.dispatch);
+      UserInitialState.functions.saveAuthCode(code, store.dispatch);
 
-      persistor.flush().then(() => {
+      UserTokenService.makeRequest(getUserCode("authCode"), (response) => {
 
-        window.location.href = window.location.origin;
+        console.log(response);
+
+        persistor.flush().then(() => {
+
+          window.location.href = window.location.origin;
+
+        });
+
+      }, (response) => {
+
+        console.log(response);
 
       });
 
+
     }
 
-    else if(!this.getToken())
-      window.location.href = UserService.getUrl();
+    else if(!getUserCode("authCode"))
+      window.location.href = UserAuthorizationService.getUrl();
 
   };
 

@@ -1,5 +1,5 @@
 import {ENV} from "../env";
-import axios, {AxiosRequestConfig, AxiosResponse} from 'axios';
+import axios,  {AxiosResponse} from 'axios';
 
 export enum ServiceStatus {
 
@@ -21,33 +21,21 @@ export interface ServiceReturn<T> {
 
 export class Service {
 
-  private static getHttpOptions = (): AxiosRequestConfig => {
+  private static setURl = (url: string, token: boolean) => (token ? ENV.token_url : ENV.url) + url;
 
-    return {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer '
-      },
-    }
+  static get = async <DataType, ReturnType>(url: string, token = false) => {
+
+    const urlString = Service.setURl(url, token);
+
+    return await Service.callRequest<ReturnType>(axios.get<ReturnType>(urlString));
 
   };
 
-  static get = async <DataType, ReturnType>(url: string) => {
+  static post = async <DataType, ReturnType>(url: string, data: DataType, token = false) => {
 
-    const urlString = ENV.url + url;
-    const httpOptions = Service.getHttpOptions();
+    const urlString = Service.setURl(url, token);
 
-    return await Service.callRequest<ReturnType>(axios.get<ReturnType>(urlString, httpOptions));
-
-  };
-
-  static post = async <DataType, ReturnType>(url: string, data: DataType) => {
-
-    const urlString = ENV.url + url;
-    const httpOptions = Service.getHttpOptions();
-
-    return Service.callRequest<ReturnType>(axios.post<ReturnType>(urlString, data, httpOptions));
+    return Service.callRequest<ReturnType>(axios.post<ReturnType>(urlString, data));
 
   };
 

@@ -8,11 +8,10 @@ export enum UserActionConst {
 
 export class UserAction {
 
-  static saveToken = (token: string, dispatch: Dispatch<AnyAction>) => {
+  static saveToken = (authCode: string, dispatch: Dispatch<AnyAction>) => {
 
-    dispatch({type: UserActionConst.SAVE_TOKEN, payload: {token}});
+    dispatch({type: UserActionConst.SAVE_TOKEN, payload: {authCode}});
 
-    // setTimeout(() => window.location.href = window.location.origin,500)
   };
 
 }

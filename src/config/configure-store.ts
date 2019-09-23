@@ -14,7 +14,7 @@ export interface StatesReducers {
 }
 
 const reducers = combineReducers({
-  UserPersistedReducer: persistReducer({ key: 'redux', storage, blacklist: ['functions']}, UserReducer),
+  UserPersistedReducer: persistReducer({ key: 'config', storage, blacklist: ['functions']}, UserReducer),
   AlbumsReducer
 });
 
