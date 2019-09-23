@@ -3,6 +3,7 @@ import {SearchModel} from "../../../service/search/search-model";
 import noPhoto from "../../../assets/no-photo.png";
 import {Helpers} from "../../../helpers";
 import {ArtistModel} from "../../../service/artist/artist-model";
+import {AlbumModel} from "../../../service/album/album-model";
 
 export class AlbumsPageInteractor {
 
@@ -12,6 +13,29 @@ export class AlbumsPageInteractor {
 
   };
 
+  static formatCardArtist = (albums: AlbumModel.Response[]) => {
+
+    let cards: AlbumsPageModel.cardView[] = [];
+
+    const getImage = (data: {url: string}[]) => ( data.length > 0 ? data[0].url  : noPhoto);
+
+    const upperCaseFirstLetter = Helpers.upperCaseFirstLetter;
+
+    albums.forEach(album => {
+
+      cards.push({
+        id: album.id,
+        type: "album",
+        title: upperCaseFirstLetter(album.name),
+        subTitle: upperCaseFirstLetter(album.artists[0].name),
+        img: getImage(album.images)
+      })
+
+    });
+
+    return cards;
+
+  };
   static formatRequest = (request: SearchModel.Response): AlbumsPageModel.cardView[] => {
 
     let cards: AlbumsPageModel.cardView[] = [];

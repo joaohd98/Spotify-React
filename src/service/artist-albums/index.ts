@@ -1,5 +1,5 @@
 import {Service, ServiceReturn, ServiceStatus} from "../index";
-import {AlbumModel} from "../album/album-model";
+import {ArtistAlbumModel} from "./artist-album-model";
 
 export class ArtistAlbumservice {
 
@@ -11,11 +11,11 @@ export class ArtistAlbumservice {
 
   };
 
-  static makeRequest = (id: string, success: (response: ServiceReturn<AlbumModel.Response>) => void, failed: (response: ServiceReturn<AlbumModel.Response>) => void = () => {}) => {
+  static makeRequest = (id: string, success: (response: ServiceReturn<ArtistAlbumModel.Response>) => void, failed: (response: ServiceReturn<ArtistAlbumModel.Response>) => void = () => {}) => {
 
-   let service = Service.get<any, AlbumModel.Response>(ArtistAlbumservice.getUrl(id));
+   let service = Service.get<any, ArtistAlbumModel.Response>(ArtistAlbumservice.getUrl(id));
 
-    service.then((response: ServiceReturn<AlbumModel.Response>) => {
+    service.then((response: ServiceReturn<ArtistAlbumModel.Response>) => {
 
       if(response.cod === ServiceStatus.success)
         success(response);

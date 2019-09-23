@@ -12,7 +12,7 @@ export class ErrorMessage extends React.Component<ErrorMessageInterface>{
 
   render() {
 
-    let {title, subTitle, buttonText, buttonPress} = this.props;
+    let { title, subTitle, buttonText, buttonPress } = this.props;
 
     return (
       <div className="error-message">

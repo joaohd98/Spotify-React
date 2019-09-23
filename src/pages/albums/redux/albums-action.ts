@@ -1,5 +1,6 @@
 import {SearchService} from "../../../service/search";
 import {AlbumsPageInteractor} from "../services/albums-page-interactor";
+import {ArtistAlbumservice} from "../../../service/artist-albums";
 
 export enum AlbumActionConst {
 
@@ -29,13 +30,41 @@ export class AlbumsAction {
 
         let artist = AlbumsPageInteractor.findArtist(response.data!.artists.items, text);
 
-        dispatch({
-          type: AlbumActionConst.SUCCESS_SEARCH_ALBUM, payload: {
-            cards: artist ? AlbumsPageInteractor.formatRequest(response.data!) : AlbumsPageInteractor.formatRequest(response.data!),
-            hasNext: AlbumsPageInteractor.verifyHasNext(response.data!),
-            status: response.cod,
-          }
-        });
+        if(artist) {
+
+          ArtistAlbumservice.makeRequest(artist.id, response => {
+
+            dispatch({
+              type: AlbumActionConst.SUCCESS_SEARCH_ALBUM, payload: {
+                cards: AlbumsPageInteractor.formatCardArtist(response.data!.items),
+                hasNext: false,
+                status: response.cod,
+              }
+            });
+
+          }, () => {
+
+            dispatch({
+              type: AlbumActionConst.FAILED_SEARCH_ALBUM, payload: {
+                status: response.cod,
+              }
+            });
+
+          });
+
+        }
+
+        else {
+
+          dispatch({
+            type: AlbumActionConst.SUCCESS_SEARCH_ALBUM, payload: {
+              cards: AlbumsPageInteractor.formatRequest(response.data!),
+              hasNext: AlbumsPageInteractor.verifyHasNext(response.data!),
+              status: response.cod,
+            }
+          });
+
+        }
 
       }, response => {
 
