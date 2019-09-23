@@ -10,6 +10,7 @@ export enum AlbumActionConst {
   LOADING_ADD_ALBUM = "ALBUM_ACTION_LOADING_ADD_ALBUM",
   SUCCESS_ADD_ALBUM = "ALBUM_ACTION_SUCCESS_ADD_ALBUM",
   FAILED_ADD_ALBUM = "ALBUM_ACTION_FAILED_ADD_ALBUM"
+
 }
 
 export class AlbumsAction {
@@ -26,9 +27,12 @@ export class AlbumsAction {
 
       SearchService.makeRequest(text, limit, offset, response => {
 
+        console.log("response", response);
+
         dispatch({
           type: AlbumActionConst.SUCCESS_SEARCH_ALBUM, payload: {
             cards: AlbumsPageInteractor.formatRequest(response.data!),
+            hasNext: AlbumsPageInteractor.verifyHasNext(response.data!),
             status: response.cod,
           }
         });
@@ -57,9 +61,12 @@ export class AlbumsAction {
 
       SearchService.makeRequest(text, limit, offset, response => {
 
+        console.log("response", response);
+
         dispatch({
           type: AlbumActionConst.SUCCESS_ADD_ALBUM, payload: {
             cards: AlbumsPageInteractor.formatRequest(response.data!),
+            hasNext: AlbumsPageInteractor.verifyHasNext(response.data!),
             status: response.cod,
             offset
           }

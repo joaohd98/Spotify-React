@@ -11,6 +11,7 @@ export const AlbumsInitialState: AlbumsPageModel.Props = {
   footerLoading: {
     seeMore: false,
     reachedBottom: false,
+    hasNext: false,
     status: ServiceStatus.noAction
   },
   limit: 3, //9
@@ -33,6 +34,7 @@ export const AlbumsReducer = (state = AlbumsInitialState, action: { type: AlbumA
         text: action.payload.text,
         offset: 0,
         footerLoading: {
+          hasNext: true,
           seeMore: false,
           reachedBottom: false,
           status: ServiceStatus.noAction
@@ -47,7 +49,11 @@ export const AlbumsReducer = (state = AlbumsInitialState, action: { type: AlbumA
       return {
         ...state,
         cards: action.payload.cards,
-        status: action.payload.status
+        status: action.payload.status,
+        footerLoading: {
+          ...state.footerLoading,
+          hasNext: action.payload.hasNext
+        }
       };
 
     }
@@ -66,6 +72,7 @@ export const AlbumsReducer = (state = AlbumsInitialState, action: { type: AlbumA
       return {
         ...state,
         footerLoading: {
+          ...state.footerLoading,
           seeMore: true,
           status: ServiceStatus.loading,
           reachedBottom: true
@@ -81,9 +88,9 @@ export const AlbumsReducer = (state = AlbumsInitialState, action: { type: AlbumA
         cards: state.cards.concat(action.payload.cards),
         offset: action.payload.offset,
         footerLoading: {
-          seeMore: true,
+          ...state.footerLoading,
           status: action.payload.status,
-          reachedBottom: false
+          hasNext: action.payload.hasNext,
         }
       };
 

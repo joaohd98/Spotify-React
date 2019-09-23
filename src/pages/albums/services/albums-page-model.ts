@@ -10,6 +10,7 @@ export namespace AlbumsPageModel {
     footerLoading: {
       seeMore: boolean,
       reachedBottom: boolean,
+      hasNext: boolean,
       status: ServiceStatus
     }
     offset: number,

@@ -54,7 +54,10 @@ export class FooterLoading extends React.Component<AlbumsPageModel.Props> {
 
   render() {
 
-    if(!this.props.footerLoading.seeMore && this.props.status === ServiceStatus.success && this.props.cards.length > 0)
+    if(!this.props.footerLoading.hasNext)
+      return <div/>;
+
+    else if(!this.props.footerLoading.seeMore && this.props.status === ServiceStatus.success && this.props.cards.length > 0)
       return <div className="footer-loading">{ this.renderButton() } </div>;
 
     else if(this.props.footerLoading.reachedBottom) {

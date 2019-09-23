@@ -17,7 +17,7 @@ class Albums extends React.Component<AlbumsPageModel.Props, AlbumsPageModel.Stat
 
   handleScroll = () => {
 
-    if(this.props.footerLoading.seeMore && Helpers.checkIfReachBottom() && !this.state.reachBottom) {
+    if(this.props.footerLoading.seeMore && Helpers.checkIfReachBottom() && !this.state.reachBottom && this.props.footerLoading.hasNext) {
 
       this.setState({reachBottom: true});
       this.props.functions.addAlbums(this.props.text, this.props.offset, this.props.limit);

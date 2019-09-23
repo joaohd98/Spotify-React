@@ -59,4 +59,10 @@ export class AlbumsPageInteractor {
 
   }
 
+  static verifyHasNext =  (request: SearchModel.Response) => {
+
+    return request.artists.next != null || request.tracks.next != null || request.albums.next != null
+
+  }
+
 }
