@@ -1,32 +1,65 @@
 import * as React from 'react';
 import {Provider} from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
-import store from "../redux/store";
 import './styles.scss'
 import logo from "../assets/logo.png"
 import {AlbumsPage} from "../pages/albums";
 import {PersistGate} from "redux-persist/integration/react";
-import {persistStore} from "redux-persist";
-import {UserModel} from "../user/user-model";
+import {UserService} from "../user/user-service";
+import {UserInitialState} from "../user/user-reducer";
+import {store, persistor} from "../redux/configure-store"
 
-export const Layout = (props: UserModel) => {
+export class Layout extends React.Component {
 
-  console.log(props);
+  getToken = () => {
 
-  return (
-    <Provider store={store()}>
-      <PersistGate loading={null} persistor={persistStore(store())}>
-        <BrowserRouter>
-          <div className="container">
-            <img className="logo" src={logo} alt="logo"/>
-            <div className="page-container">
-              <Route path="/" exact component={AlbumsPage} />
+    return store.getState().UserPersistedReducer.token;
+
+  };
+
+  checkIfHasToken = () => {
+
+    if(window.location.pathname === "/auth") {
+
+      let code = new URL(window.location.href).searchParams.get("code")!;
+
+      if (!code)
+        window.location.href = UserService.getUrl();
+
+      UserInitialState.functions.saveToken(code, store.dispatch);
+
+      persistor.flush().then(() => {
+
+        window.location.href = window.location.origin;
+
+      });
+
+    }
+
+    else if(!this.getToken())
+      window.location.href = UserService.getUrl();
+
+  };
+
+  render() {
+
+    return (
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor} onBeforeLift={this.checkIfHasToken}  >
+          <BrowserRouter>
+            <div className="container">
+              <img className="logo" src={logo} alt="logo"/>
+              <div className="page-container">
+                <Route path="/" exact component={AlbumsPage} />
+              </div>
             </div>
-          </div>
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
-  );
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
+    );
 
-};
+  }
+
+}
+
 

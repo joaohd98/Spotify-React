@@ -21,7 +21,7 @@ export const AlbumsInitialState: AlbumsPageModel.Props = {
 
 };
 
-export const AlbumsReducer = (state = AlbumsInitialState, action: { type: AlbumActionConst, payload: AlbumsPageModel.Props}) => {
+export const AlbumsReducer = (state = AlbumsInitialState, action: { type: AlbumActionConst, payload: any}) => {
 
   switch (action.type) {
 
