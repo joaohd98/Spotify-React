@@ -8,9 +8,9 @@ export enum UserActionConst {
 
 export class UserAction {
 
-  static saveToken = (authCode: string, dispatch: Dispatch<AnyAction>) => {
+  static saveToken = (accessToken: string, refreshToken: string, dispatch: Dispatch<AnyAction>) => {
 
-    dispatch({type: UserActionConst.SAVE_TOKEN, payload: {authCode}});
+    dispatch({type: UserActionConst.SAVE_TOKEN, payload: {accessToken, refreshToken}});
 
   };
 

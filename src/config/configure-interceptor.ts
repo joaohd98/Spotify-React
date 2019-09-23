@@ -1,5 +1,4 @@
 import axios, {AxiosRequestConfig, } from 'axios';
-import {ENV} from "../env";
 import {getUserCode} from "../user/user-model";
 
 export const ConfigureInterceptor = () => {
@@ -21,19 +20,10 @@ export const ConfigureInterceptor = () => {
     else {
 
       config.headers = {
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
       };
-
-      config.auth = {
-       username: ENV.client_id,
-       password: ENV.client_secret
-      };
-
-      console.log(config);
 
     }
-
 
     return config;
 

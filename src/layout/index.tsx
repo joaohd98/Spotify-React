@@ -12,6 +12,7 @@ import {UserAuthorizationService} from "../user/service/authorization";
 import {getUserCode} from "../user/user-model";
 import {UserTokenService} from "../user/service/token";
 
+
 export class Layout extends React.Component {
 
   componentDidMount() {
@@ -29,11 +30,11 @@ export class Layout extends React.Component {
       if (!code)
         window.location.href = UserAuthorizationService.getUrl();
 
-      UserInitialState.functions.saveAuthCode(code, store.dispatch);
+      UserTokenService.makeRequest(code, response => {
 
-      UserTokenService.makeRequest(getUserCode("authCode"), (response) => {
+        let data = response.data!;
 
-        console.log(response);
+        UserInitialState.functions.saveToken(data.access_token, data.refresh_token, store.dispatch);
 
         persistor.flush().then(() => {
 
@@ -50,7 +51,7 @@ export class Layout extends React.Component {
 
     }
 
-    else if(!getUserCode("authCode"))
+    else if(!getUserCode("accessToken"))
       window.location.href = UserAuthorizationService.getUrl();
 
   };

@@ -3,18 +3,18 @@ import {store} from "../config/configure-store";
 
 export interface UserModel {
 
-  authCode: string,
+  authToken: string,
   accessToken: string,
   refreshToken: string,
   albumsRecent: object[],
 
   functions: {
-    saveAuthCode: (authCode: string, dispatch: Dispatch<AnyAction>) => void
+    saveToken: (accessToken: string, refreshToken: string, dispatch: Dispatch<AnyAction>) => void
   }
 
 }
 
-export const getUserCode = (type: "authCode" | "refreshToken" | "accessToken") => {
+export const getUserCode = (type: "refreshToken" | "accessToken") => {
 
   return store.getState().UserPersistedReducer[type];
 

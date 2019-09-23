@@ -2,7 +2,6 @@ import {Service, ServiceReturn, ServiceStatus} from "../../service";
 import {getRedirectUri} from "../user-model";
 
 interface UserTokenRequestModel {
-  grant_type: string,
   code: string,
   redirect_uri: string
 }
@@ -17,12 +16,11 @@ interface UserTokenResponseModel {
 
 export class UserTokenService {
 
-  static url = "token";
+  static url = "access-token";
 
   static makeRequest = (code: string, success: (response: ServiceReturn<UserTokenResponseModel>) => void, failed: (response: ServiceReturn<UserTokenResponseModel>) => void) => {
 
     let service = Service.post<UserTokenRequestModel, UserTokenResponseModel>(UserTokenService.url, {
-      grant_type: "authorization_code",
       code: code,
       redirect_uri: getRedirectUri()
     }, true);

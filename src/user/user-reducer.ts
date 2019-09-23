@@ -3,13 +3,14 @@ import {UserAction, UserActionConst} from "./user-action";
 
 export const UserInitialState: UserModel = {
 
-  authCode: "",
+  authToken: "",
   refreshToken: "",
   accessToken: "",
   albumsRecent: [],
   functions: {
-    saveAuthCode: (authCode, dispatch) => UserAction.saveToken(authCode, dispatch)
+    saveToken: (accessToken, refreshToken, dispatch) => UserAction.saveToken(accessToken, refreshToken, dispatch)
   }
+
 };
 
 export const UserReducer = (state = UserInitialState, action: { type: UserActionConst, payload: any}) => {
@@ -20,7 +21,8 @@ export const UserReducer = (state = UserInitialState, action: { type: UserAction
 
       return {
         ...state,
-        authCode: action.payload.authCode,
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
       }
 
     }
