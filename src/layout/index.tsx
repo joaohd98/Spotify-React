@@ -11,9 +11,18 @@ import {ConfigureInterceptor} from "../config/configure-interceptor";
 import {UserAuthorizationService} from "../user/service/authorization";
 import {getUserCode} from "../user/user-model";
 import {UserTokenService} from "../user/service/token";
+import spinner from "../assets/spinner.svg"
+import {CSSProperties} from "react";
 
+interface State {
+  loading: boolean
+}
 
-export class Layout extends React.Component {
+export class Layout extends React.Component<null, State> {
+
+  state = {
+    loading: true
+  };
 
   componentDidMount() {
 
@@ -54,6 +63,34 @@ export class Layout extends React.Component {
     else if(!getUserCode("accessToken"))
       window.location.href = UserAuthorizationService.getUrl();
 
+    else
+      this.setState({loading: false})
+
+  };
+
+  renderViews = () => {
+
+    return (
+      <div className="page-container">
+        <Route path="/" exact component={AlbumsPage} />
+      </div>
+    )
+
+  };
+
+  renderLoading = () => {
+
+    let div: CSSProperties = {width: "100%", marginTop: "25vh", marginRight: "5vw"};
+    let img: CSSProperties = {display: "block", margin: "auto"};
+    let p: CSSProperties = {textAlign: "center", margin: 0, fontSize: 30};
+
+    return (
+      <div style={div}>
+        <img style={img} src={spinner} alt="spinner"/>
+        <p style={p}>Carregando...</p>
+      </div>
+    )
+
   };
 
   render() {
@@ -64,9 +101,7 @@ export class Layout extends React.Component {
           <BrowserRouter>
             <div className="container">
               <img className="logo" src={logo} alt="logo"/>
-              <div className="page-container">
-                <Route path="/" exact component={AlbumsPage} />
-              </div>
+              { this.state.loading ? this.renderLoading() : this.renderViews()}
             </div>
           </BrowserRouter>
         </PersistGate>
