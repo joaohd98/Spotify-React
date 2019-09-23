@@ -6,7 +6,35 @@ import {ServiceStatus} from "../../../../service";
 import {AlbumsPageModel} from "../../services/albums-page-model";
 import {FooterLoading} from "../footer-loading";
 
-export class ListAlbums extends React.Component<AlbumsPageModel.Props> {
+interface State {
+  failed: boolean,
+  noInternetConnection: boolean,
+  noResult: boolean,
+  isLoading: boolean
+}
+
+export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
+
+  state = {
+    failed: false,
+    noInternetConnection: false,
+    noResult: false,
+    isLoading: false
+  };
+
+  componentDidUpdate() {
+
+    const valid = {
+      failed: this.props.status === ServiceStatus.failed,
+      noInternetConnection: this.props.status === ServiceStatus.noInternetConnection,
+      noResult: this.props.status === ServiceStatus.success && this.props.cards.length === 0 && this.props.text !== "",
+      isLoading: this.props.status === ServiceStatus.loading
+    };
+
+    if(JSON.stringify(this.state) !== JSON.stringify(valid))
+      this.setState(valid);
+
+  }
 
   renderMultipleCard = () => {
 
@@ -37,7 +65,9 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props> {
 
     let data: ErrorMessageInterface;
 
-    if(this.props.status === ServiceStatus.failed)  {
+    const {failed, noInternetConnection} = this.state;
+
+    if(failed)  {
 
       data = {
 
@@ -51,7 +81,7 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props> {
 
     }
 
-    else if(this.props.status === ServiceStatus.noInternetConnection) {
+    else if(noInternetConnection) {
 
       data = {
 
@@ -92,16 +122,12 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props> {
 
   render() {
 
-    const hasErrors = (
-      this.props.status === ServiceStatus.failed ||
-      this.props.status === ServiceStatus.noInternetConnection ||
-      (this.props.status === ServiceStatus.success && this.props.cards.length === 0 && this.props.text !== "")
-    );
+    const {failed, noInternetConnection, noResult, isLoading} = this.state;
 
-    if(hasErrors)
+    if(failed || noInternetConnection || noResult)
       return this.renderErrorMessage();
 
-    else if(this.props.status === ServiceStatus.loading)
+    else if(isLoading)
       return this.renderSkeletonCard();
 
     else
