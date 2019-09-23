@@ -9,7 +9,7 @@ export interface UserModel {
   albumsRecent: object[],
 
   functions: {
-    saveToken: (accessToken: string, refreshToken: string, dispatch: Dispatch<AnyAction>) => void
+    saveToken: (accessToken: string, refreshToken: string, dispatch: Dispatch<AnyAction>) => void,
   }
 
 }

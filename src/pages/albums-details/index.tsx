@@ -6,7 +6,6 @@ export class AlbumDetails extends React.Component {
 
     return (
       <div>
-        Teste
       </div>
     )
 
