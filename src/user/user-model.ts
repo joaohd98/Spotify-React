@@ -1,5 +1,5 @@
 import {AnyAction, Dispatch} from "redux";
-import {store} from "../config/configure-store";
+import {store} from "../config/store";
 
 export interface UserModel {
 

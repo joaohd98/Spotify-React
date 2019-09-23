@@ -1,6 +1,6 @@
 import axios, {AxiosRequestConfig} from 'axios';
 import {getUserCode} from "../user/user-model";
-import {persistor, store} from "./configure-store";
+import {persistor, store} from "./store";
 import {UserRefreshTokenService} from "../user/service/refresh-token";
 
 export const ConfigureInterceptor = () => {

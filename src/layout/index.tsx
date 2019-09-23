@@ -6,8 +6,8 @@ import logo from "../assets/logo.png"
 import {AlbumsPage} from "../pages/albums";
 import {PersistGate} from "redux-persist/integration/react";
 import {UserInitialState} from "../user/user-reducer";
-import {store, persistor} from "../config/configure-store"
-import {ConfigureInterceptor} from "../config/configure-interceptor";
+import {store, persistor} from "../config/store"
+import {ConfigureInterceptor} from "../config/interceptor";
 import {UserAuthorizationService} from "../user/service/authorization";
 import {getUserCode} from "../user/user-model";
 import {UserTokenService} from "../user/service/token";

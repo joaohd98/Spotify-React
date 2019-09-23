@@ -2,7 +2,7 @@ import React from 'react';
 import {SearchBar} from "./components/search-bar";
 import {SubHeaderTitle} from "./components/sub-header-title";
 import {ListAlbums} from "./components/list-albums";
-import {StatesReducers} from "../../config/configure-store";
+import {StatesReducers} from "../../config/store";
 import {bindActionCreators} from "redux";
 import {AlbumsInitialState} from "./redux/albums-reducer";
 import {connect} from "react-redux";
