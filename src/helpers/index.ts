@@ -37,7 +37,23 @@ export class Helpers {
     const windowBottom = windowHeight + window.pageYOffset;
 
     return windowBottom >= docHeight;
+
+  };
+
+  static removeAccentsLowerCase = (word: string): string => {
+
+    word = word.toLowerCase();
+
+    return word.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+
+  };
+
+  static compare2Words = (w1: string, w2: string): boolean => {
+
+    return Helpers.removeAccentsLowerCase(w1) === Helpers.removeAccentsLowerCase(w2);
+
   }
+
 
 
 }

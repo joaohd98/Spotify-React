@@ -2,6 +2,7 @@ import {AlbumsPageModel} from "./albums-page-model";
 import {SearchModel} from "../../../service/search/search-model";
 import noPhoto from "../../../assets/no-photo.png";
 import {Helpers} from "../../../helpers";
+import {ArtistModel} from "../../../service/artist/artist-model";
 
 export class AlbumsPageInteractor {
 
@@ -43,25 +44,24 @@ export class AlbumsPageInteractor {
 
     });
 
-    request.artists.items.forEach(artist => {
-
-      cards.push({
-        id: artist.id,
-        type: "artist",
-        title: upperCaseFirstLetter(artist.name),
-        subTitle: "",
-        img: getImage(artist.images)
-      })
-
-    });
-
     return cards.sort((card1, card2) => ( card1.title > card2.title ? 1 : card1.title < card2.title ? -1 : 0));
 
-  }
+  };
 
   static verifyHasNext =  (request: SearchModel.Response) => {
 
     return request.artists.next != null || request.tracks.next != null || request.albums.next != null
+
+  };
+
+  static findArtist = (artists: ArtistModel.Response[], text: string) => {
+
+    return artists.find(artist => Helpers.compare2Words(artist.name, text))
+  };
+
+  static getOffset() {
+
+    return 5;
 
   }
 

@@ -27,11 +27,11 @@ export class AlbumsAction {
 
       SearchService.makeRequest(text, limit, offset, response => {
 
-        console.log("response", response);
+        let artist = AlbumsPageInteractor.findArtist(response.data!.artists.items, text);
 
         dispatch({
           type: AlbumActionConst.SUCCESS_SEARCH_ALBUM, payload: {
-            cards: AlbumsPageInteractor.formatRequest(response.data!),
+            cards: artist ? AlbumsPageInteractor.formatRequest(response.data!) : AlbumsPageInteractor.formatRequest(response.data!),
             hasNext: AlbumsPageInteractor.verifyHasNext(response.data!),
             status: response.cod,
           }
@@ -55,17 +55,17 @@ export class AlbumsAction {
 
     return dispatch => {
 
-      offset += 3;
+      offset += AlbumsPageInteractor.getOffset();
 
       dispatch({type: AlbumActionConst.LOADING_ADD_ALBUM});
 
       SearchService.makeRequest(text, limit, offset, response => {
 
-        console.log("response", response);
+        let artist = AlbumsPageInteractor.findArtist(response.data!.artists.items, text);
 
         dispatch({
           type: AlbumActionConst.SUCCESS_ADD_ALBUM, payload: {
-            cards: AlbumsPageInteractor.formatRequest(response.data!),
+            cards: artist ? AlbumsPageInteractor.formatRequest(response.data!) : AlbumsPageInteractor.formatRequest(response.data!),
             hasNext: AlbumsPageInteractor.verifyHasNext(response.data!),
             status: response.cod,
             offset

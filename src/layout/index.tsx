@@ -73,6 +73,7 @@ export class Layout extends React.Component<null, State> {
     return (
       <div className="page-container">
         <Route path="/" exact component={AlbumsPage} />
+        <Route path="/album-details" exact component={AlbumsPage} />
       </div>
     )
 
@@ -97,7 +98,7 @@ export class Layout extends React.Component<null, State> {
 
     return (
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor} onBeforeLift={this.checkIfHasToken}  >
+        <PersistGate loading={null} persistor={persistor} onBeforeLift={this.checkIfHasToken}>
           <BrowserRouter>
             <div className="container">
               <img className="logo" src={logo} alt="logo"/>

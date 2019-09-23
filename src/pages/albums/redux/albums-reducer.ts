@@ -1,6 +1,7 @@
 import {AlbumActionConst, AlbumsAction} from "./albums-action";
 import {ServiceStatus} from "../../../service";
 import {AlbumsPageModel} from "../services/albums-page-model";
+import {AlbumsPageInteractor} from "../services/albums-page-interactor";
 
 export const AlbumsInitialState: AlbumsPageModel.Props = {
 
@@ -14,7 +15,7 @@ export const AlbumsInitialState: AlbumsPageModel.Props = {
     hasNext: false,
     status: ServiceStatus.noAction
   },
-  limit: 3, //9
+  limit: AlbumsPageInteractor.getOffset(),
   functions: {
     searchAlbums: (text, offset, limit) => AlbumsAction.searchAlbums(text, offset, limit),
     addAlbums: (text, offset, limit) => AlbumsAction.addAlbums(text, offset, limit),
