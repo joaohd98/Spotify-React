@@ -21,6 +21,15 @@
 
       width: 95%;
 
+      @include screenType(mobile) {
+
+        font-size: 13px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+      }
+
       span:first-child {
 
         margin-right: 15px;
@@ -31,15 +40,22 @@
 
       span:last-child {
 
-        color: var(--color-white)
-
+        color: var(--color-white);
       }
 
     }
 
     .duration {
 
-      color: var(--color-gray);
+      font-size: 15px;
+      padding-left: 5px;
+
+      @include screenType(desktop) {
+
+        font-size: 18px;
+
+      }
+        color: var(--color-gray);
 
     }
 
