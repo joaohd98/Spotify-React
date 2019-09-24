@@ -36,7 +36,7 @@ export class AlbumsAction {
 
             dispatch({
               type: AlbumActionConst.SUCCESS_SEARCH_ALBUM, payload: {
-                cards: AlbumsPageInteractor.formatCardArtist(response.data!.items),
+                cards: AlbumsPageInteractor.formatRequest(response.data!.items),
                 hasNext: false,
                 status: response.cod,
               }
@@ -58,7 +58,7 @@ export class AlbumsAction {
 
           dispatch({
             type: AlbumActionConst.SUCCESS_SEARCH_ALBUM, payload: {
-              cards: AlbumsPageInteractor.formatRequest(response.data!),
+              cards: AlbumsPageInteractor.formatRequest(response.data!.albums.items, response.data!.tracks.items),
               hasNext: AlbumsPageInteractor.verifyHasNext(response.data!),
               status: response.cod,
             }
@@ -84,7 +84,7 @@ export class AlbumsAction {
 
     return dispatch => {
 
-      offset += AlbumsPageInteractor.getOffset();
+      offset += AlbumsPageInteractor.getOffsetOrLimit();
 
       dispatch({type: AlbumActionConst.LOADING_ADD_ALBUM});
 
@@ -92,7 +92,7 @@ export class AlbumsAction {
 
         dispatch({
           type: AlbumActionConst.SUCCESS_ADD_ALBUM, payload: {
-            cards: AlbumsPageInteractor.formatRequest(response.data!),
+            cards: AlbumsPageInteractor.formatRequest(response.data!.albums.items, response.data!.tracks.items),
             hasNext: AlbumsPageInteractor.verifyHasNext(response.data!),
             status: response.cod,
             offset

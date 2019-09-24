@@ -10,7 +10,7 @@ export const AlbumsInitialState: AlbumsPageModel.Props = {
   status: ServiceStatus.noAction,
   offset: 0,
   hasNext: false,
-  limit: AlbumsPageInteractor.getOffset(),
+  limit: AlbumsPageInteractor.getOffsetOrLimit(),
   functions: {
     searchAlbums: (text, offset, limit) => AlbumsAction.searchAlbums(text, offset, limit),
     addAlbums: (text, offset, limit) => AlbumsAction.addAlbums(text, offset, limit),

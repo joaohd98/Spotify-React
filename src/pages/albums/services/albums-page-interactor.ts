@@ -4,6 +4,7 @@ import noPhoto from "../../../assets/no-photo.png";
 import {Helpers} from "../../../helpers";
 import {ArtistModel} from "../../../service/artist/artist-model";
 import {AlbumModel} from "../../../service/album/album-model";
+import {TrackModel} from "../../../service/track/track-model";
 
 export class AlbumsPageInteractor {
 
@@ -13,7 +14,7 @@ export class AlbumsPageInteractor {
 
   };
 
-  static formatCardArtist = (albums: AlbumModel.Response[]) => {
+  static formatRequest = (albums: AlbumModel.Response[] = [], tracks: TrackModel.Response[] = []): AlbumsPageModel.cardView[] => {
 
     let cards: AlbumsPageModel.cardView[] = [];
 
@@ -33,30 +34,7 @@ export class AlbumsPageInteractor {
 
     });
 
-    return cards;
-
-  };
-  static formatRequest = (request: SearchModel.Response): AlbumsPageModel.cardView[] => {
-
-    let cards: AlbumsPageModel.cardView[] = [];
-
-    const getImage = (data: {url: string}[]) => ( data.length > 0 ? data[0].url  : noPhoto);
-
-    const upperCaseFirstLetter = Helpers.upperCaseFirstLetter;
-
-    request.albums.items.forEach(album => {
-
-      cards.push({
-        id: album.id,
-        type: "album",
-        title: upperCaseFirstLetter(album.name),
-        subTitle: upperCaseFirstLetter(album.artists[0].name),
-        img: getImage(album.images)
-      })
-
-    });
-
-    request.tracks.items.forEach(track => {
+    tracks.forEach(track => {
 
       cards.push({
         id: track.id,
@@ -83,7 +61,8 @@ export class AlbumsPageInteractor {
     return artists.find(artist => Helpers.compare2Words(artist.name, text))
   };
 
-  static getOffset() {
+
+  static getOffsetOrLimit() {
 
     return 5;
 
