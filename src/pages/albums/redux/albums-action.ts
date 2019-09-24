@@ -90,11 +90,9 @@ export class AlbumsAction {
 
       SearchService.makeRequest(text, limit, offset, response => {
 
-        let artist = AlbumsPageInteractor.findArtist(response.data!.artists.items, text);
-
         dispatch({
           type: AlbumActionConst.SUCCESS_ADD_ALBUM, payload: {
-            cards: artist ? AlbumsPageInteractor.formatRequest(response.data!) : AlbumsPageInteractor.formatRequest(response.data!),
+            cards: AlbumsPageInteractor.formatRequest(response.data!),
             hasNext: AlbumsPageInteractor.verifyHasNext(response.data!),
             status: response.cod,
             offset

@@ -7,14 +7,9 @@ export namespace AlbumsPageModel {
     text: string;
     cards: cardView[];
     status: ServiceStatus;
-    footerLoading: {
-      seeMore: boolean,
-      reachedBottom: boolean,
-      hasNext: boolean,
-      status: ServiceStatus
-    }
+    hasNext: boolean,
     offset: number,
-    limit: number
+    limit: number,
     functions: {
       searchAlbums: (text: string, offset: number, limit: number) => void,
       addAlbums: (text: string, offset: number, limit: number) => void
@@ -23,8 +18,6 @@ export namespace AlbumsPageModel {
   }
 
   export interface State {
-
-    reachBottom: boolean
 
   }
 

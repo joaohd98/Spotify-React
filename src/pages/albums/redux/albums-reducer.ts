@@ -9,12 +9,7 @@ export const AlbumsInitialState: AlbumsPageModel.Props = {
   cards: [],
   status: ServiceStatus.noAction,
   offset: 0,
-  footerLoading: {
-    seeMore: false,
-    reachedBottom: false,
-    hasNext: false,
-    status: ServiceStatus.noAction
-  },
+  hasNext: false,
   limit: AlbumsPageInteractor.getOffset(),
   functions: {
     searchAlbums: (text, offset, limit) => AlbumsAction.searchAlbums(text, offset, limit),
@@ -23,7 +18,7 @@ export const AlbumsInitialState: AlbumsPageModel.Props = {
 
 };
 
-export const AlbumsReducer = (state = AlbumsInitialState, action: { type: AlbumActionConst, payload: any}) => {
+export const AlbumsReducer = (state = AlbumsInitialState, action: { type: AlbumActionConst, payload: AlbumsPageModel.Props}) => {
 
   switch (action.type) {
 
@@ -33,28 +28,8 @@ export const AlbumsReducer = (state = AlbumsInitialState, action: { type: AlbumA
         ...state,
         cards: [],
         text: action.payload.text,
+        status: ServiceStatus.loading,
         offset: 0,
-        footerLoading: {
-          hasNext: true,
-          seeMore: false,
-          reachedBottom: false,
-          status: ServiceStatus.noAction
-        },
-        status: ServiceStatus.loading
-      };
-
-    }
-
-    case AlbumActionConst.SUCCESS_SEARCH_ALBUM: {
-
-      return {
-        ...state,
-        cards: action.payload.cards,
-        status: action.payload.status,
-        footerLoading: {
-          ...state.footerLoading,
-          hasNext: action.payload.hasNext
-        }
       };
 
     }
@@ -68,16 +43,23 @@ export const AlbumsReducer = (state = AlbumsInitialState, action: { type: AlbumA
 
     }
 
+    case AlbumActionConst.SUCCESS_SEARCH_ALBUM: {
+
+      return {
+        ...state,
+        cards: action.payload.cards,
+        status: action.payload.status,
+        hasNext: action.payload.hasNext,
+      };
+
+    }
+
+
     case AlbumActionConst.LOADING_ADD_ALBUM: {
 
       return {
         ...state,
-        footerLoading: {
-          ...state.footerLoading,
-          seeMore: true,
-          status: ServiceStatus.loading,
-          reachedBottom: true
-        }
+        status: ServiceStatus.loading
       };
 
     }
@@ -88,11 +70,7 @@ export const AlbumsReducer = (state = AlbumsInitialState, action: { type: AlbumA
         ...state,
         cards: state.cards.concat(action.payload.cards),
         offset: action.payload.offset,
-        footerLoading: {
-          ...state.footerLoading,
-          status: action.payload.status,
-          hasNext: action.payload.hasNext,
-        }
+        hasNext: action.payload.hasNext,
       };
 
     }
@@ -101,10 +79,7 @@ export const AlbumsReducer = (state = AlbumsInitialState, action: { type: AlbumA
 
       return {
         ...state,
-        footerLoading: {
-          ...state.footerLoading,
-          status: action.payload.status,
-        }
+        status: action.payload.status,
       };
 
     }

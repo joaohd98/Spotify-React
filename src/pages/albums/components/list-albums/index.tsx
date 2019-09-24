@@ -4,7 +4,6 @@ import {ErrorMessage, ErrorMessageInterface} from "../../../../components/error-
 import {AlbumsPageInteractor} from "../../services/albums-page-interactor";
 import {ServiceStatus} from "../../../../service";
 import {AlbumsPageModel} from "../../services/albums-page-model";
-import {FooterLoading} from "../footer-loading";
 
 interface State {
   failed: boolean,
@@ -25,10 +24,10 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
   componentDidUpdate() {
 
     const valid = {
-      failed: this.props.status === ServiceStatus.failed,
+      failed: this.props.status === ServiceStatus.failed && this.props.cards.length === 0,
       noInternetConnection: this.props.status === ServiceStatus.noInternetConnection,
       noResult: this.props.status === ServiceStatus.success && this.props.cards.length === 0 && this.props.text !== "",
-      isLoading: this.props.status === ServiceStatus.loading
+      isLoading: this.props.status === ServiceStatus.loading && this.props.cards.length === 0
     };
 
     if(JSON.stringify(this.state) !== JSON.stringify(valid))
@@ -52,12 +51,7 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
     });
 
-    return (
-      <div>
-        <div className="list-album">{ elements }</div>
-        <FooterLoading {...this.props} />
-      </div>
-    )
+    return <div className="list-album">{ elements }</div>
 
   };
 

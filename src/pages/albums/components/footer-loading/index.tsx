@@ -3,14 +3,109 @@ import './styles.scss'
 import {AlbumsPageModel} from "../../services/albums-page-model";
 import spinner from "../../../../assets/spinner.svg"
 import {ServiceStatus} from "../../../../service";
+import {Helpers} from "../../../../helpers";
 
-export class FooterLoading extends React.Component<AlbumsPageModel.Props> {
+enum Status {
 
-  private click = () => this.props.functions.addAlbums(this.props.text, this.props.offset, this.props.limit);
+  nothing,
+  internet,
+  failed,
+  loading,
+  button
+
+}
+
+interface State {
+  reachBottom: boolean,
+  seeMore: boolean,
+  renderStatus: Status
+}
+
+export class FooterLoading extends React.Component<AlbumsPageModel.Props, State> {
+
+  state = {
+    reachBottom: false,
+    seeMore: false,
+    renderStatus: Status.nothing
+  };
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  componentDidUpdate(prevProps: Readonly<AlbumsPageModel.Props>, prevState: Readonly<AlbumsPageModel.State>, snapshot?: any): void {
+
+    if(prevProps.offset !== this.props.offset)
+      this.setState({ reachBottom: false });
+
+    if(prevProps.text !== this.props.text)
+      this.setState({ seeMore: false });
+
+    let newStatus = this.getRenderStatus();
+
+    if(newStatus !== this.state.renderStatus)
+      this.setState({ renderStatus: newStatus });
+
+  }
+
+  addAlbum = () => this.props.functions.addAlbums(this.props.text, this.props.offset, this.props.limit);
+
+  getRenderStatus = (): Status => {
+
+    let renderStatus: Status = Status.nothing;
+
+    if(!this.props.hasNext)
+      renderStatus = Status.nothing;
+
+    else if(!this.state.seeMore && this.props.status === ServiceStatus.success && this.props.cards.length > 0)
+      renderStatus = Status.button;
+
+    else if(this.state.reachBottom && this.props.cards.length > 0) {
+
+      if(this.props.status === ServiceStatus.noInternetConnection)
+        renderStatus = Status.internet;
+
+      else if(this.props.status === ServiceStatus.failed)
+        renderStatus = Status.failed;
+
+      else
+        renderStatus = Status.loading;
+    }
+
+    return renderStatus;
+
+  };
+
+  handleScroll = () => {
+
+    if(this.state.seeMore && Helpers.checkIfReachBottom()  && !this.state.reachBottom && this.props.hasNext) {
+
+      this.setState({ reachBottom: true });
+
+      this.addAlbum();
+
+    }
+
+  };
 
   renderButton = () => {
 
-    return <button onClick={this.click}>Ver Mais</button>;
+    const click = () => {
+
+      this.addAlbum();
+
+      this.setState({
+        seeMore: true,
+        reachBottom: true,
+      })
+
+    };
+
+    return <button onClick={click}>Ver Mais</button>;
 
   };
 
@@ -25,11 +120,11 @@ export class FooterLoading extends React.Component<AlbumsPageModel.Props> {
 
   };
 
-  renderError = (type: "internet" | "failed") => {
+  renderError = (type: Status.internet | Status.failed) => {
 
-    let button = <button onClick={this.click}>Tentar Novamente</button>;
+    let button = <button onClick={this.addAlbum}>Tentar Novamente</button>;
 
-    if(type === "internet") {
+    if(type === Status.internet) {
       return (
         <div>
           <p>Sem acesso a internet</p>
@@ -54,26 +149,24 @@ export class FooterLoading extends React.Component<AlbumsPageModel.Props> {
 
   render() {
 
-    if(!this.props.footerLoading.hasNext)
+    let { renderStatus } = this.state;
+
+    if(renderStatus === Status.nothing)
       return <div/>;
 
-    else if(!this.props.footerLoading.seeMore && this.props.status === ServiceStatus.success && this.props.cards.length > 0)
-      return <div className="footer-loading">{ this.renderButton() } </div>;
+    let render: JSX.Element;
 
-    else if(this.props.footerLoading.reachedBottom) {
+    if(renderStatus === Status.button)
+      render = this.renderButton();
 
-      if(this.props.footerLoading.status === ServiceStatus.noInternetConnection)
-        return <div className="footer-loading">{ this.renderError("internet") } </div>;
-
-      else if(this.props.footerLoading.status === ServiceStatus.failed)
-        return <div className="footer-loading">{ this.renderError("failed") } </div>;
-
-      else
-        return <div className="footer-loading">{this.renderLoading()} </div>;
-    }
+    else if(renderStatus === Status.loading)
+      render = this.renderLoading();
 
     else
-      return <div/>
+      render = this.renderError(renderStatus);
+
+    return <div className="footer-loading">{ render }</div>
+
   }
 
 }
