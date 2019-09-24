@@ -38,7 +38,7 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
     let cardLength = this.props.cards.length;
     let { status } = this.props;
 
-    if(cardLength == 0) {
+    if(cardLength === 0) {
 
       if(status === ServiceStatus.failed)
         return Status.failed;
