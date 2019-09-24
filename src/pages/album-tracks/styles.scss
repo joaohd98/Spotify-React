@@ -1,0 +1,28 @@
+@import '../../theme/variables';
+
+.container-tracks-album {
+
+  margin-top: 40px;
+
+  @include screenType(desktop) {
+
+    flex-direction: row;
+    display: flex;
+
+    .album {
+
+      flex: 0.1;
+      border: 1px solid white;
+
+    }
+
+    .tracks {
+
+      flex: 0.9;
+      border: 1px solid white;
+
+    }
+
+  }
+
+}
