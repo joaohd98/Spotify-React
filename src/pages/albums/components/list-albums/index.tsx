@@ -5,35 +5,69 @@ import {AlbumsPageInteractor} from "../../services/albums-page-interactor";
 import {ServiceStatus} from "../../../../service";
 import {AlbumsPageModel} from "../../services/albums-page-model";
 
+enum Status {
+
+  empty,
+  failed,
+  noInternetConnection,
+  noResult,
+  isLoading
+}
+
 interface State {
-  failed: boolean,
-  noInternetConnection: boolean,
-  noResult: boolean,
-  isLoading: boolean
+  status: Status
 }
 
 export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
   state = {
-    failed: false,
-    noInternetConnection: false,
-    noResult: false,
-    isLoading: false
+    status: Status.empty
   };
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: Readonly<AlbumsPageModel.Props>, prevState: Readonly<State>, snapshot?: any): void {
 
-    const valid = {
-      failed: this.props.status === ServiceStatus.failed && this.props.cards.length === 0,
-      noInternetConnection: this.props.status === ServiceStatus.noInternetConnection,
-      noResult: this.props.status === ServiceStatus.success && this.props.cards.length === 0 && this.props.text !== "",
-      isLoading: this.props.status === ServiceStatus.loading && this.props.cards.length === 0
-    };
+    let newStatus = this.getRenderStatus();
 
-    if(JSON.stringify(this.state) !== JSON.stringify(valid))
-      this.setState(valid);
+    if(prevState.status !== newStatus)
+      this.setState({status: newStatus});
 
   }
+
+  getRenderStatus = (): Status => {
+
+    let cardLength = this.props.cards.length;
+    let { status } = this.props;
+
+    if(cardLength == 0) {
+
+      if(status === ServiceStatus.failed)
+        return Status.failed;
+
+      else if(status === ServiceStatus.loading)
+        return Status.isLoading;
+
+      else if(status === ServiceStatus.noInternetConnection)
+        return Status.noInternetConnection;
+
+      else if(status === ServiceStatus.success && this.props.text !== "")
+        return Status.noResult;
+
+      else
+        return Status.empty;
+    }
+
+    else
+      return Status.empty
+
+
+
+  };
+
+  checkStatus = (status: Status) => {
+
+    return this.state.status === status;
+
+  };
 
   renderMultipleCard = () => {
 
@@ -59,9 +93,7 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
     let data: ErrorMessageInterface;
 
-    const {failed, noInternetConnection} = this.state;
-
-    if(failed)  {
+    if(this.checkStatus(Status.failed))  {
 
       data = {
 
@@ -75,7 +107,7 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
     }
 
-    else if(noInternetConnection) {
+    else if(this.checkStatus(Status.noInternetConnection)) {
 
       data = {
 
@@ -116,12 +148,11 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
   render() {
 
-    const {failed, noInternetConnection, noResult, isLoading} = this.state;
 
-    if(failed || noInternetConnection || noResult)
+    if(this.checkStatus(Status.failed) || this.checkStatus(Status.noInternetConnection) || this.checkStatus(Status.noResult))
       return this.renderErrorMessage();
 
-    else if(isLoading)
+    else if(this.checkStatus(Status.isLoading))
       return this.renderSkeletonCard();
 
     else
