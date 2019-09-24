@@ -1,0 +1,120 @@
+@import "../../../../theme/variables";
+
+.player {
+
+
+  position:fixed;
+
+  left: 0;
+  right: 0;
+  width: 100%;
+
+  bottom:0;
+  height: 60px;
+  border-top: 1.5px solid #646464;
+
+  @include screenType(desktop) {
+
+    left: 12%;
+    right: 6%;
+    width: 82%;
+
+  }
+
+  .progress-bar {
+
+    z-index: 1000;
+    border-bottom: 1.5px solid white;
+    position: absolute;
+    top: -1px;
+    width: 80%;
+
+
+  }
+
+  .player-actions {
+
+    background: #404040;
+    height: 100%;
+    padding-top: 15px;
+
+    &.disabled {
+
+      opacity: 0.5;
+      pointer-events: none;
+
+    }
+
+    .previous-next, .play-pause, .title {
+
+      display: inline-block;
+
+    }
+
+    button {
+
+      font-size: 14px;
+      border: 1.25px solid white;
+      padding: 8px 13px;
+      border-radius: 30px;
+      pointer-events: auto;
+      background: none;
+
+    }
+
+    button:active {
+
+      opacity: 0.5;
+
+    }
+
+    .previous-next {
+
+      width: 100px;
+
+      button:first-child {
+        margin-left: 10px;
+      }
+
+      button:nth-child(2) {
+
+        margin-left: 10px;
+
+      }
+
+    }
+
+    .title {
+
+      width: calc(100% - 100px - 50px);
+      font-size: 13px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-align: center;
+
+      @include screenType(desktop) {
+
+        font-size: 16px;
+
+      }
+
+    }
+
+    .play-pause {
+
+      text-align: center;
+      width: 50px;
+
+      button {
+
+        padding: 8px 12px;
+
+      }
+
+    }
+
+  }
+
+}
+

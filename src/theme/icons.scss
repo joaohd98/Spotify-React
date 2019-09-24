@@ -23,31 +23,31 @@
 
   }
 
-  &.spinner {
+  &.spinner:before {
 
     content: '\f110';
 
   }
 
-  &.play {
+  &.play:before {
 
     content: '\e801';
 
   }
 
-  &.pause {
+  &.pause:before {
 
     content: '\e802';
 
   }
 
-  &.next-player {
+  &.next-player:before {
 
     content: '\e803';
 
   }
 
-  &.previous-player {
+  &.previous-player:before {
 
     content: '\e804';
 
