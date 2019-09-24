@@ -33,30 +33,33 @@ export const ConfigureInterceptor = () => {
 
   axios.interceptors.response.use(response => response, error => {
 
-    //Token expired
-    if (error.config && error.response && error.response.status === 401) {
+    return new Promise((resolve, reject) => {
+
+      if (error.response.status !== 401)
+        reject(error);
 
       let user = store.getState().UserPersistedReducer;
 
-      return UserRefreshTokenService.makeRequest(user.refreshToken, (response) => {
+      //Token expired
+      UserRefreshTokenService.makeRequest(user.refreshToken, (response) => {
 
         user.functions.saveToken(response.data!.access_token, user.refreshToken, store.dispatch);
 
-        return persistor.flush().then(() => {
+          persistor.flush().then(() => {
 
-          return axios.request(error.config);
+            resolve(axios.request(error.config));
 
-        });
+          });
+
+      }, () => {
+
+        reject(error);
 
       });
 
-    }
+    });
 
-    else
-      return Promise.reject(error);
-
-
-  })
+  });
 
 };
 

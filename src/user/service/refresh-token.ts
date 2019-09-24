@@ -15,7 +15,7 @@ export class UserRefreshTokenService {
 
   static url = "refresh-token";
 
-  static makeRequest = (refreshToken: string, success: (response: ServiceReturn<UserRefreshTokenResponseModel>) => void) => {
+  static makeRequest = (refreshToken: string, success: (response: ServiceReturn<UserRefreshTokenResponseModel>) => void, failed: (response: ServiceReturn<UserRefreshTokenResponseModel>) => void) => {
 
     let service = Service.post<UserRefreshTokenRequestModel, UserRefreshTokenResponseModel>(UserRefreshTokenService.url, {
       refresh_token: refreshToken,
@@ -25,6 +25,9 @@ export class UserRefreshTokenService {
 
       if(response.cod === ServiceStatus.success)
         success(response);
+
+      else
+        failed(response);
 
     })
 
