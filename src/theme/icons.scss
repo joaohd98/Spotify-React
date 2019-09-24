@@ -1,0 +1,57 @@
+@font-face {
+
+  font-family: 'Icons';
+  src: url('../assets/fonts/icons/icons.eot');
+  src: url('../assets/fonts/icons/icons.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/icons/icons.woff2') format('woff2'),
+  url('../assets/fonts/icons/icons.woff') format('woff'),
+  url('../assets/fonts/icons/icons.ttf')  format('truetype'),
+  url('../assets/fonts/icons/icons.svg#svgFontName') format('svg');
+
+}
+
+.custom-icon {
+
+  font-family: Icons;
+  font-size: 32px;
+  color: var(--color-white);
+  font-style: normal;
+
+  &.back:before {
+
+    content: '\e800';
+
+  }
+
+  &.spinner {
+
+    content: '\f110';
+
+  }
+
+  &.play {
+
+    content: '\e801';
+
+  }
+
+  &.pause {
+
+    content: '\e802';
+
+  }
+
+  &.next-player {
+
+    content: '\e803';
+
+  }
+
+  &.previous-player {
+
+    content: '\e804';
+
+  }
+
+
+}

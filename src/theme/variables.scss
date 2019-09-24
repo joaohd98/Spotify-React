@@ -7,7 +7,6 @@
 
 }
 
-
 @mixin screenType($media) {
 
   @if $media == desktop {
@@ -23,3 +22,4 @@
   }
 
 }
+
