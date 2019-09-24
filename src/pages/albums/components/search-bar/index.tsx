@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from 'react';
 import "./styles.scss"
-import {AlbumsPageModel} from "../../services/albums-page-model";
+import {AlbumsPageModel} from "../../providers/albums-page-model";
 
 interface States {
   textInput: string;

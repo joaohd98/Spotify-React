@@ -1,7 +1,7 @@
 import React from 'react';
 import "./styles.scss"
-import {AlbumsPageInteractor} from "../../services/albums-page-interactor";
-import {AlbumsPageModel} from "../../services/albums-page-model";
+import {AlbumsPageInteractor} from "../../providers/albums-page-interactor";
+import {AlbumsPageModel} from "../../providers/albums-page-model";
 
 export class SubHeaderTitle extends React.Component<AlbumsPageModel.Props> {
 

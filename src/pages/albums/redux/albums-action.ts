@@ -1,5 +1,5 @@
 import {SearchService} from "../../../service/search";
-import {AlbumsPageInteractor} from "../services/albums-page-interactor";
+import {AlbumsPageInteractor} from "../providers/albums-page-interactor";
 import {ArtistAlbumservice} from "../../../service/artist-albums";
 
 export enum AlbumActionConst {

@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import {AlbumsPageModel} from "../pages/albums/services/albums-page-model";
+import {AlbumsPageModel} from "../pages/albums/providers/albums-page-model";
 import {UserReducer} from "../user/user-reducer";
 import {AlbumsReducer} from "../pages/albums/redux/albums-reducer";
 import {UserModel} from "../user/user-model";

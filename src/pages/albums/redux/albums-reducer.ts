@@ -1,7 +1,7 @@
 import {AlbumActionConst, AlbumsAction} from "./albums-action";
 import {ServiceStatus} from "../../../service";
-import {AlbumsPageModel} from "../services/albums-page-model";
-import {AlbumsPageInteractor} from "../services/albums-page-interactor";
+import {AlbumsPageModel} from "../providers/albums-page-model";
+import {AlbumsPageInteractor} from "../providers/albums-page-interactor";
 
 export const AlbumsInitialState: AlbumsPageModel.Props = {
 

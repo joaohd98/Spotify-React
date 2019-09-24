@@ -6,7 +6,7 @@ import {StatesReducers} from "../../config/store";
 import {bindActionCreators} from "redux";
 import {AlbumsInitialState} from "./redux/albums-reducer";
 import {connect} from "react-redux";
-import {AlbumsPageModel} from "./services/albums-page-model";
+import {AlbumsPageModel} from "./providers/albums-page-model";
 import {FooterLoading} from "./components/footer-loading";
 
 class Albums extends React.Component<AlbumsPageModel.Props, AlbumsPageModel.State> {

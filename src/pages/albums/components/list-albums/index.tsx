@@ -1,9 +1,9 @@
 import React from 'react';
 import "./styles.scss"
 import {ErrorMessage, ErrorMessageInterface} from "../../../../components/error-message";
-import {AlbumsPageInteractor} from "../../services/albums-page-interactor";
+import {AlbumsPageInteractor} from "../../providers/albums-page-interactor";
 import {ServiceStatus} from "../../../../service";
-import {AlbumsPageModel} from "../../services/albums-page-model";
+import {AlbumsPageModel} from "../../providers/albums-page-model";
 
 enum Status {
 

@@ -1,6 +1,6 @@
 import React from "react";
 import './styles.scss'
-import {AlbumsPageModel} from "../../services/albums-page-model";
+import {AlbumsPageModel} from "../../providers/albums-page-model";
 import spinner from "../../../../assets/spinner.svg"
 import {ServiceStatus} from "../../../../service";
 import {Helpers} from "../../../../helpers";
