@@ -38,7 +38,7 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
   getRenderStatus = (): Status => {
 
     let { status } = this.props;
-    
+
     if(this.props.cards.length === 0) {
 
       if(status === ServiceStatus.failed)
@@ -92,29 +92,21 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
   renderRecentAlbum = () => {
 
-    if(this.props.albumsRecent.length === 0)
-      return <ErrorMessage title={""} subTitle={"Não foram encontrados albuns recentes."} />
+    let elements: JSX.Element[] = [];
 
-    else {
+    this.props.albumsRecent.forEach(({card}, index) => {
 
-      let elements: JSX.Element[] = [];
+      elements.push(
+        <div className="card" key={index}>
+          <img src={card.img} alt="capa" onClick={() => {}} />
+          <p>{card.albumName}</p>
+          <p>{card.artistName}</p>
+        </div>
+      )
 
-      this.props.albumsRecent.forEach(({card}, index) => {
+    });
 
-        elements.push(
-          <div className="card" key={index}>
-            <img src={card.img} alt="capa" onClick={() => {}} />
-            <p>{card.albumName}</p>
-            <p>{card.artistName}</p>
-          </div>
-        )
-
-      });
-
-      return <div className="list-album">{ elements }</div>
-
-    }
-
+    return <div className="list-album">{ elements }</div>
 
   };
 
@@ -149,6 +141,17 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
     }
 
+    else if(this.checkStatus(Status.empty)) {
+
+      data = {
+
+        title: "",
+        subTitle: "Não foram encontrados álbuns recentes",
+
+      };
+
+    }
+
     else {
 
       data = {
@@ -177,7 +180,8 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
   render() {
 
-    if(this.checkStatus(Status.failed) || this.checkStatus(Status.noInternetConnection) || this.checkStatus(Status.noResult))
+    if(this.checkStatus(Status.failed) || this.checkStatus(Status.noInternetConnection) || this.checkStatus(Status.noResult) ||
+      (this.checkStatus(Status.empty) && this.props.albumsRecent.length == 0))
       return this.renderErrorMessage();
 
     else if(this.checkStatus(Status.isLoading))
