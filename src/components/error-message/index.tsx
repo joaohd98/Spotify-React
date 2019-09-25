@@ -8,22 +8,16 @@ export interface ErrorMessageInterface {
   buttonPress?: () => void
 }
 
-export class ErrorMessage extends React.Component<ErrorMessageInterface>{
+export const ErrorMessage = (props: ErrorMessageInterface) => {
 
-  render() {
+  let { title, subTitle, buttonText, buttonPress } = props;
 
-    let { title, subTitle, buttonText, buttonPress } = this.props;
+  return (
+    <div className="error-message">
+      <div className="title">{ title }</div>
+      <div className="sub-title">{ subTitle }</div>
+      { buttonPress && buttonText ? <button onClick={buttonPress}>{ buttonText }</button> : '' }
+    </div>
+  )
 
-    return (
-      <div className="error-message">
-        <div className="title">{ title }</div>
-        <div className="sub-title">{ subTitle }</div>
-        { buttonPress && buttonText ? <button onClick={buttonPress}>{ buttonText }</button> : '' }
-      </div>
-    )
-
-
-  }
-
-
-}
+};

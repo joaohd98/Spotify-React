@@ -11,9 +11,8 @@ import {ConfigureInterceptor} from "../config/interceptor";
 import {UserAuthorizationService} from "../user/service/authorization";
 import {getUserCode} from "../user/user-model";
 import {UserTokenService} from "../user/service/token";
-import spinner from "../assets/spinner.svg"
-import {CSSProperties} from "react";
 import {TracksPage} from "../pages/tracks";
+import {LoadingSpinner} from "../components/loading-spinner";
 
 interface State {
   loading: boolean
@@ -80,21 +79,6 @@ export class Layout extends React.Component<null, State> {
 
   };
 
-  renderLoading = () => {
-
-    let div: CSSProperties = {width: "100%", marginTop: "25vh", marginRight: "5vw"};
-    let img: CSSProperties = {display: "block", margin: "auto"};
-    let p: CSSProperties = {textAlign: "center", margin: 0, fontSize: 30};
-
-    return (
-      <div style={div}>
-        <img style={img} src={spinner} alt="spinner"/>
-        <p style={p}>Carregando...</p>
-      </div>
-    )
-
-  };
-
   render() {
 
     return (
@@ -103,7 +87,7 @@ export class Layout extends React.Component<null, State> {
           <BrowserRouter>
             <div className="container">
               <img className="logo" src={logo} alt="logo"/>
-              { this.state.loading ? this.renderLoading() : this.renderViews()}
+              { this.state.loading ? <LoadingSpinner/> : this.renderViews()}
             </div>
           </BrowserRouter>
         </PersistGate>

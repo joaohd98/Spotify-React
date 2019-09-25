@@ -94,7 +94,7 @@ export class FooterPlayer extends React.Component<TracksPageModel.Props, State> 
 
     else
       this.props.functions.changeMusic(change, this.props.currentIndex, this.props.tracks);
-    
+
   };
 
   playPauseMusic = () => {

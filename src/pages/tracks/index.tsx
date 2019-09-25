@@ -9,6 +9,9 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {TrackPageInitialState} from "./redux/tracks-page-reducer";
 import {TracksPageModel} from "./providers/tracks-page-model";
+import {ServiceStatus} from "../../service";
+import {LoadingSpinner} from "../../components/loading-spinner";
+import {ErrorMessage, ErrorMessageInterface} from "../../components/error-message";
 
 class Tracks extends React.Component<TracksPageModel.Props> {
 
@@ -22,19 +25,82 @@ class Tracks extends React.Component<TracksPageModel.Props> {
 
   }
 
+  renderErrorMessage = () => {
+
+    let data: ErrorMessageInterface;
+
+    if(this.props.status === ServiceStatus.noInternetConnection)  {
+
+      data = {
+
+        title: "Sem acesso a internet",
+        subTitle: "Verifique a sua rede Wi-Fi ou dados móveis.",
+        buttonText : "Tentar Novamente",
+        buttonPress : () => this.props.functions.getTracks(this.props.card!.id)
+
+      };
+
+    }
+
+    else {
+
+      data = {
+
+        title: 'Não foi possível encontrar ás músicas',
+        subTitle: "Tente novamente mais tarde.",
+        buttonText : "Tentar Novamente",
+        buttonPress : () => this.props.functions.getTracks(this.props.card!.id)
+
+      }
+
+
+    }
+
+    return <ErrorMessage {...data} />
+
+
+  };
+
+  renderLoading = () => {
+
+    return <LoadingSpinner/>;
+
+  };
+
+  renderAlbumTracks = () => {
+
+    return (
+      <div className="container-tracks-album">
+        <div className="album">
+          <AlbumCard {...this.props}  />
+        </div>
+        <div className="tracks">
+          <TrackRows {...this.props} />
+        </div>
+      </div>
+    )
+
+  };
+
+  getRenderType = () => {
+
+    if(this.props.status === ServiceStatus.loading)
+      return this.renderLoading();
+
+    else if(this.props.status === ServiceStatus.noInternetConnection || this.props.status === ServiceStatus.failed)
+      return this.renderErrorMessage();
+
+    else
+      return this.renderAlbumTracks()
+
+  };
+
   render() {
 
     return (
       <div>
         <BackButton {...this.props} />
-        <div className="container-tracks-album">
-          <div className="album">
-            <AlbumCard {...this.props}  />
-          </div>
-          <div className="tracks">
-            <TrackRows {...this.props} />
-          </div>
-        </div>
+        { this.getRenderType() }
         <FooterPlayer {...this.props}  />
       </div>
     )
