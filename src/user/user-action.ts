@@ -21,7 +21,7 @@ export class UserAction {
 
     dispatch({
       type: UserActionConst.ADD_ALBUM_RECENT, payload: {
-        albumsRecent: {
+        album: {
           card,
           tracks
         }

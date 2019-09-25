@@ -22,7 +22,7 @@ interface State {
 export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
   state = {
-    status: Status.empty
+    status: Status.success
   };
 
   componentDidUpdate(prevProps: Readonly<AlbumsPageModel.Props>, prevState: Readonly<State>, snapshot?: any): void {

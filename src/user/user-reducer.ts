@@ -33,8 +33,8 @@ export const UserReducer = (state = UserInitialState, action: { type: UserAction
 
       let albums = state.albumsRecent;
 
-      albums.unshift(action.payload.albumsRecent);
-      albums = albums.slice(0,  10);
+      albums = albums.filter((album, index) => album.card.id !== action.payload.album.card.id && index < 9);
+      albums.unshift(action.payload.album);
 
       return {
         ...state,
