@@ -13,6 +13,7 @@ enum Status {
   noInternetConnection,
   noResult,
   isLoading
+
 }
 
 interface State {
@@ -22,7 +23,7 @@ interface State {
 export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
   state = {
-    status: Status.success
+    status: Status.empty
   };
 
   componentDidUpdate(prevProps: Readonly<AlbumsPageModel.Props>, prevState: Readonly<State>, snapshot?: any): void {
@@ -36,10 +37,9 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
   getRenderStatus = (): Status => {
 
-    let cardLength = this.props.cards.length;
     let { status } = this.props;
-
-    if(cardLength === 0) {
+    
+    if(this.props.cards.length === 0) {
 
       if(status === ServiceStatus.failed)
         return Status.failed;
