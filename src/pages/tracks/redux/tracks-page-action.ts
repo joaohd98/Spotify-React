@@ -1,5 +1,7 @@
 export enum TracksPageConst {
 
+  SET_CARD_ALBUM = "TRACK_PAGE_SET_CARD_ALBUM"
+
 }
 
 export class TracksPageAction {

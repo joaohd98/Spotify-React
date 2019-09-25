@@ -19,7 +19,20 @@ export const TrackPageInitialState: TracksPageModel.Props = {
 
 export const TrackPageReducer = (state = TrackPageInitialState, action: { type: TracksPageConst, payload: TracksPageModel.Props}) => {
 
+  switch (action.type) {
 
-  return state;
+    case TracksPageConst.SET_CARD_ALBUM: {
+
+      return {
+        ...state,
+        card: action.payload.card
+      };
+
+    }
+
+    default: return state
+
+  }
+
 
 };

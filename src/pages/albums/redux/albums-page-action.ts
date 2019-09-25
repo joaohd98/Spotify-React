@@ -2,6 +2,7 @@ import {SearchService} from "../../../service/search";
 import {AlbumsPageInteractor} from "../providers/albums-page-interactor";
 import {ArtistAlbumservice} from "../../../service/artist-albums";
 import {AlbumsPageModel} from "../providers/albums-page-model";
+import {TracksPageConst} from "../../tracks/redux/tracks-page-action";
 
 export enum AlbumActionConst {
 
@@ -114,14 +115,20 @@ export class AlbumsPageAction {
 
   };
 
-  static goToAlbumTracks = (album: AlbumsPageModel.cardView, history: any) => {
+  static goToAlbumTracks = (card: AlbumsPageModel.cardView, history: any) => {
 
     return dispatch => {
 
-      history.push(`/${album.id}/tracks`);
+      dispatch({
+        type: TracksPageConst.SET_CARD_ALBUM, payload: {
+          card: card,
+        }
+      });
+
+      history.push(`/${card.id}/tracks`);
 
     }
-    
+
   };
 
 

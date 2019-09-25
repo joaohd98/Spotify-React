@@ -14,7 +14,7 @@ export namespace AlbumsPageModel {
     functions: {
       searchAlbums: (text: string, offset: number, limit: number) => void,
       addAlbums: (text: string, offset: number, limit: number) => void,
-      goToAlbumTracks: (album: AlbumsPageModel.cardView, history: History) => void
+      goToAlbumTracks: (card: AlbumsPageModel.cardView, history: History) => void
     }
 
   }
