@@ -5,7 +5,6 @@ import {Helpers} from "../../../helpers";
 import {ArtistModel} from "../../../service/artist/artist-model";
 import {AlbumModel} from "../../../service/album/album-model";
 import {TrackModel} from "../../../service/track/track-model";
-import {TracksPageModel} from "../../tracks/providers/tracks-page-model";
 
 export class AlbumsPageInteractor {
 
@@ -57,27 +56,6 @@ export class AlbumsPageInteractor {
 
     });
 
-  };
-
-  static formatRecentAlbums = (albums: {card: TracksPageModel.AlbumCard, tracks: TracksPageModel.TrackRow[]}[]): AlbumsPageModel.cardView[]  => {
-
-    let elements: AlbumsPageModel.cardView[] = [];
-
-    albums.forEach(album => {
-
-      elements.push({
-        id: album.card.id,
-        type: "album",
-        albumName: Helpers.upperCaseFirstLetter(album.card.albumName),
-        artistName: Helpers.upperCaseFirstLetter(album.card.artistName),
-        trackName: "",
-        img: album.card.img || noPhoto
-      })
-
-    });
-
-    return elements;
-    
   };
 
   static getCardTitle = (card: AlbumsPageModel.cardView) => {

@@ -21,7 +21,7 @@ export class TracksPageAction {
 
     return dispatch => {
 
-      history.goBack()
+      history.replace('/');
 
     }
 
