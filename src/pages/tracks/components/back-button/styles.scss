@@ -1,6 +1,6 @@
 @import "../../../../theme/variables";
 
-p {
+.back-button {
 
   font-size: 20px;
   margin-top: 15px;
@@ -16,5 +16,11 @@ p {
     padding-right: 10px;
 
   }
+
+}
+
+.back-button:active {
+
+  opacity: 0.5;
 
 }

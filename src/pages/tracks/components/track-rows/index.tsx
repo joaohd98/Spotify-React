@@ -1,7 +1,8 @@
 import React from 'react';
 import './styles.scss'
+import {TracksPageModel} from "../../providers/tracks-page-model";
 
-export class TrackRows extends React.Component {
+export class TrackRows extends React.Component<TracksPageModel.Props> {
 
   getNumber = () => {
 

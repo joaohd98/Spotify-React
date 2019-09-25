@@ -8,23 +8,24 @@ import {StatesReducers} from "../../config/store";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {TrackPageInitialState} from "./redux/tracks-page-reducer";
+import {TracksPageModel} from "./providers/tracks-page-model";
 
-class Tracks extends React.Component {
+class Tracks extends React.Component<TracksPageModel.Props> {
 
   render() {
 
     return (
       <div>
-        <BackButton />
+        <BackButton {...this.props} />
         <div className="container-tracks-album">
           <div className="album">
-            <AlbumCard />
+            <AlbumCard {...this.props}  />
           </div>
           <div className="tracks">
-            <TrackRows/>
+            <TrackRows {...this.props} />
           </div>
         </div>
-        <FooterPlayer />
+        <FooterPlayer {...this.props}  />
       </div>
     )
 

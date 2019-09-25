@@ -1,5 +1,3 @@
-import History from "react-router-dom";
-
 export interface GlobalProps {
 
   history?: any;

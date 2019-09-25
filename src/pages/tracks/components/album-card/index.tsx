@@ -1,7 +1,8 @@
 import React from 'react';
 import './styles.scss'
+import {TracksPageModel} from "../../providers/tracks-page-model";
 
-export class AlbumCard extends React.Component {
+export class AlbumCard extends React.Component<TracksPageModel.Props> {
 
   render() {
 
