@@ -27,8 +27,9 @@ export class AlbumsPageInteractor {
       cards.push({
         id: album.id,
         type: "album",
-        title: upperCaseFirstLetter(album.name),
-        subTitle: upperCaseFirstLetter(album.artists[0].name),
+        albumName: upperCaseFirstLetter(album.name),
+        artistName: upperCaseFirstLetter(album.artists[0].name),
+        trackName: "",
         img: getImage(album.images)
       })
 
@@ -39,14 +40,34 @@ export class AlbumsPageInteractor {
       cards.push({
         id: track.id,
         type: "track",
-        title: upperCaseFirstLetter(track.name),
-        subTitle: upperCaseFirstLetter(track.artists[0].name),
+        albumName: upperCaseFirstLetter(track.album.name),
+        trackName: upperCaseFirstLetter(track.name),
+        artistName: upperCaseFirstLetter(track.artists[0].name),
         img: getImage(track.album.images)
       })
 
     });
 
-    return cards.sort((card1, card2) => ( card1.title > card2.title ? 1 : card1.title < card2.title ? -1 : 0));
+    return cards.sort((card1, card2) => {
+
+      const t1 = AlbumsPageInteractor.getCardTitle(card1);
+      const t2 = AlbumsPageInteractor.getCardTitle(card2);
+
+      return ( t1 > t2 ? 1 : t1 < t2 ? -1 : 0)
+
+    });
+
+  };
+
+  static getCardTitle = (card: AlbumsPageModel.cardView) => {
+
+    switch (card.type) {
+
+      case "album": return card.albumName;
+      case "artist": return card.artistName;
+      case "track": return card.trackName;
+
+    }
 
   };
 

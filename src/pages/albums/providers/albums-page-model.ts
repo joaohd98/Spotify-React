@@ -27,8 +27,9 @@ export namespace AlbumsPageModel {
 
     id: string,
     type: "artist" | "track" | "album",
-    title: string,
-    subTitle: string,
+    albumName: string,
+    artistName: string,
+    trackName: string,
     img: string,
 
   }
