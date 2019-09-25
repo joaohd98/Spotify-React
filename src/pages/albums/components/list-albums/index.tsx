@@ -181,7 +181,7 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
   render() {
 
     if(this.checkStatus(Status.failed) || this.checkStatus(Status.noInternetConnection) || this.checkStatus(Status.noResult) ||
-      (this.checkStatus(Status.empty) && this.props.albumsRecent.length == 0))
+      (this.checkStatus(Status.empty) && this.props.albumsRecent.length === 0))
       return this.renderErrorMessage();
 
     else if(this.checkStatus(Status.isLoading))
