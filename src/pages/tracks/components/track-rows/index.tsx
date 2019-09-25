@@ -5,6 +5,13 @@ import {TracksPageInteractor} from "../../providers/tracks-page-interactor";
 
 export class TrackRows extends React.Component<TracksPageModel.Props> {
 
+  checkIsSelected = (index: number) => {
+
+    return this.props.currentIndex === index ? "selected" : "";
+
+  };
+
+
   renderTracks = () => {
 
     let elements: JSX.Element[] = [];
@@ -12,7 +19,7 @@ export class TrackRows extends React.Component<TracksPageModel.Props> {
     this.props.tracks.forEach((track, index) => {
 
       elements.push(
-        <p className="track-row" key={index}>
+        <p className={`track-row ${this.checkIsSelected(index)}`} key={index} onClick={() => this.props.functions.selectMusic(index)}>
           <span className="track-number">
             <span>
               { index + 1 }.

@@ -36,14 +36,15 @@ export class TracksPageInteractor {
 
   };
 
-  static formatTracks = (tracks: AlbumTracksModel.Response): TracksPageModel.trackRow[] => {
+  static formatTracks = (tracks: AlbumTracksModel.Response): TracksPageModel.TrackRow[] => {
 
-    let rows: TracksPageModel.trackRow[] = [];
+    let rows: TracksPageModel.TrackRow[] = [];
 
     tracks.items.forEach(track => {
 
       rows.push({
         name: track.name,
+        url: track.preview_url,
         duration: track.duration_ms
       })
 

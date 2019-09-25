@@ -15,6 +15,17 @@ export class FooterPlayer extends React.Component<TracksPageModel.Props> {
   //
   // audio.duration;
 
+  checkIfPlayerHasSound = () => {
+
+
+
+  };
+
+  getPlayPauseIcon = () => {
+
+
+  };
+
   render() {
 
     return (

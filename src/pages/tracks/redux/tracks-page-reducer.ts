@@ -12,7 +12,8 @@ export const TrackPageInitialState: TracksPageModel.Props = {
     goBack: (history) => TracksPageAction.goBack(history),
     findAlbum: (id) => TracksPageAction.findAlbum(id),
     getTracks: (id) => TracksPageAction.getTracks(id),
-    changeMusic: (change, currentIndex, cards)  => TracksPageAction.changeMusic(change, currentIndex, cards)
+    selectMusic: (currentIndex)  => TracksPageAction.selectMusic(currentIndex),
+    changeMusic: (change, currentIndex, tracks)  => TracksPageAction.changeMusic(change, currentIndex, tracks)
   }
 
 };

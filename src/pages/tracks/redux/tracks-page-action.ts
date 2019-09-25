@@ -1,7 +1,7 @@
 import {AlbumService} from "../../../service/album";
-import {AlbumsPageModel} from "../../albums/providers/albums-page-model";
 import {AlbumTracksService} from "../../../service/album-tracks";
 import {TracksPageInteractor} from "../providers/tracks-page-interactor";
+import {TracksPageModel} from "../providers/tracks-page-model";
 
 export enum TracksPageConst {
 
@@ -47,21 +47,17 @@ export class TracksPageAction {
 
           dispatch({type: TracksPageConst.SERVICE_FAILED, payload: { status: error.cod }});
 
-
         })
 
       }, error => {
 
         dispatch({type: TracksPageConst.SERVICE_FAILED, payload: { status: error.cod }});
 
-
       })
 
     }
 
   };
-
-
 
   static getTracks = (id: string) => {
 
@@ -88,11 +84,31 @@ export class TracksPageAction {
 
   };
 
-
-  static changeMusic = (change: "previous" | "next", currentIndex: number, card: AlbumsPageModel.cardView) => {
+  static selectMusic = (currentIndex: number) => {
 
     return dispatch => {
 
+      dispatch({type: TracksPageConst.CHANGE_CURRENT_MUSIC, payload: { currentIndex }})
+
+    }
+
+  };
+
+  static changeMusic = (change: "previous" | "next", currentIndex: number, tracks: TracksPageModel.TrackRow[]) => {
+
+    return dispatch => {
+
+      const tracksLength = tracks.length;
+
+      currentIndex += change === "previous" ? -1 : 1;
+
+      if(currentIndex < 0)
+        currentIndex = tracksLength - 1;
+
+      else if(currentIndex >= tracksLength)
+        currentIndex = 0;
+
+      dispatch({type: TracksPageConst.CHANGE_CURRENT_MUSIC, payload: { currentIndex }})
 
     }
 

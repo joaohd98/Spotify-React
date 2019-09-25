@@ -1,6 +1,4 @@
-import {AlbumsPageModel} from "../../albums/providers/albums-page-model";
 import {ServiceStatus} from "../../../service";
-import {TrackModel} from "../../../service/track/track-model";
 import {GlobalProps} from "../../../config/global-props";
 
 export namespace TracksPageModel {
@@ -8,14 +6,15 @@ export namespace TracksPageModel {
   export interface Props extends GlobalProps{
 
     card: TracksPageModel.AlbumCard | null,
-    tracks: TracksPageModel.trackRow[],
+    tracks: TracksPageModel.TrackRow[],
     currentIndex: number,
     status: ServiceStatus,
     functions: {
       goBack: (history) => void,
       findAlbum: (id: string) => void,
       getTracks: (id: string) => void,
-      changeMusic: (change: "previous" | "next", currentIndex: number, card: AlbumsPageModel.cardView)  => void,
+      selectMusic: (currentIndex: number)  => void,
+      changeMusic: (change: "previous" | "next", currentIndex: number, tracks: TracksPageModel.TrackRow[])  => void,
     }
 
   }
@@ -29,9 +28,10 @@ export namespace TracksPageModel {
 
   }
 
-  export interface trackRow {
+  export interface TrackRow {
 
     name: string,
+    url: string,
     duration: number,
 
   }
