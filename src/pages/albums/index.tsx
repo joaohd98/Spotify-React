@@ -11,6 +11,18 @@ import {AlbumsPageInitialState} from "./redux/albums-page-reducer";
 
 class Albums extends React.Component<AlbumsPageModel.Props, AlbumsPageModel.State> {
 
+  componentDidMount() {
+
+    if(this.props.text === "")
+      this.props.functions.getRecentAlbums();
+
+
+    else
+      this.props.functions.searchAlbums(this.props.text, this.props.offset, this.props.limit);
+
+
+  }
+
   render() {
 
     return (

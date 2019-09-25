@@ -5,6 +5,7 @@ import {Helpers} from "../../../helpers";
 import {ArtistModel} from "../../../service/artist/artist-model";
 import {AlbumModel} from "../../../service/album/album-model";
 import {TrackModel} from "../../../service/track/track-model";
+import {TracksPageModel} from "../../tracks/providers/tracks-page-model";
 
 export class AlbumsPageInteractor {
 
@@ -14,21 +15,20 @@ export class AlbumsPageInteractor {
 
   };
 
+
   static formatRequest = (albums: AlbumModel.Response[] = [], tracks: TrackModel.Response[] = []): AlbumsPageModel.cardView[] => {
 
     let cards: AlbumsPageModel.cardView[] = [];
 
     const getImage = (data: {url: string}[]) => ( data.length > 0 ? data[0].url  : noPhoto);
 
-    const upperCaseFirstLetter = Helpers.upperCaseFirstLetter;
-
     albums.forEach(album => {
 
       cards.push({
         id: album.id,
         type: "album",
-        albumName: upperCaseFirstLetter(album.name),
-        artistName: upperCaseFirstLetter(album.artists[0].name),
+        albumName: Helpers.upperCaseFirstLetter(album.name),
+        artistName: Helpers.upperCaseFirstLetter(album.artists[0].name),
         trackName: "",
         img: getImage(album.images)
       })
@@ -40,9 +40,9 @@ export class AlbumsPageInteractor {
       cards.push({
         id: track.album.id,
         type: "track",
-        albumName: upperCaseFirstLetter(track.album.name),
-        trackName: upperCaseFirstLetter(track.name),
-        artistName: upperCaseFirstLetter(track.artists[0].name),
+        albumName: Helpers.upperCaseFirstLetter(track.album.name),
+        trackName: Helpers.upperCaseFirstLetter(track.name),
+        artistName: Helpers.upperCaseFirstLetter(track.artists[0].name),
         img: getImage(track.album.images)
       })
 
@@ -57,6 +57,27 @@ export class AlbumsPageInteractor {
 
     });
 
+  };
+
+  static formatRecentAlbums = (albums: {card: TracksPageModel.AlbumCard, tracks: TracksPageModel.TrackRow[]}[]): AlbumsPageModel.cardView[]  => {
+
+    let elements: AlbumsPageModel.cardView[] = [];
+
+    albums.forEach(album => {
+
+      elements.push({
+        id: album.card.id,
+        type: "album",
+        albumName: Helpers.upperCaseFirstLetter(album.card.albumName),
+        artistName: Helpers.upperCaseFirstLetter(album.card.artistName),
+        trackName: "",
+        img: album.card.img || noPhoto
+      })
+
+    });
+
+    return elements;
+    
   };
 
   static getCardTitle = (card: AlbumsPageModel.cardView) => {

@@ -1,15 +1,20 @@
 import {AnyAction, Dispatch} from "redux";
 import {store} from "../config/store";
+import {TracksPageModel} from "../pages/tracks/providers/tracks-page-model";
 
 export interface UserModel {
 
   authToken: string,
   accessToken: string,
   refreshToken: string,
-  albumsRecent: object[],
+  albumsRecent: {
+    card: TracksPageModel.AlbumCard,
+    tracks: TracksPageModel.TrackRow[],
+  }[],
 
   functions: {
     saveToken: (accessToken: string, refreshToken: string, dispatch: Dispatch<AnyAction>) => void,
+    addAlbumRecent: (card: TracksPageModel.AlbumCard, tracks: TracksPageModel.TrackRow[], dispatch: Dispatch<AnyAction>) => void,
   }
 
 }

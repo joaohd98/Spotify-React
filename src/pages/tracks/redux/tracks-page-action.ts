@@ -2,6 +2,7 @@ import {AlbumService} from "../../../service/album";
 import {AlbumTracksService} from "../../../service/album-tracks";
 import {TracksPageInteractor} from "../providers/tracks-page-interactor";
 import {TracksPageModel} from "../providers/tracks-page-model";
+import {UserInitialState} from "../../../user/user-reducer";
 
 export enum TracksPageConst {
 
@@ -36,9 +37,15 @@ export class TracksPageAction {
 
         AlbumTracksService.makeRequest(id, responseTracks => {
 
-          dispatch({type: TracksPageConst.GET_ALBUM_TRACKS, payload: {
+          let album = {
             card: TracksPageInteractor.formatAlbum(responseAlbum.data!),
             tracks: TracksPageInteractor.formatTracks(responseTracks.data!),
+          };
+
+          UserInitialState.functions.addAlbumRecent(album.card, album.tracks, dispatch);
+
+          dispatch({type: TracksPageConst.GET_ALBUM_TRACKS, payload: {
+            ...album,
             status: responseTracks.cod,
           }});
 
@@ -59,16 +66,20 @@ export class TracksPageAction {
 
   };
 
-  static getTracks = (id: string) => {
+  static getTracks = (album: TracksPageModel.AlbumCard) => {
 
     return dispatch => {
 
       dispatch({type: TracksPageConst.SERVICE_LOADING});
 
-      AlbumTracksService.makeRequest(id, response => {
+      AlbumTracksService.makeRequest(album.id, response => {
+
+        let track = TracksPageInteractor.formatTracks(response.data!);
+
+        UserInitialState.functions.addAlbumRecent(album, track, dispatch);
 
         dispatch({type: TracksPageConst.GET_TRACKS, payload: {
-            tracks: TracksPageInteractor.formatTracks(response.data!),
+            track,
             status: response.cod,
         }});
 

@@ -18,7 +18,7 @@ class Tracks extends React.Component<TracksPageModel.Props> {
   componentDidMount() {
 
     if(this.props.card != null)
-      this.props.functions.getTracks(this.props.card.id);
+      this.props.functions.getTracks(this.props.card);
 
     else
       this.props.functions.findAlbum(this.props.match!.params.id);
@@ -36,7 +36,7 @@ class Tracks extends React.Component<TracksPageModel.Props> {
         title: "Sem acesso a internet",
         subTitle: "Verifique a sua rede Wi-Fi ou dados móveis.",
         buttonText : "Tentar Novamente",
-        buttonPress : () => this.props.functions.getTracks(this.props.card!.id)
+        buttonPress : () => this.props.functions.getTracks(this.props.card!)
 
       };
 
@@ -49,7 +49,7 @@ class Tracks extends React.Component<TracksPageModel.Props> {
         title: 'Não foi possível encontrar ás músicas',
         subTitle: "Tente novamente mais tarde.",
         buttonText : "Tentar Novamente",
-        buttonPress : () => this.props.functions.getTracks(this.props.card!.id)
+        buttonPress : () => this.props.functions.getTracks(this.props.card!)
 
       }
 

@@ -12,7 +12,7 @@ export namespace TracksPageModel {
     functions: {
       goBack: (history) => void,
       findAlbum: (id: string) => void,
-      getTracks: (id: string) => void,
+      getTracks: (album: TracksPageModel.AlbumCard) => void,
       selectMusic: (currentIndex: number)  => void,
       changeMusic: (change: "previous" | "next", currentIndex: number, tracks: TracksPageModel.TrackRow[])  => void,
     }

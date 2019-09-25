@@ -8,7 +8,8 @@ export const UserInitialState: UserModel = {
   accessToken: "",
   albumsRecent: [],
   functions: {
-    saveToken: (accessToken, refreshToken, dispatch) => UserAction.saveToken(accessToken, refreshToken, dispatch)
+    saveToken: (accessToken, refreshToken, dispatch) => UserAction.saveToken(accessToken, refreshToken, dispatch),
+    addAlbumRecent: (card, tracks, dispatch) => UserAction.addAlbumRecent(card, tracks, dispatch)
   }
 
 };
@@ -23,6 +24,21 @@ export const UserReducer = (state = UserInitialState, action: { type: UserAction
         ...state,
         accessToken: action.payload.accessToken,
         refreshToken: action.payload.refreshToken,
+      }
+
+    }
+
+
+    case UserActionConst.ADD_ALBUM_RECENT: {
+
+      let albums = state.albumsRecent;
+
+      albums.unshift(action.payload.albumsRecent);
+      albums = albums.slice(0,  10);
+
+      return {
+        ...state,
+        albumsRecent: albums
       }
 
     }
