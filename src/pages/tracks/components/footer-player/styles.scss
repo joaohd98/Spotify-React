@@ -9,7 +9,8 @@
 
   bottom:0;
   height: 60px;
-  border-top: 1.5px solid #646464;
+  border-top: 1.5px solid #616161;
+  background: #404040;
 
   @include screenType(desktop) {
 
