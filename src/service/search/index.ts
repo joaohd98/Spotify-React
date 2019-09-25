@@ -16,7 +16,7 @@ export class SearchService {
       market: "BR"
     };
 
-    return Helpers.generateUrlGet<SearchModel.Request>(SearchService.url, request);
+    return Helpers.generateUrlGet(SearchService.url, request, "getParameter");
 
   };
 

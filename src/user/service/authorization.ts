@@ -14,11 +14,11 @@ export class UserAuthorizationService {
 
   static getUrl = () => {
 
-    return Helpers.generateUrlGet<UserAuthorizationModel>(UserAuthorizationService.url, {
+    return Helpers.generateUrlGet(UserAuthorizationService.url, {
       client_id: ENV.client_id,
       response_type: "code",
       redirect_uri: getRedirectUri()
-    })
+    }, "getParameter")
 
   };
 

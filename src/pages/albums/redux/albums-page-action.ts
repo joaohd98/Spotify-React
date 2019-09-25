@@ -3,6 +3,7 @@ import {AlbumsPageInteractor} from "../providers/albums-page-interactor";
 import {ArtistAlbumservice} from "../../../service/artist-albums";
 import {AlbumsPageModel} from "../providers/albums-page-model";
 import {TracksPageConst} from "../../tracks/redux/tracks-page-action";
+import {CustomHistory} from "../../../config/global-props";
 
 export enum AlbumActionConst {
 
@@ -115,7 +116,7 @@ export class AlbumsPageAction {
 
   };
 
-  static goToAlbumTracks = (card: AlbumsPageModel.cardView, history: any) => {
+  static goToAlbumTracks = (card: AlbumsPageModel.cardView, history: CustomHistory) => {
 
     return dispatch => {
 

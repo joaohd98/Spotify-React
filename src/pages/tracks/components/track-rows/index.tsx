@@ -1,32 +1,33 @@
 import React from 'react';
 import './styles.scss'
 import {TracksPageModel} from "../../providers/tracks-page-model";
+import {TracksPageInteractor} from "../../providers/tracks-page-interactor";
 
 export class TrackRows extends React.Component<TracksPageModel.Props> {
 
-  getNumber = () => {
+  renderTracks = () => {
 
     let elements: JSX.Element[] = [];
 
-    for(let i = 1; i <= 10; i++){
+    this.props.tracks.forEach((track, index) => {
 
       elements.push(
-        <p className="track-row" key={i}>
+        <p className="track-row" key={index}>
           <span className="track-number">
             <span>
-              { i }.
+              { index + 1 }.
             </span>
             <span>
-              nome da musica
+              { track.name }
             </span>
           </span>
           <span className="duration">
-            2:32
+              { TracksPageInteractor.secondsToMinutes(track.duration) }
           </span>
         </p>
       )
 
-    }
+    });
 
     return elements;
 
@@ -36,7 +37,7 @@ export class TrackRows extends React.Component<TracksPageModel.Props> {
 
     return (
       <div className="track-list">
-        { this.getNumber() }
+        { this.renderTracks() }
       </div>
     )
 

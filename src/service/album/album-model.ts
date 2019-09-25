@@ -66,4 +66,8 @@ export namespace AlbumModel {
     uri: string;
   }
 
+  export interface Request {
+    id: string
+  }
+
 }

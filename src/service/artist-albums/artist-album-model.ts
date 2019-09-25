@@ -13,4 +13,8 @@ export namespace ArtistAlbumModel {
     total: number
   }
 
+  export interface Request {
+    id: string
+  }
+
 }

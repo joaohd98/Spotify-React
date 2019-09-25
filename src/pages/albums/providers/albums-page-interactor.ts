@@ -38,7 +38,7 @@ export class AlbumsPageInteractor {
     tracks.forEach(track => {
 
       cards.push({
-        id: track.id,
+        id: track.album.id,
         type: "track",
         albumName: upperCaseFirstLetter(track.album.name),
         trackName: upperCaseFirstLetter(track.name),

@@ -1,5 +1,5 @@
 import {ServiceStatus} from "../../../service";
-import {GlobalProps} from "../../../config/global-props";
+import {CustomHistory, GlobalProps} from "../../../config/global-props";
 
 export namespace AlbumsPageModel {
 
@@ -14,7 +14,7 @@ export namespace AlbumsPageModel {
     functions: {
       searchAlbums: (text: string, offset: number, limit: number) => void,
       addAlbums: (text: string, offset: number, limit: number) => void,
-      goToAlbumTracks: (card: AlbumsPageModel.cardView, history: History) => void
+      goToAlbumTracks: (card: AlbumsPageModel.cardView, history: CustomHistory) => void
     }
 
   }

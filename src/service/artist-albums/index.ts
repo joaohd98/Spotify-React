@@ -1,5 +1,6 @@
 import {Service, ServiceReturn, ServiceStatus} from "../index";
 import {ArtistAlbumModel} from "./artist-album-model";
+import {Helpers} from "../../helpers";
 
 export class ArtistAlbumservice {
 
@@ -7,7 +8,11 @@ export class ArtistAlbumservice {
 
   private static getUrl = (id: string) => {
 
-    return ArtistAlbumservice.url.replace("{id}", id);
+    let request: ArtistAlbumModel.Request = {
+      id
+    };
+
+    return Helpers.generateUrlGet(ArtistAlbumservice.url, request, "urlParameter");
 
   };
 

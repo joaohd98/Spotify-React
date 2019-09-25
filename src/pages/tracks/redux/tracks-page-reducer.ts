@@ -12,9 +12,8 @@ export const TrackPageInitialState: TracksPageModel.Props = {
     goBack: (history) => TracksPageAction.goBack(history),
     findAlbum: (id) => TracksPageAction.findAlbum(id),
     getTracks: (id) => TracksPageAction.getTracks(id),
-    changeMusic: (change: "previous" | "next")  => TracksPageAction.changeMusic(change)
+    changeMusic: (change, currentIndex, cards)  => TracksPageAction.changeMusic(change, currentIndex, cards)
   }
-
 
 };
 
@@ -27,6 +26,54 @@ export const TrackPageReducer = (state = TrackPageInitialState, action: { type: 
       return {
         ...state,
         card: action.payload.card
+      };
+
+    }
+
+    case TracksPageConst.GET_ALBUM_TRACKS: {
+
+      return {
+        ...state,
+        status: action.payload.status,
+        card: action.payload.card,
+        tracks: action.payload.tracks,
+      };
+
+    }
+
+    case TracksPageConst.GET_TRACKS: {
+
+      return {
+        ...state,
+        status: action.payload.status,
+        tracks: action.payload.tracks,
+      };
+
+    }
+
+    case TracksPageConst.CHANGE_CURRENT_MUSIC: {
+
+      return {
+        ...state,
+        currentIndex: action.payload.currentIndex
+      };
+
+    }
+
+    case TracksPageConst.SERVICE_FAILED: {
+
+      return {
+        ...state,
+        status: action.payload.status
+      };
+
+    }
+
+    case TracksPageConst.SERVICE_LOADING: {
+
+      return {
+        ...state,
+        status: ServiceStatus.loading
       };
 
     }

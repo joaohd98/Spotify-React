@@ -12,6 +12,18 @@ import {TracksPageModel} from "./providers/tracks-page-model";
 
 class Tracks extends React.Component<TracksPageModel.Props> {
 
+  componentDidMount() {
+
+    console.log(this.props);
+
+    if(this.props.card != null)
+      this.props.functions.getTracks(this.props.card.id);
+
+    else
+      this.props.functions.findAlbum(this.props.match!.params.id);
+
+  }
+
   render() {
 
     return (

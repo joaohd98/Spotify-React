@@ -8,13 +8,20 @@ export class AlbumCard extends React.Component<TracksPageModel.Props> {
 
     let card = this.props.card!;
 
-    return (
-      <div className="album-container">
-        <img src={card.img} alt="album"/>
-        <p>{card.albumName}</p>
-        <p>{card.artistName}</p>
-      </div>
-    )
+    if(card) {
+
+      return (
+        <div className="album-container">
+          <img src={card.img} alt="album"/>
+          <p>{card.albumName}</p>
+          <p>{card.artistName}</p>
+        </div>
+      )
+    }
+
+    else
+      return <div />
+
   }
 
 }

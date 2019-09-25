@@ -1,24 +1,37 @@
 export class Helpers {
 
-  static generateUrlGet = <T>(url: string, data: T): string => {
+  static generateUrlGet = (url: string, data: {[Key: string]: any}, type: "getParameter" | "urlParameter"): string => {
 
-    let isFirstTry = true;
+    if(type === "getParameter") {
 
-    for(let index in data) {
+      let isFirstTry = true;
 
-      if(isFirstTry) {
+      for(let index in data) {
 
-        url += "?" + index + "=" + data[index];
-        isFirstTry = false;
+        if(isFirstTry) {
+
+          url += "?" + index + "=" + data[index];
+          isFirstTry = false;
+
+        }
+
+        else
+          url += "&" + index + "=" + data[index];
 
       }
 
-      else
-        url += "&" + index + "=" + data[index];
+      return url;
 
     }
 
-    return url;
+    else {
+
+      for (let index in data)
+        url = url.replace(`{${index}}`, data[index]);
+
+      return url
+
+    }
 
   };
 
