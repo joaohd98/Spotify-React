@@ -15,6 +15,7 @@ export namespace TracksPageModel {
     functions: {
       goBack: (history: History) => void,
       findAlbum: (id: string) => void,
+      getTracks: (id: string) => void,
       changeMusic: (change: "previous" | "next")  => void,
     }
 

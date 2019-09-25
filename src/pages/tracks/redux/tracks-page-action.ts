@@ -27,6 +27,17 @@ export class TracksPageAction {
   };
 
 
+
+  static getTracks = (id: string) => {
+
+    return dispatch => {
+
+
+    }
+
+  };
+
+
   static changeMusic = (change) => {
 
     return dispatch => {

@@ -5,10 +5,10 @@ import {UserRefreshTokenService} from "../user/service/refresh-token";
 
 export const ConfigureInterceptor = () => {
 
-  axios.interceptors.request.use( (config: AxiosRequestConfig) => {
+  axios.interceptors.request.use((config: AxiosRequestConfig) => {
 
     // Normal Request
-    if(!config.url!.endsWith("token")) {
+    if (!config.url!.endsWith("token")) {
 
       config.headers = {
         'Accept': 'application/json',
@@ -35,15 +35,14 @@ export const ConfigureInterceptor = () => {
 
     return new Promise((resolve, reject) => {
 
-      if (error.response.status !== 401)
-        reject(error);
+      if (error.config && error.response && error.response.status === 401) {
 
-      let user = store.getState().UserPersistedReducer;
+        let user = store.getState().UserPersistedReducer;
 
-      //Token expired
-      UserRefreshTokenService.makeRequest(user.refreshToken, (response) => {
+        //Token expired
+        UserRefreshTokenService.makeRequest(user.refreshToken, (response) => {
 
-        user.functions.saveToken(response.data!.access_token, user.refreshToken, store.dispatch);
+          user.functions.saveToken(response.data!.access_token, user.refreshToken, store.dispatch);
 
           persistor.flush().then(() => {
 
@@ -51,16 +50,19 @@ export const ConfigureInterceptor = () => {
 
           });
 
-      }, () => {
+        }, () => {
 
+          reject(error);
+
+        });
+
+      } else
         reject(error);
-
-      });
 
     });
 
+
   });
 
-};
 
-
+}
