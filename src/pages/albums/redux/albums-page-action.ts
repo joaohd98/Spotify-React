@@ -133,7 +133,7 @@ export class AlbumsPageAction {
         }
       });
 
-      history.push(`/album/tracks`);
+      history.push(`/${card.id}/tracks`);
 
     }
 
@@ -150,7 +150,7 @@ export class AlbumsPageAction {
         }
       });
 
-      history.push(`/album/tracks`);
+      history.push(`/${card.id}/tracks`);
 
     }
 
