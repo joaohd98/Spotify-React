@@ -18,22 +18,23 @@ export class FooterPlayer extends React.Component<TracksPageModel.Props, State> 
     progress: 0
   };
 
-  componentWillMount() {
+  componentWillUnmount() {
 
-    this.state.audio.removeEventListener("timeupdate", () => {});
+    this.state.audio.removeEventListener("timeupdate", this.checkProgress, false);
+    this.state.audio.pause();
 
   }
 
   componentDidUpdate(prevProps: Readonly<TracksPageModel.Props>, prevState: Readonly<State>, snapshot?: any): void {
 
-    if(prevProps.currentIndex !== this.props.currentIndex) {
+    if(prevProps.currentIndex !== this.props.currentIndex && this.props.currentIndex > -1) {
 
       prevState.audio.pause();
 
       let selectedTrack = this.props.tracks[this.props.currentIndex];
       let audio = new Audio(selectedTrack.url);
 
-      audio.addEventListener("timeupdate", () => this.checkProgress(), false);
+      audio.addEventListener("timeupdate", this.checkProgress, false);
 
       audio.play();
 
@@ -54,11 +55,8 @@ export class FooterPlayer extends React.Component<TracksPageModel.Props, State> 
 
     let progress = ( currentTime / duration ) * 100;
 
-    if(progress === 100) {
-
+    if(progress === 100)
       this.props.functions.changeMusic("next", this.props.currentIndex, this.props.tracks);
-
-    }
 
     else
       this.setState({ progress });
