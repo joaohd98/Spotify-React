@@ -3,6 +3,7 @@ import {ServiceStatus} from "../../../service";
 import {AlbumsPageModel} from "../providers/albums-page-model";
 import {AlbumsPageInteractor} from "../providers/albums-page-interactor";
 
+
 export const AlbumsPageInitialState: AlbumsPageModel.Props = {
 
   text: "",
@@ -15,7 +16,9 @@ export const AlbumsPageInitialState: AlbumsPageModel.Props = {
   functions: {
     searchAlbums: (text, offset, limit) => AlbumsPageAction.searchAlbums(text, offset, limit),
     addAlbums: (text, offset, limit) => AlbumsPageAction.addAlbums(text, offset, limit),
-    goToAlbumTracks: (card, history) => AlbumsPageAction.goToAlbumTracks(card, history)
+    goToAlbumTracks: (card, history) => AlbumsPageAction.goToAlbumTracks(card, history),
+    goToRecentAlbumTracks: (card, tracks, history) => AlbumsPageAction.goToRecentAlbumTracks(card, tracks, history)
+
   }
 
 };

@@ -94,11 +94,11 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
     let elements: JSX.Element[] = [];
 
-    this.props.albumsRecent.forEach(({card}, index) => {
+    this.props.albumsRecent.forEach(({card, tracks}, index) => {
 
       elements.push(
         <div className="card" key={index}>
-          <img src={card.img} alt="capa" onClick={() => {}} />
+          <img src={card.img} alt="capa" onClick={() => this.props.functions.goToRecentAlbumTracks(card, tracks, this.props.history!)} />
           <p>{card.albumName}</p>
           <p>{card.artistName}</p>
         </div>

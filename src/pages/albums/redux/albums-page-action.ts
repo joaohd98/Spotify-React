@@ -4,6 +4,7 @@ import {ArtistAlbumservice} from "../../../service/artist-albums";
 import {AlbumsPageModel} from "../providers/albums-page-model";
 import {TracksPageConst} from "../../tracks/redux/tracks-page-action";
 import {CustomHistory} from "../../../config/global-props";
+import {TracksPageModel} from "../../tracks/providers/tracks-page-model";
 
 export enum AlbumActionConst {
 
@@ -132,7 +133,24 @@ export class AlbumsPageAction {
         }
       });
 
-      history.push(`/${card.id}/tracks`);
+      history.push(`/album/tracks`);
+
+    }
+
+  };
+
+  static goToRecentAlbumTracks = (card: TracksPageModel.AlbumCard, tracks: TracksPageModel.TrackRow[], history: CustomHistory) => {
+
+    return dispatch => {
+
+      dispatch({
+        type: TracksPageConst.SET_CARD_ALBUM, payload: {
+          card,
+          tracks
+        }
+      });
+
+      history.push(`/album/tracks`);
 
     }
 
