@@ -1,5 +1,6 @@
 import {ServiceStatus} from "../../../service";
 import {CustomHistory, GlobalProps} from "../../../config/global-props";
+import {TracksPageModel} from "../../tracks/providers/tracks-page-model";
 
 export namespace AlbumsPageModel {
 
@@ -11,8 +12,11 @@ export namespace AlbumsPageModel {
     hasNext: boolean,
     offset: number,
     limit: number,
+    albumsRecent: {
+      card: TracksPageModel.AlbumCard,
+      tracks: TracksPageModel.TrackRow[],
+    }[],
     functions: {
-      getRecentAlbums: () => void,
       searchAlbums: (text: string, offset: number, limit: number) => void,
       addAlbums: (text: string, offset: number, limit: number) => void,
       goToAlbumTracks: (card: AlbumsPageModel.cardView, history: CustomHistory) => void

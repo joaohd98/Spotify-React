@@ -13,13 +13,8 @@ class Albums extends React.Component<AlbumsPageModel.Props, AlbumsPageModel.Stat
 
   componentDidMount() {
 
-    if(this.props.text === "")
-      this.props.functions.getRecentAlbums();
-
-
-    else
+    if(this.props.text !== "")
       this.props.functions.searchAlbums(this.props.text, this.props.offset, this.props.limit);
-
 
   }
 
@@ -39,7 +34,9 @@ class Albums extends React.Component<AlbumsPageModel.Props, AlbumsPageModel.Stat
 }
 
 const mapStateToProps = (state: StatesReducers) => {
-  return state.AlbumsReducer
+  return {
+    ...state.AlbumsReducer,
+    albumsRecent: state.UserPersistedReducer.albumsRecent}
 };
 
 const mapDispatchToProps = dispatch => ({

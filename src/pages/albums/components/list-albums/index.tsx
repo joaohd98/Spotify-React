@@ -7,6 +7,7 @@ import {AlbumsPageModel} from "../../providers/albums-page-model";
 
 enum Status {
 
+  success,
   empty,
   failed,
   noInternetConnection,
@@ -57,7 +58,7 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
     }
 
     else
-      return Status.empty
+      return Status.success
 
 
 
@@ -86,6 +87,34 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
     });
 
     return <div className="list-album">{ elements }</div>
+
+  };
+
+  renderRecentAlbum = () => {
+
+    if(this.props.albumsRecent.length === 0)
+      return <ErrorMessage title={""} subTitle={"Não foram encontrados albuns recentes."} />
+
+    else {
+
+      let elements: JSX.Element[] = [];
+
+      this.props.albumsRecent.forEach(({card}, index) => {
+
+        elements.push(
+          <div className="card" key={index}>
+            <img src={card.img} alt="capa" onClick={() => {}} />
+            <p>{card.albumName}</p>
+            <p>{card.artistName}</p>
+          </div>
+        )
+
+      });
+
+      return <div className="list-album">{ elements }</div>
+
+    }
+
 
   };
 
@@ -148,12 +177,14 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
   render() {
 
-
     if(this.checkStatus(Status.failed) || this.checkStatus(Status.noInternetConnection) || this.checkStatus(Status.noResult))
       return this.renderErrorMessage();
 
     else if(this.checkStatus(Status.isLoading))
       return this.renderSkeletonCard();
+
+    else if(this.checkStatus(Status.empty))
+      return this.renderRecentAlbum();
 
     else
       return this.renderMultipleCard();

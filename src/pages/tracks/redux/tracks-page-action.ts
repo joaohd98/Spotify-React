@@ -37,7 +37,7 @@ export class TracksPageAction {
 
         AlbumTracksService.makeRequest(id, responseTracks => {
 
-          let album = {
+          const album = {
             card: TracksPageInteractor.formatAlbum(responseAlbum.data!),
             tracks: TracksPageInteractor.formatTracks(responseTracks.data!),
           };
@@ -74,12 +74,12 @@ export class TracksPageAction {
 
       AlbumTracksService.makeRequest(album.id, response => {
 
-        let track = TracksPageInteractor.formatTracks(response.data!);
+        const tracks = TracksPageInteractor.formatTracks(response.data!);
 
-        UserInitialState.functions.addAlbumRecent(album, track, dispatch);
+        UserInitialState.functions.addAlbumRecent(album, tracks, dispatch);
 
         dispatch({type: TracksPageConst.GET_TRACKS, payload: {
-            track,
+            tracks,
             status: response.cod,
         }});
 

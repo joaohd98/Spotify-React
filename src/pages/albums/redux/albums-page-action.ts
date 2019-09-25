@@ -4,11 +4,8 @@ import {ArtistAlbumservice} from "../../../service/artist-albums";
 import {AlbumsPageModel} from "../providers/albums-page-model";
 import {TracksPageConst} from "../../tracks/redux/tracks-page-action";
 import {CustomHistory} from "../../../config/global-props";
-import {store} from "../../../config/store";
 
 export enum AlbumActionConst {
-
-  GET_RECENT_ALBUMS = "ALBUM_ACTION_LOADING_SEARCH_ALBUM",
 
   LOADING_SEARCH_ALBUM = "ALBUM_ACTION_LOADING_SEARCH_ALBUM",
   SUCCESS_SEARCH_ALBUM = "ALBUM_ACTION_SUCCESS_SEARCH_ALBUM",
@@ -22,93 +19,71 @@ export enum AlbumActionConst {
 
 export class AlbumsPageAction {
 
-  static getRecentAlbums = () => {
-
-    return dispatch => {
-
-      dispatch({type: AlbumActionConst.GET_RECENT_ALBUMS, payload: {
-          cards: AlbumsPageInteractor.formatRecentAlbums(store.getState().UserPersistedReducer.albumsRecent)
-        }
-      })
-
-    }
-
-  };
 
   static searchAlbums = (text: string, limit: number, offset: number) => {
 
     return dispatch => {
 
-      if(text === "") {
+      dispatch({
+        type: AlbumActionConst.LOADING_SEARCH_ALBUM, payload: {
+          text: text,
+        }
+      });
 
-        dispatch({
-          type: AlbumActionConst.GET_RECENT_ALBUMS, payload: {
-            cards: AlbumsPageInteractor.formatRecentAlbums(store.getState().UserPersistedReducer.albumsRecent)
-          }
-        })
+      if(text === "")
+        return;
 
-      }
+      SearchService.makeRequest(text, limit, offset, response => {
 
-      else {
+        let artist = AlbumsPageInteractor.findArtist(response.data!.artists.items, text);
 
-        dispatch({
-          type: AlbumActionConst.LOADING_SEARCH_ALBUM, payload: {
-            text: text,
-          }
-        });
+        if(artist) {
 
-        SearchService.makeRequest(text, limit, offset, response => {
-
-          let artist = AlbumsPageInteractor.findArtist(response.data!.artists.items, text);
-
-          if(artist) {
-
-            ArtistAlbumservice.makeRequest(artist.id, response => {
-
-              dispatch({
-                type: AlbumActionConst.SUCCESS_SEARCH_ALBUM, payload: {
-                  cards: AlbumsPageInteractor.formatRequest(response.data!.items),
-                  hasNext: false,
-                  status: response.cod,
-                }
-              });
-
-            }, () => {
-
-              dispatch({
-                type: AlbumActionConst.FAILED_SEARCH_ALBUM, payload: {
-                  status: response.cod,
-                }
-              });
-
-            });
-
-          }
-
-          else {
+          ArtistAlbumservice.makeRequest(artist.id, response => {
 
             dispatch({
               type: AlbumActionConst.SUCCESS_SEARCH_ALBUM, payload: {
-                cards: AlbumsPageInteractor.formatRequest(response.data!.albums.items, response.data!.tracks.items),
-                hasNext: AlbumsPageInteractor.verifyHasNext(response.data!),
+                cards: AlbumsPageInteractor.formatRequest(response.data!.items),
+                hasNext: false,
                 status: response.cod,
               }
             });
 
-          }
+          }, () => {
 
-        }, response => {
+            dispatch({
+              type: AlbumActionConst.FAILED_SEARCH_ALBUM, payload: {
+                status: response.cod,
+              }
+            });
+
+          });
+
+        }
+
+        else {
 
           dispatch({
-            type: AlbumActionConst.FAILED_SEARCH_ALBUM, payload: {
+            type: AlbumActionConst.SUCCESS_SEARCH_ALBUM, payload: {
+              cards: AlbumsPageInteractor.formatRequest(response.data!.albums.items, response.data!.tracks.items),
+              hasNext: AlbumsPageInteractor.verifyHasNext(response.data!),
               status: response.cod,
             }
           });
 
+        }
+
+      }, response => {
+
+        dispatch({
+          type: AlbumActionConst.FAILED_SEARCH_ALBUM, payload: {
+            status: response.cod,
+          }
         });
 
+      });
 
-      }
+
 
     };
 

@@ -11,8 +11,8 @@ export const AlbumsPageInitialState: AlbumsPageModel.Props = {
   offset: 0,
   hasNext: false,
   limit: AlbumsPageInteractor.getOffsetOrLimit(),
+  albumsRecent: [],
   functions: {
-    getRecentAlbums: () => AlbumsPageAction.getRecentAlbums(),
     searchAlbums: (text, offset, limit) => AlbumsPageAction.searchAlbums(text, offset, limit),
     addAlbums: (text, offset, limit) => AlbumsPageAction.addAlbums(text, offset, limit),
     goToAlbumTracks: (card, history) => AlbumsPageAction.goToAlbumTracks(card, history)
@@ -24,23 +24,13 @@ export const AlbumsPageReducer = (state = AlbumsPageInitialState, action: { type
 
   switch (action.type) {
 
-    case AlbumActionConst.GET_RECENT_ALBUMS: {
-
-      return {
-        ...state,
-        text: "",
-        cards: action.payload.cards
-      }
-
-    }
-
     case AlbumActionConst.LOADING_SEARCH_ALBUM: {
 
       return {
         ...state,
         cards: [],
         text: action.payload.text,
-        status: ServiceStatus.loading,
+        status: action.payload.text ? ServiceStatus.loading : ServiceStatus.noAction,
         offset: 0,
       };
 
