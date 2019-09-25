@@ -4,10 +4,10 @@ import {SubHeaderTitle} from "./components/sub-header-title";
 import {ListAlbums} from "./components/list-albums";
 import {StatesReducers} from "../../config/store";
 import {bindActionCreators} from "redux";
-import {AlbumsInitialState} from "./redux/albums-reducer";
 import {connect} from "react-redux";
 import {AlbumsPageModel} from "./providers/albums-page-model";
 import {FooterLoading} from "./components/footer-loading";
+import {AlbumsPageInitialState} from "./redux/albums-page-reducer";
 
 class Albums extends React.Component<AlbumsPageModel.Props, AlbumsPageModel.State> {
 
@@ -31,7 +31,7 @@ const mapStateToProps = (state: StatesReducers) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  functions: bindActionCreators(AlbumsInitialState.functions, dispatch)
+  functions: bindActionCreators(AlbumsPageInitialState.functions, dispatch)
 });
 
 export const AlbumsPage = connect(mapStateToProps, mapDispatchToProps)(Albums);

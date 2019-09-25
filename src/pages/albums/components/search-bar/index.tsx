@@ -25,7 +25,7 @@ export class SearchBar extends React.Component<AlbumsPageModel.Props, States> {
     return (
       <div className="search-bar">
         <label htmlFor="search-bar">Busque por artistas, álbuns ou músicas.</label>
-        <input type="search" id="search-bar" value={this.state.textInput} onChange={this.searchAlbum} placeholder="Comece a escrever..."/>
+        <input type="search" id="search-bar" autoComplete="false" value={this.state.textInput} onChange={this.searchAlbum} placeholder="Comece a escrever..."/>
       </div>
     )
 

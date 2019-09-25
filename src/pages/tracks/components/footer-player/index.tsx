@@ -3,6 +3,17 @@ import './styles.scss'
 
 export class FooterPlayer extends React.Component {
 
+
+  // let audio = new Audio("https://p.scdn.co/mp3-preview/bf9e33b1bb53c281c5eea0da6c317f2cd7c3eb58?cid=774b29d4f13844c495f206cafdad9c86");
+  //
+  // audio.play();
+  //
+  // audio.pause();
+  //
+  // audio.currentTime
+  //
+  // audio.duration;
+
   render() {
 
     return (

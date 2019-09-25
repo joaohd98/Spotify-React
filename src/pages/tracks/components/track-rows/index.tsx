@@ -10,7 +10,7 @@ export class TrackRows extends React.Component {
     for(let i = 1; i <= 10; i++){
 
       elements.push(
-        <p className="track-row">
+        <p className="track-row" key={i}>
           <span className="track-number">
             <span>
               { i }.

@@ -13,7 +13,7 @@ import {getUserCode} from "../user/user-model";
 import {UserTokenService} from "../user/service/token";
 import spinner from "../assets/spinner.svg"
 import {CSSProperties} from "react";
-import {AlbumTracksPage} from "../pages/album-tracks";
+import {TracksPage} from "../pages/tracks";
 
 interface State {
   loading: boolean
@@ -73,8 +73,8 @@ export class Layout extends React.Component<null, State> {
 
     return (
       <div className="page-container">
-        <Route path="/" exact component={AlbumTracksPage} />
-        <Route path="/aaaa" exact component={AlbumsPage} />
+        <Route path="/" exact component={AlbumsPage} />
+        <Route path="/:album/tracks" exact component={TracksPage} />
       </div>
     )
 

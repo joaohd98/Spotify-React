@@ -1,8 +1,9 @@
 import {ServiceStatus} from "../../../service";
+import {GlobalProps} from "../../../config/global-props";
 
 export namespace AlbumsPageModel {
 
-  export interface Props {
+  export interface Props extends GlobalProps{
 
     text: string;
     cards: cardView[];
@@ -12,7 +13,8 @@ export namespace AlbumsPageModel {
     limit: number,
     functions: {
       searchAlbums: (text: string, offset: number, limit: number) => void,
-      addAlbums: (text: string, offset: number, limit: number) => void
+      addAlbums: (text: string, offset: number, limit: number) => void,
+      goToAlbumTracks: (album: AlbumsPageModel.cardView, history: History) => void
     }
 
   }

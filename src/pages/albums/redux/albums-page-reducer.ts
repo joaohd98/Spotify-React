@@ -1,9 +1,9 @@
-import {AlbumActionConst, AlbumsAction} from "./albums-action";
+import {AlbumActionConst, AlbumsPageAction} from "./albums-page-action";
 import {ServiceStatus} from "../../../service";
 import {AlbumsPageModel} from "../providers/albums-page-model";
 import {AlbumsPageInteractor} from "../providers/albums-page-interactor";
 
-export const AlbumsInitialState: AlbumsPageModel.Props = {
+export const AlbumsPageInitialState: AlbumsPageModel.Props = {
 
   text: "",
   cards: [],
@@ -12,13 +12,14 @@ export const AlbumsInitialState: AlbumsPageModel.Props = {
   hasNext: false,
   limit: AlbumsPageInteractor.getOffsetOrLimit(),
   functions: {
-    searchAlbums: (text, offset, limit) => AlbumsAction.searchAlbums(text, offset, limit),
-    addAlbums: (text, offset, limit) => AlbumsAction.addAlbums(text, offset, limit),
+    searchAlbums: (text, offset, limit) => AlbumsPageAction.searchAlbums(text, offset, limit),
+    addAlbums: (text, offset, limit) => AlbumsPageAction.addAlbums(text, offset, limit),
+    goToAlbumTracks: (album, history) => AlbumsPageAction.goToAlbumTracks(album, history)
   }
 
 };
 
-export const AlbumsReducer = (state = AlbumsInitialState, action: { type: AlbumActionConst, payload: AlbumsPageModel.Props}) => {
+export const AlbumsPageReducer = (state = AlbumsPageInitialState, action: { type: AlbumActionConst, payload: AlbumsPageModel.Props}) => {
 
   switch (action.type) {
 

@@ -1,6 +1,7 @@
 import {SearchService} from "../../../service/search";
 import {AlbumsPageInteractor} from "../providers/albums-page-interactor";
 import {ArtistAlbumservice} from "../../../service/artist-albums";
+import {AlbumsPageModel} from "../providers/albums-page-model";
 
 export enum AlbumActionConst {
 
@@ -14,7 +15,7 @@ export enum AlbumActionConst {
 
 }
 
-export class AlbumsAction {
+export class AlbumsPageAction {
 
   static searchAlbums = (text: string, limit: number, offset: number) => {
 
@@ -111,6 +112,17 @@ export class AlbumsAction {
 
     }
 
-  }
+  };
+
+  static goToAlbumTracks = (album: AlbumsPageModel.cardView, history: any) => {
+
+    return dispatch => {
+
+      history.push(`/${album.id}/tracks`);
+
+    }
+    
+  };
+
 
 }
