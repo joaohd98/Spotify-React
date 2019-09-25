@@ -14,8 +14,6 @@ class Tracks extends React.Component<TracksPageModel.Props> {
 
   componentDidMount() {
 
-    console.log(this.props);
-
     if(this.props.card != null)
       this.props.functions.getTracks(this.props.card.id);
 

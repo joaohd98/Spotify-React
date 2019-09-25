@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Provider} from 'react-redux'
-import { BrowserRouter, Route } from 'react-router-dom'
+import {BrowserRouter, Route} from 'react-router-dom'
 import './styles.scss'
 import logo from "../assets/logo.png"
 import {AlbumsPage} from "../pages/albums";
