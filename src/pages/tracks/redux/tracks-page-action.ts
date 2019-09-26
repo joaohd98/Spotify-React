@@ -3,6 +3,7 @@ import {AlbumTracksService} from "../../../service/album-tracks";
 import {TracksPageInteractor} from "../providers/tracks-page-interactor";
 import {TracksPageModel} from "../providers/tracks-page-model";
 import {UserInitialState} from "../../../user/user-reducer";
+import {CustomHistory, CustomLocation} from "../../../config/global-props";
 
 export enum TracksPageConst {
 
@@ -17,11 +18,15 @@ export enum TracksPageConst {
 
 export class TracksPageAction {
 
-  static goBack = (history) => {
+  static goBack = (history: CustomHistory, location: CustomLocation) => {
 
     return () => {
 
-      history.replace('/');
+      if(location.state && location.state!.from)
+        history.goBack();
+
+      else
+        history.replace("/");
 
     }
 

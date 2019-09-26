@@ -8,10 +8,18 @@ import {
   UnregisterCallback
 } from "history";
 
+export interface CustomLocation {
+  hash: string
+  pathname: string
+  search: string
+  state: {
+    [key: string]: string
+  }
+}
 export interface CustomHistory {
   length: number,
   action: "PUSH" | "REPLACE" | "POP",
-  location: Location<any>;
+  location: CustomLocation;
   push(path: Path, state?: any): void;
   push(location: LocationDescriptorObject<any>): void;
   replace(path: Path, state?: any): void;
@@ -30,12 +38,7 @@ export interface GlobalProps {
 
   history?: CustomHistory;
 
-  location?: {
-    hash: string
-    pathname: string
-    search: string
-    state: string
-  };
+  location?: CustomLocation;
 
   match?: {
     isExact: boolean,

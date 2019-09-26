@@ -9,7 +9,7 @@ export const TrackPageInitialState: TracksPageModel.Props = {
   currentIndex: -1,
   status: ServiceStatus.noAction,
   functions: {
-    goBack: (history) => TracksPageAction.goBack(history),
+    goBack: (history, location) => TracksPageAction.goBack(history, location),
     findAlbum: (id) => TracksPageAction.findAlbum(id),
     getSavedAlbum: (card, tracks) => TracksPageAction.getSavedAlbum(card, tracks),
     getTracks: (album) => TracksPageAction.getTracks(album),

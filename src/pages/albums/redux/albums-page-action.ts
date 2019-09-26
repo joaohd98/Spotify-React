@@ -134,7 +134,9 @@ export class AlbumsPageAction {
         }
       });
 
-      history.push(`/${card.id}/tracks`);
+      history.push(`/${card.id}/tracks`, {
+        from: history.location.pathname
+      });
 
     }
 

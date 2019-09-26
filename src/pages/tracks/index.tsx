@@ -17,22 +17,24 @@ class Tracks extends React.Component<TracksPageModel.Props> {
 
   componentDidMount() {
 
+    const {card, tracks} = this.props;
+
     const albums = store.getState().UserPersistedReducer.albumsRecent;
 
-    if(this.props.card != null) {
+    if(card != null) {
 
-      if(this.props.tracks.length === 0) {
+      if(tracks.length === 0) {
 
-        let album = albums.find(album => album.card.id === this.props.card!.id);
+        let album = albums.find(album => album.card.id === card!.id);
 
         if(album)
           this.props.functions.getSavedAlbum(album.card, album.tracks);
 
         else
-          this.props.functions.getTracks(this.props.card);
+          this.props.functions.getTracks(card);
 
       }
-      
+
     }
 
     else {

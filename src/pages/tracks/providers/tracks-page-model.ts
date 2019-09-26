@@ -1,5 +1,5 @@
 import {ServiceStatus} from "../../../service";
-import {CustomHistory, GlobalProps} from "../../../config/global-props";
+import {CustomHistory, CustomLocation, GlobalProps} from "../../../config/global-props";
 
 export namespace TracksPageModel {
 
@@ -10,7 +10,7 @@ export namespace TracksPageModel {
     currentIndex: number,
     status: ServiceStatus,
     functions: {
-      goBack: (history: CustomHistory) => void,
+      goBack: (history: CustomHistory, location: CustomLocation) => void,
       findAlbum: (id: string) => void,
       getTracks: (album: TracksPageModel.AlbumCard) => void,
       getSavedAlbum: (card: TracksPageModel.AlbumCard, tracks: TracksPageModel.TrackRow[]) => void
