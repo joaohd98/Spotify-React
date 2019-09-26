@@ -1,0 +1,16 @@
+@import '../../../theme/variables';
+
+img {
+
+  width: 80vw;
+  height: 40vh;
+  max-width: 400px;
+  max-height: 450px;
+
+  @include screenType(desktop) {
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+  }
+}

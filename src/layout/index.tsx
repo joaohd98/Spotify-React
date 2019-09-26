@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Provider} from 'react-redux'
-import {BrowserRouter, Route} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import './styles.scss'
 import logo from "../assets/logo.png"
 import {AlbumsPage} from "../pages/albums";
@@ -14,6 +14,7 @@ import {UserTokenService} from "../user/service/token";
 import {TracksPage} from "../pages/tracks";
 import {LoadingSpinner} from "../components/loading-spinner";
 import {GlobalProps} from "../config/global-props";
+import {NotFound404Page} from '../pages/warning/not-found-404';
 
 interface State {
   loading: boolean
@@ -73,8 +74,11 @@ export class Layout extends React.Component<GlobalProps, State> {
 
     return (
       <div className="page-container">
-        <Route path="/:search?" exact component={AlbumsPage} />
-        <Route path="/:id/tracks"  exact component={TracksPage} />
+        <Switch>
+          <Route path="/:search?" exact component={AlbumsPage} />
+          <Route path="/:id/tracks"  exact component={TracksPage} />
+          <Route path="*" component={NotFound404Page} />
+        </Switch>
       </div>
     )
 
@@ -86,10 +90,10 @@ export class Layout extends React.Component<GlobalProps, State> {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor} onBeforeLift={this.checkIfHasToken}>
           <BrowserRouter>
-            <div className="container">
-              <img className="logo" src={logo} alt="logo"/>
-              { this.state.loading ? <LoadingSpinner/> : this.renderViews()}
-            </div>
+              <div className="container">
+                <img className="logo" src={logo} alt="logo"/>
+                { this.state.loading ? <LoadingSpinner/> : this.renderViews()}
+              </div>
           </BrowserRouter>
         </PersistGate>
       </Provider>
