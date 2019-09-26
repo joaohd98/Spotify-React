@@ -1,16 +1,21 @@
 @import '../../../theme/variables';
 
-img {
+.not-found-message {
+  
+  img {
 
-  width: 80vw;
-  height: 40vh;
-  max-width: 400px;
-  max-height: 450px;
+    width: 80vw;
+    height: 40vh;
+    max-width: 400px;
+    max-height: 450px;
 
-  @include screenType(desktop) {
+    @include screenType(desktop) {
 
-    margin-top: 30px;
-    margin-bottom: 30px;
+      margin-top: 30px;
+      margin-bottom: 30px;
 
+    }
   }
+
+
 }

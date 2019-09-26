@@ -26,7 +26,7 @@ class NotFound404 extends React.Component<GlobalProps> {
   render() {
 
     return (
-      <div>
+      <div className="not-found-message">
         <ErrorMessage
           title={"Não encontramos essa página :("}
           subTitle={this.getImage()}
