@@ -8,12 +8,15 @@
   right: 0;
 
   bottom:0;
-  height: 60px;
+  height: 70px;
+
+
   border-top: 1.5px solid #616161;
   background: #404040;
 
   @include screenType(desktop) {
 
+    height: 60px;
     left: 12%;
     right: 6%;
     width: 82%;
@@ -84,7 +87,7 @@
 
     .title {
 
-      width: calc(100% - 120px - 60px);
+      width: calc(100% - 120px - 65px);
       font-size: 14px;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -103,7 +106,7 @@
 
       padding-left: 10px;
       width: 40px;
-      padding-right: 10px;
+      padding-right: 15px;
 
 
       button {

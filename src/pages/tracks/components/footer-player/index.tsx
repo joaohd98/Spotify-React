@@ -6,8 +6,9 @@ interface State {
   isPlaying: boolean,
   name: string,
   audio: HTMLAudioElement,
-  progress: number
+  progress: number,
 }
+
 
 export class FooterPlayer extends React.Component<TracksPageModel.Props, State> {
 
@@ -15,7 +16,7 @@ export class FooterPlayer extends React.Component<TracksPageModel.Props, State> 
     isPlaying: false,
     name: "",
     audio: new Audio(),
-    progress: 0
+    progress: 0,
   };
 
   componentWillUnmount() {
@@ -36,6 +37,7 @@ export class FooterPlayer extends React.Component<TracksPageModel.Props, State> 
 
       audio.addEventListener("timeupdate", this.checkProgress, false);
 
+      //Handle not allowed exception
       audio.play();
 
       this.setState({
@@ -55,11 +57,14 @@ export class FooterPlayer extends React.Component<TracksPageModel.Props, State> 
 
     let progress = ( currentTime / duration ) * 100;
 
-    if(progress === 100)
+    this.setState({ progress });
+
+    if(progress === 100) {
+
       this.props.functions.changeMusic("next", this.props.currentIndex, this.props.tracks);
 
-    else
-      this.setState({ progress });
+    }
+
 
   };
 
@@ -71,7 +76,7 @@ export class FooterPlayer extends React.Component<TracksPageModel.Props, State> 
 
   getPlayPauseIcon = () => {
 
-    return this.state.isPlaying ? "pause" : "play"
+    return this.state.isPlaying && this.state.progress !== 100 ? "pause" : "play"
 
   };
 
@@ -85,25 +90,33 @@ export class FooterPlayer extends React.Component<TracksPageModel.Props, State> 
 
   changeMusic = (change: "previous" | "next") => {
 
-    let audio = this.state.audio;
+    let { audio } = this.state;
 
-    if(this.state.audio.currentTime > 3 && change === "previous")
-      audio.currentTime = 0;
+    if(this.props.tracks.length > 1) {
+
+      if(audio.currentTime > 3 && change === "previous")
+        audio.currentTime = 0;
+
+      else
+        this.props.functions.changeMusic(change, this.props.currentIndex, this.props.tracks);
+
+    }
 
     else
-      this.props.functions.changeMusic(change, this.props.currentIndex, this.props.tracks);
+      audio.currentTime = 0;
+
 
   };
 
   playPauseMusic = () => {
 
-    if(this.state.isPlaying)
+    if(this.state.isPlaying && this.state.progress !== 100)
       this.state.audio.pause();
 
     else
       this.state.audio.play();
 
-    this.setState({isPlaying: !this.state.isPlaying});
+    this.setState({isPlaying: this.state.progress === 100 ? true : !this.state.isPlaying});
 
   };
 
