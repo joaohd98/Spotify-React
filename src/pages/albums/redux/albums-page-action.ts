@@ -4,6 +4,7 @@ import {ArtistAlbumservice} from "../../../service/artist-albums";
 import {TracksPageConst} from "../../tracks/redux/tracks-page-action";
 import {CustomHistory} from "../../../config/global-props";
 import {TracksPageModel} from "../../tracks/providers/tracks-page-model";
+import {Dispatch} from "redux";
 
 export enum AlbumActionConst {
 
@@ -18,7 +19,6 @@ export enum AlbumActionConst {
 }
 
 export class AlbumsPageAction {
-
 
   static searchAlbums = (text: string, limit: number, offset: number) => {
 
@@ -37,29 +37,8 @@ export class AlbumsPageAction {
 
         let artist = AlbumsPageInteractor.findArtist(response.data!.artists.items, text);
 
-        if(artist) {
-
-          ArtistAlbumservice.makeRequest(artist.id, response => {
-
-            dispatch({
-              type: AlbumActionConst.SUCCESS_SEARCH_ALBUM, payload: {
-                cards: AlbumsPageInteractor.formatRequest(response.data!.items),
-                hasNext: false,
-                status: response.cod,
-              }
-            });
-
-          }, () => {
-
-            dispatch({
-              type: AlbumActionConst.FAILED_SEARCH_ALBUM, payload: {
-                status: response.cod,
-              }
-            });
-
-          });
-
-        }
+        if(artist)
+          AlbumsPageAction.getArtistAlbum(artist.id, dispatch);
 
         else {
 
@@ -83,11 +62,33 @@ export class AlbumsPageAction {
 
       });
 
-
-
     };
 
   };
+
+  private static getArtistAlbum(id: string, dispatch: Dispatch) {
+
+    ArtistAlbumservice.makeRequest(id, response => {
+
+      dispatch({
+        type: AlbumActionConst.SUCCESS_SEARCH_ALBUM, payload: {
+          cards: AlbumsPageInteractor.formatRequest(response.data!.items),
+          hasNext: false,
+          status: response.cod,
+        }
+      });
+
+    }, (response) => {
+
+      dispatch({
+        type: AlbumActionConst.FAILED_SEARCH_ALBUM, payload: {
+          status: response.cod,
+        }
+      });
+
+    });
+
+  }
 
   static addAlbums = (text: string, offset: number, limit: number) => {
 
