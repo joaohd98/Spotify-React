@@ -72,7 +72,7 @@ export class Layout extends React.Component<null, State> {
 
     return (
       <div className="page-container">
-        <Route path="/" exact component={AlbumsPage} />
+        <Route path="/:search?" exact component={AlbumsPage} />
         <Route path="/:id/tracks" exact component={TracksPage} />
       </div>
     )

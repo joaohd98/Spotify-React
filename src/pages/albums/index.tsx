@@ -16,6 +16,7 @@ class Albums extends React.Component<AlbumsPageModel.Props, AlbumsPageModel.Stat
     const {cards, offset, limit} = this.props;
     const { search } = this.props.match!.params;
 
+
     if(cards.length === 0 && search)
       this.props.functions.searchAlbums(search, limit, offset)
 
