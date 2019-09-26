@@ -5,7 +5,7 @@ import {TracksPageInteractor} from "../../providers/tracks-page-interactor";
 
 export class TrackRows extends React.Component<TracksPageModel.Props> {
 
-  checkIsSelected = (index: number) => {
+  isSelected = (index: number) => {
 
     return this.props.currentIndex === index ? "selected" : "";
 
@@ -19,19 +19,17 @@ export class TrackRows extends React.Component<TracksPageModel.Props> {
     this.props.tracks.forEach((track, index) => {
 
       elements.push(
-        <p className={`track-row ${this.checkIsSelected(index)}`} key={index} onClick={() => this.props.functions.selectMusic(index)}>
-          <span className="track-number">
-            <span>
-              { index + 1 }.
-            </span>
-            <span>
-              { track.name }
-            </span>
-          </span>
-          <span className="duration">
-              { TracksPageInteractor.secondsToMinutes(track.duration) }
-          </span>
-        </p>
+        <tr className={`track-row ${this.isSelected(index)}`} key={index} onClick={() => this.props.functions.selectMusic(index)}>
+          <td>
+            { index + 1 }.
+          </td>
+          <td>
+            { track.name }
+          </td>
+          <td>
+            { TracksPageInteractor.secondsToMinutes(track.duration) }
+          </td>
+        </tr>
       )
 
     });
@@ -43,9 +41,11 @@ export class TrackRows extends React.Component<TracksPageModel.Props> {
   render() {
 
     return (
-      <div className="track-list">
-        { this.renderTracks() }
-      </div>
+      <table className="track-list">
+        <tbody>
+          { this.renderTracks() }
+        </tbody>
+      </table>
     )
 
   }

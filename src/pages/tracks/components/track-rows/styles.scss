@@ -2,26 +2,34 @@
 
 .track-list {
 
+  table-layout: fixed;
+  border-collapse:separate;
+  border-spacing: 0 1.5em;
+
   @include screenType(desktop) {
 
+    margin-top: 0;
     margin-left: 25px;
 
+  }
+
+  tbody {
+    margin-top: -10px;
   }
 
   .track-row {
 
     margin-top: 10px;
     margin-bottom: 15px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
-    display: flex;
-    flex-direction: row;
-    cursor: pointer;
 
+    cursor: pointer;
+    width: 100%;
 
     &.selected {
 
-      span {
+      td {
 
         color: var(--color-green) !important;
 
@@ -29,50 +37,36 @@
 
     }
 
+    td:first-child {
 
-    .track-number {
-
-      width: 95%;
-
-      @include screenType(mobile) {
-
-        font-size: 13px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-
-      }
-
-      span:first-child {
-
-        margin-right: 15px;
-        color: var(--color-gray);
-
-      }
-
-
-      span:last-child {
-
-        color: var(--color-white);
-      }
-
-    }
-
-    .duration {
-
-      font-size: 15px;
-      padding-left: 5px;
-
-      @include screenType(desktop) {
-
-        font-size: 18px;
-
-      }
-
+      width: 5%;
       color: var(--color-gray);
 
     }
 
+    td:nth-child(2) {
+
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+
+      padding-left: 5px;
+      padding-right: 5px;
+      width: 100%;
+
+      //need to be 0 to work
+      max-width: 0;
+      color: var(--color-white);
+
+
+    }
+
+    td:last-child {
+
+      width: 5%;
+      color: var(--color-gray);
+
+    }
 
   }
 
