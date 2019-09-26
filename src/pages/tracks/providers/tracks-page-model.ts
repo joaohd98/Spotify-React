@@ -13,6 +13,7 @@ export namespace TracksPageModel {
       goBack: (history: CustomHistory) => void,
       findAlbum: (id: string) => void,
       getTracks: (album: TracksPageModel.AlbumCard) => void,
+      getSavedAlbum: (card: TracksPageModel.AlbumCard, tracks: TracksPageModel.TrackRow[]) => void
       selectMusic: (currentIndex: number)  => void,
       changeMusic: (change: "previous" | "next", currentIndex: number, tracks: TracksPageModel.TrackRow[])  => void,
     }

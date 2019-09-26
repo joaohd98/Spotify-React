@@ -30,10 +30,6 @@ export class FooterLoading extends React.Component<AlbumsPageModel.Props, State>
   };
 
   componentDidMount() {
-
-    console.log(this.state);
-    console.log(this.props);
-
     window.addEventListener("scroll", this.handleScroll);
   }
 

@@ -16,8 +16,6 @@ class Albums extends React.Component<AlbumsPageModel.Props, AlbumsPageModel.Stat
 
   render() {
 
-    console.log("props", this.props);
-
     return (
       <div>
         <SearchBar {...this.props}/>

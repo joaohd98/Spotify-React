@@ -78,7 +78,7 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
       elements.push(
         <div className="card" key={index}>
-          <img src={card.img} alt="capa" onClick={() => this.props.functions.goToAlbumTracks(this.props.history!, card )} />
+          <img src={card.img} alt="capa" onClick={() => this.props.functions.goToAlbumTracks(this.props.history!, card)} />
           <p>{AlbumsPageInteractor.getCardTitle(card)}</p>
           <p>{card.artistName}</p>
         </div>

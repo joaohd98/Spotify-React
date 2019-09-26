@@ -19,9 +19,23 @@ export class TracksPageAction {
 
   static goBack = (history) => {
 
-    return dispatch => {
+    return () => {
 
       history.replace('/');
+
+    }
+
+  };
+
+  static getSavedAlbum = (card: TracksPageModel.AlbumCard, tracks: TracksPageModel.TrackRow[]) => {
+
+    return dispatch => {
+
+      dispatch({type: TracksPageConst.SET_CARD_ALBUM, payload: {
+          card,
+          tracks
+        }
+      });
 
     }
 
@@ -81,13 +95,13 @@ export class TracksPageAction {
         dispatch({type: TracksPageConst.GET_TRACKS, payload: {
             tracks,
             status: response.cod,
-        }});
+          }
+        });
 
 
       }, error => {
 
         dispatch({type: TracksPageConst.SERVICE_FAILED, payload: { status: error.cod }});
-
 
       })
 

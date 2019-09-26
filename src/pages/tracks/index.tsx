@@ -4,7 +4,7 @@ import {BackButton} from "./components/back-button";
 import {AlbumCard} from "./components/album-card";
 import {TrackRows} from "./components/track-rows";
 import {FooterPlayer} from "./components/footer-player";
-import {StatesReducers} from "../../config/store";
+import {StatesReducers, store} from "../../config/store";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {TrackPageInitialState} from "./redux/tracks-page-reducer";
@@ -17,11 +17,34 @@ class Tracks extends React.Component<TracksPageModel.Props> {
 
   componentDidMount() {
 
-    if(this.props.card != null)
-      this.props.functions.getTracks(this.props.card);
+    const albums = store.getState().UserPersistedReducer.albumsRecent;
 
-    else if(this.props.tracks.length === 0)
-      this.props.functions.findAlbum(this.props.match!.params.id);
+    if(this.props.card != null && this.props.tracks.length > 0)
+      return;
+
+    else if(this.props.card != null) {
+
+      let album = albums.find(album => album.card.id === this.props.card!.id);
+
+      if(album)
+        this.props.functions.getSavedAlbum(album.card, album.tracks);
+
+      else
+        this.props.functions.getTracks(this.props.card);
+
+    }
+
+    else {
+
+      let album = albums.find(album => album.card.id === this.props.match!.params.id);
+
+      if(album)
+        this.props.functions.getSavedAlbum(album.card, album.tracks);
+
+      else
+        this.props.functions.findAlbum(this.props.match!.params.id);
+
+    }
 
   }
 
