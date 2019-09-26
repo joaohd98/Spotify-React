@@ -13,12 +13,13 @@ import {getUserCode} from "../user/user-model";
 import {UserTokenService} from "../user/service/token";
 import {TracksPage} from "../pages/tracks";
 import {LoadingSpinner} from "../components/loading-spinner";
+import {GlobalProps} from "../config/global-props";
 
 interface State {
   loading: boolean
 }
 
-export class Layout extends React.Component<null, State> {
+export class Layout extends React.Component<GlobalProps, State> {
 
   state = {
     loading: true
@@ -73,7 +74,7 @@ export class Layout extends React.Component<null, State> {
     return (
       <div className="page-container">
         <Route path="/:search?" exact component={AlbumsPage} />
-        <Route path="/:id/tracks" exact component={TracksPage} />
+        <Route path="/:id/tracks"  exact component={TracksPage} />
       </div>
     )
 
