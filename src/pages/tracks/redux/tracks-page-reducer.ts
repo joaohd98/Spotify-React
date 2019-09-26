@@ -41,7 +41,7 @@ export const TrackPageReducer = (state = TrackPageInitialState, action: { type: 
         status: action.payload.status,
         card: action.payload.card,
         tracks: action.payload.tracks,
-        currentIndex: -1,
+        currentIndex: -1
       };
 
     }
@@ -52,7 +52,6 @@ export const TrackPageReducer = (state = TrackPageInitialState, action: { type: 
         ...state,
         status: action.payload.status,
         tracks: action.payload.tracks,
-        currentIndex: -1,
       };
 
     }
