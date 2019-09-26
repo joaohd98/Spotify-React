@@ -15,7 +15,7 @@ export const AlbumsPageInitialState: AlbumsPageModel.Props = {
   limit: AlbumsPageInteractor.getOffsetOrLimit(),
   albumsRecent: [],
   functions: {
-    searchAlbums: (text, offset, limit) => AlbumsPageAction.searchAlbums(text, offset, limit),
+    searchAlbums: (text, offset, limit, isTyping?) => AlbumsPageAction.searchAlbums(text, offset, limit, isTyping),
     addAlbums: (text, offset, limit) => AlbumsPageAction.addAlbums(text, offset, limit),
     goToAlbumTracks: (history, card, tracks) => AlbumsPageAction.goToAlbumTracks(history, card, tracks)
   }

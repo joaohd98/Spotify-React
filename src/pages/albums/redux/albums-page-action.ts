@@ -20,7 +20,7 @@ export enum AlbumActionConst {
 
 export class AlbumsPageAction {
 
-  static searchAlbums = (text: string, limit: number, offset: number) => {
+  static searchAlbums = (text: string, limit: number, offset: number, isTyping = false) => {
 
     return dispatch => {
 
@@ -29,8 +29,8 @@ export class AlbumsPageAction {
           text: text,
         }
       });
-
-      if(text === "")
+      
+      if(text === "" || isTyping)
         return;
 
       SearchService.makeRequest(text, limit, offset, response => {
