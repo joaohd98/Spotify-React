@@ -16,8 +16,7 @@ export const AlbumsPageInitialState: AlbumsPageModel.Props = {
   functions: {
     searchAlbums: (text, offset, limit) => AlbumsPageAction.searchAlbums(text, offset, limit),
     addAlbums: (text, offset, limit) => AlbumsPageAction.addAlbums(text, offset, limit),
-    goToAlbumTracks: (card, history) => AlbumsPageAction.goToAlbumTracks(card, history),
-    goToRecentAlbumTracks: (card, tracks, history) => AlbumsPageAction.goToRecentAlbumTracks(card, tracks, history)
+    goToAlbumTracks: (history, card, tracks) => AlbumsPageAction.goToAlbumTracks(history, card, tracks)
 
   }
 

@@ -1,7 +1,6 @@
 import {SearchService} from "../../../service/search";
 import {AlbumsPageInteractor} from "../providers/albums-page-interactor";
 import {ArtistAlbumservice} from "../../../service/artist-albums";
-import {AlbumsPageModel} from "../providers/albums-page-model";
 import {TracksPageConst} from "../../tracks/redux/tracks-page-action";
 import {CustomHistory} from "../../../config/global-props";
 import {TracksPageModel} from "../../tracks/providers/tracks-page-model";
@@ -123,23 +122,7 @@ export class AlbumsPageAction {
 
   };
 
-  static goToAlbumTracks = (card: AlbumsPageModel.cardView, history: CustomHistory) => {
-
-    return dispatch => {
-
-      dispatch({
-        type: TracksPageConst.SET_CARD_ALBUM, payload: {
-          card: card,
-        }
-      });
-
-      history.push(`/${card.id}/tracks`);
-
-    }
-
-  };
-
-  static goToRecentAlbumTracks = (card: TracksPageModel.AlbumCard, tracks: TracksPageModel.TrackRow[], history: CustomHistory) => {
+  static goToAlbumTracks = (history: CustomHistory, card: TracksPageModel.AlbumCard, tracks: TracksPageModel.TrackRow[] = []) => {
 
     return dispatch => {
 
@@ -155,6 +138,7 @@ export class AlbumsPageAction {
     }
 
   };
+
 
 
 }

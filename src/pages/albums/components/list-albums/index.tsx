@@ -23,7 +23,7 @@ interface State {
 export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
   state = {
-    status: Status.empty
+    status: this.props.text === "" ? Status.empty : Status.success
   };
 
   componentDidUpdate(prevProps: Readonly<AlbumsPageModel.Props>, prevState: Readonly<State>, snapshot?: any): void {
@@ -78,7 +78,7 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
       elements.push(
         <div className="card" key={index}>
-          <img src={card.img} alt="capa" onClick={() => this.props.functions.goToAlbumTracks(card, this.props.history!)} />
+          <img src={card.img} alt="capa" onClick={() => this.props.functions.goToAlbumTracks(this.props.history!, card )} />
           <p>{AlbumsPageInteractor.getCardTitle(card)}</p>
           <p>{card.artistName}</p>
         </div>
@@ -98,7 +98,7 @@ export class ListAlbums extends React.Component<AlbumsPageModel.Props, State> {
 
       elements.push(
         <div className="card" key={index}>
-          <img src={card.img} alt="capa" onClick={() => this.props.functions.goToRecentAlbumTracks(card, tracks, this.props.history!)} />
+          <img src={card.img} alt="capa" onClick={() => this.props.functions.goToAlbumTracks(this.props.history!, card, tracks)} />
           <p>{card.albumName}</p>
           <p>{card.artistName}</p>
         </div>

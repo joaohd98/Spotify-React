@@ -20,7 +20,7 @@ class Tracks extends React.Component<TracksPageModel.Props> {
     if(this.props.card != null)
       this.props.functions.getTracks(this.props.card);
 
-    else
+    else if(this.props.tracks.length === 0)
       this.props.functions.findAlbum(this.props.match!.params.id);
 
   }

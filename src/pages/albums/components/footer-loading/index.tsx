@@ -26,10 +26,14 @@ export class FooterLoading extends React.Component<AlbumsPageModel.Props, State>
   state = {
     reachBottom: false,
     seeMore: false,
-    renderStatus: Status.nothing
+    renderStatus: this.props.cards.length > 0 ? Status.button : Status.nothing
   };
 
   componentDidMount() {
+
+    console.log(this.state);
+    console.log(this.props);
+
     window.addEventListener("scroll", this.handleScroll);
   }
 
