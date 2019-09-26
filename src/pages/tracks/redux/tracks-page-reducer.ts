@@ -28,7 +28,8 @@ export const TrackPageReducer = (state = TrackPageInitialState, action: { type: 
       return {
         ...state,
         card: action.payload.card,
-        tracks: action.payload.tracks
+        tracks: action.payload.tracks,
+        currentIndex: -1
       };
 
     }
