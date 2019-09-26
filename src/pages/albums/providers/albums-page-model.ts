@@ -6,6 +6,7 @@ export namespace AlbumsPageModel {
 
   export interface Props extends GlobalProps{
 
+    isFirstTime: boolean
     text: string;
     cards: cardView[];
     status: ServiceStatus;

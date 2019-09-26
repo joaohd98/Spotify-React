@@ -13,11 +13,11 @@ class Albums extends React.Component<AlbumsPageModel.Props, AlbumsPageModel.Stat
 
   componentDidMount() {
 
-    const {cards, offset, limit} = this.props;
+    const {cards, offset, limit, isFirstTime} = this.props;
     const { search } = this.props.match!.params;
 
 
-    if(cards.length === 0 && search)
+    if(cards.length === 0 && search && isFirstTime)
       this.props.functions.searchAlbums(search, limit, offset)
 
   }

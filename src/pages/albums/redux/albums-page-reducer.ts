@@ -6,6 +6,7 @@ import {AlbumsPageInteractor} from "../providers/albums-page-interactor";
 
 export const AlbumsPageInitialState: AlbumsPageModel.Props = {
 
+  isFirstTime: true,
   text: "",
   cards: [],
   status: ServiceStatus.noAction,
@@ -30,6 +31,7 @@ export const AlbumsPageReducer = (state = AlbumsPageInitialState, action: { type
       return {
         ...state,
         cards: [],
+        isFirstTime: false,
         text: action.payload.text,
         status: action.payload.text ? ServiceStatus.loading : ServiceStatus.noAction,
         offset: 0,
