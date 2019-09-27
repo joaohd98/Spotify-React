@@ -10,6 +10,7 @@
   grid-column-gap: 15px;
   justify-content: space-between;
 
+
   @include screenType(mobile-small-screen) {
 
     display: block;
@@ -26,6 +27,8 @@
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
+
+    -webkit-animation: fadein 1s;
 
     @include screenType(mobile-small-screen) {
 
@@ -72,6 +75,8 @@
     grid-template-rows: repeat(2, 1fr);
     grid-auto-rows: 0;
     overflow-y: hidden;
+
+    -webkit-animation: fadein 1s;
 
     /*
      * Screen with desktop
@@ -140,23 +145,20 @@
 
     @keyframes loading-album {
       to {
-        background-position:
-                100% 0, // animation img
-                0 0, // img
+        background-position: 100% 0, // animation img
+        0 0, // img
 
-                83% 71%, //animation title
-                50% 85%, // title
+        83% 71%, //animation title
+        50% 85%, // title
 
-                83% 79%, //animation artist
-                50% 95%; // artist
+        83% 79%, //animation artist
+        50% 95%; // artist
 
       }
     }
 
   }
 
-
-
-
 }
+
 

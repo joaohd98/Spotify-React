@@ -43,7 +43,7 @@ export class TrackRows extends React.Component<TracksPageModel.Props> {
     return (
       <table className="track-list">
         <tbody>
-          { this.renderTracks() }
+        { this.renderTracks() }
         </tbody>
       </table>
     )

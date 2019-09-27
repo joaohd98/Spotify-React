@@ -6,6 +6,7 @@
   margin-left: 10%;
   margin-right: 10%;
 
+
   @include screenType(desktop) {
 
     width: 25vw;
@@ -16,6 +17,7 @@
 
   img {
 
+    -webkit-animation: fadein 1s;
     display: block;
     width: 100%;
     margin-bottom: 20px;

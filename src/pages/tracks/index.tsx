@@ -49,7 +49,6 @@ class Tracks extends React.Component<TracksPageModel.Props> {
 
     }
 
-    window.scrollTo(0, 0)
 
   }
 

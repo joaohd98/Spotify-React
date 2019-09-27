@@ -2,14 +2,18 @@
 
 .track-list {
 
+  display: block;
   table-layout: fixed;
   border-collapse:separate;
   border-spacing: 0 1.5em;
 
+  animation: slideDown 1s;
+  
   @include screenType(desktop) {
 
     margin-top: 0;
     margin-left: 25px;
+
 
   }
 

@@ -82,7 +82,7 @@ export class FooterPlayer extends React.Component<TracksPageModel.Props, State> 
 
   getPlayPauseIcon = () => {
 
-    return this.state.isPlaying && this.state.progress !== 100 ? "pause" : "play"
+    return this.state.isPlaying ? "pause" : "play"
 
   };
 
