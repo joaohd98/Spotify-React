@@ -3,7 +3,7 @@ import "./styles.scss"
 import {AlbumsPageModel} from "../../providers/albums-page-model";
 
 interface States {
-  typingTimeout: number
+  typingTimeout: any;
 }
 
 export class SearchBar extends React.Component<AlbumsPageModel.Props, States> {
