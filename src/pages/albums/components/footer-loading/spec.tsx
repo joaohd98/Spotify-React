@@ -1,16 +1,17 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow, ShallowWrapper} from 'enzyme';
 import {FooterLoading} from "./index";
 import {AlbumsPageInitialState} from "../../redux/albums-page-reducer";
 
 describe("FooterLoadingComponent", () => {
 
+  let component: ShallowWrapper;
+  beforeEach(() => component = shallow(<FooterLoading {...AlbumsPageInitialState}/>));
+
   it("render", () => {
 
-    let res = shallow(<FooterLoading {...AlbumsPageInitialState}/>);
+    expect(component).toBeTruthy();
 
-    expect(res).toBeTruthy();
-
-  })
+  });
 
 });
