@@ -8,7 +8,7 @@
   border-spacing: 0 1.5em;
 
   animation: slideDown 1s;
-  
+
   @include screenType(desktop) {
 
     margin-top: 0;

@@ -43,6 +43,7 @@ export class FooterPlayer extends React.Component<TracksPageModel.Props, State> 
       let { audio } = this.state;
 
       audio.src = selectedTrack.url;
+      audio.load();
       audio.currentTime = 0;
       audio.play();
 
@@ -65,7 +66,7 @@ export class FooterPlayer extends React.Component<TracksPageModel.Props, State> 
 
     this.setState({ progress });
 
-    if(progress === 100) {
+    if(progress >= 100) {
 
       this.props.functions.changeMusic("next", this.props.currentIndex, this.props.tracks);
 
@@ -116,13 +117,13 @@ export class FooterPlayer extends React.Component<TracksPageModel.Props, State> 
 
   playPauseMusic = () => {
 
-    if(this.state.isPlaying && this.state.progress !== 100)
+    if(this.state.isPlaying && this.state.progress >= 100)
       this.state.audio.pause();
 
     else
       this.state.audio.play();
 
-    this.setState({isPlaying: this.state.progress === 100 ? true : !this.state.isPlaying});
+    this.setState({isPlaying: this.state.progress >= 100 ? true : !this.state.isPlaying});
 
   };
 
