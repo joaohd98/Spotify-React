@@ -24,7 +24,7 @@ export class SearchBar extends React.Component<AlbumsPageModel.Props, States> {
     this.setState({
       typingTimeout: setTimeout(() => {
         this.props.functions.searchAlbums(target.value, this.props.limit, this.props.offset, false);
-      }, 3000)
+      }, 2000)
     });
 
 
