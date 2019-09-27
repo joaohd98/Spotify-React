@@ -1,10 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import {FooterLoading} from "./index";
+import {AlbumsPageInitialState} from "../../redux/albums-page-reducer";
 
-it("it should render without error", () => {
+describe("FooterLoadingComponent", () => {
 
-  let res = shallow(<div>Test</div>);
+  it("render", () => {
 
-  expect(res).toBeTruthy();
+    let res = shallow(<FooterLoading {...AlbumsPageInitialState}/>);
+
+    expect(res).toBeTruthy();
+
+  })
 
 });
