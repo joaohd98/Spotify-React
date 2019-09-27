@@ -3,11 +3,25 @@
     "outDir": "./target/",
     "sourceMap": true,
     "skipLibCheck": true,
-    "noImplicitAny": true,
-    "module": "commonjs",
+    "noImplicitAny": false,
+    "module": "esnext",
     "target": "es5",
     "jsx": "react",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
   },
   "include": [
     "./src/**/*"

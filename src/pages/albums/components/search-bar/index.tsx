@@ -1,4 +1,5 @@
 import React, {ChangeEvent} from 'react';
+import "./styles.scss"
 import {AlbumsPageModel} from "../../providers/albums-page-model";
 
 interface States {
