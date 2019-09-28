@@ -105,14 +105,14 @@ export class FooterLoading extends React.Component<AlbumsPageModel.Props, State>
 
     };
 
-    return <button onClick={click}>Ver Mais</button>;
+    return <button className="see-more" onClick={click}>Ver Mais</button>;
 
   };
 
   renderLoading = () => {
 
     return (
-      <div>
+      <div className="loading">
         <img src={spinner} alt="spinner" />
         <p>Carregando</p>
       </div>
@@ -126,7 +126,7 @@ export class FooterLoading extends React.Component<AlbumsPageModel.Props, State>
 
     if(type === Status.internet) {
       return (
-        <div>
+        <div className="error-message">
           <p>Sem acesso a internet</p>
           <p>Tente novamente mais tarde</p>
           { button }
@@ -137,7 +137,7 @@ export class FooterLoading extends React.Component<AlbumsPageModel.Props, State>
     else {
 
       return (
-        <div>
+        <div className="error-message">
           <p>Não foi possível encontrar mais àlbuns</p>
           <p>Verifique a sua rede Wi-Fi ou dados móveis.</p>
           { button }
@@ -152,7 +152,7 @@ export class FooterLoading extends React.Component<AlbumsPageModel.Props, State>
     let { renderStatus } = this.state;
 
     if(renderStatus === Status.nothing)
-      return <div/>;
+      return null;
 
     let render: JSX.Element;
 

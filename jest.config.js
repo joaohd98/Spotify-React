@@ -10,7 +10,7 @@ module.exports = {
     "js"
   ],
   transform: {
-    "^.+\\.(ts|tsx)$": "<rootDir>/src/config/jest/test-preprocessor.js"
+    "^.+\\.(ts|tsx)$": "babel-jest"
   },
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
   moduleNameMapper: {
